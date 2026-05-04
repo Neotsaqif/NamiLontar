@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBUH Bakery Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="top-header">
+        <div class="header-content">
+            <div class="logo">MBUH BAKERY</div>
+            <nav class="main-nav">
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" aria-label="User Profile"><i class="ph ph-user"></i></button>
+                <button class="icon-btn" aria-label="Shopping Cart"><i class="ph ph-shopping-cart"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Settings</h2>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-item active">
+                    <i class="ph-fill ph-user-circle"></i>
+                    Profile
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="ph ph-receipt"></i>
+                    Transactions
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="ph ph-package"></i>
+                    Orders
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="ph ph-sign-out"></i>
+                    Sign Out
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Right Content Pane -->
+        <main class="content-pane">
+
+            <!-- Main Profile Area -->
+            <section class="profile-summary">
+                <div class="profile-info-group">
+                    <div class="profile-photo-container">
+                        <img src="assets/profile.png" alt="Julian Rossi" class="profile-photo">
+                        <button class="edit-btn" aria-label="Edit Profile"><i class="ph ph-pencil-simple"></i></button>
+                    </div>
+                    <div class="profile-text">
+                        <h1 class="profile-name">Julian Rossi</h1>
+                        <p class="profile-membership">Member since October 2023 &bull; Artisanal Tier</p>
+                    </div>
+                </div>
+                <button class="save-btn">SAVE CHANGES</button>
+            </section>
+
+            <!-- Cards Area -->
+            <section class="cards-grid">
+                <!-- Personal Information Card -->
+                <div class="card">
+                    <h3 class="card-title">Personal Information</h3>
+                    <div class="form-group">
+                        <label>FULL NAME</label>
+                        <input type="text" value="Julian Rossi" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL ADDRESS</label>
+                        <input type="email" value="julian.rossi@artisanal.com" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>PHONE NUMBER</label>
+                        <input type="tel" value="+1 (555) 234-8890" readonly>
+                    </div>
+                </div>
+
+                <!-- Shipping Preference Card -->
+                <div class="card">
+                    <h3 class="card-title">Shipping Preference</h3>
+                    <div class="form-group">
+                        <label>STREET ADDRESS</label>
+                        <input type="text" value="882 Boulangerie Way" readonly>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>CITY</label>
+                            <input type="text" value="Pastryville" readonly>
+                        </div>
+                        <div class="form-group half">
+                            <label>POSTAL CODE</label>
+                            <input type="text" value="90210" readonly>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"><i class="ph-bold ph-check"></i></span>
+                            <span class="checkbox-label">Use as default billing address</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Orders & Transactions Section -->
+            <section class="transactions-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Orders & Transactions</h2>
+                    <a href="#" class="view-all">VIEW ALL ACTIVITY</a>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ORDER ID</th>
+                                <th>DATE</th>
+                                <th>ITEMS</th>
+                                <th>STATUS</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#MB-92842</td>
+                                <td>Oct 24, 2023</td>
+                                <td>Sourdough Loaf, Butter Croissant (x4)</td>
+                                <td><span class="badge badge-green">DELIVERED</span></td>
+                                <td class="total-col">$42.50</td>
+                            </tr>
+                            <tr>
+                                <td>#MB-92711</td>
+                                <td>Oct 18, 2023</td>
+                                <td>Classic Baguette (x2), Pain au Chocolat</td>
+                                <td><span class="badge badge-green">DELIVERED</span></td>
+                                <td class="total-col">$28.15</td>
+                            </tr>
+                            <tr>
+                                <td>#MB-92605</td>
+                                <td>Oct 12, 2023</td>
+                                <td>Monthly Bread Box Subscription</td>
+                                <td><span class="badge badge-blue">IN TRANSIT</span></td>
+                                <td class="total-col">$120.00</td>
+                            </tr>
+                            <tr>
+                                <td>#MB-92589</td>
+                                <td>Oct 05, 2023</td>
+                                <td>Rustic Rye Bread, Sea Salt Focaccia</td>
+                                <td><span class="badge badge-gray">CANCELLED</span></td>
+                                <td class="total-col">$34.90</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bottom-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">MBUH BAKERY</div>
+                <div class="copyright">&copy; 2024 MBUH BAKERY. Artisanal Craftsmanship.</div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Shipping Info</a>
+                </div>
+                <div class="footer-icons">
+                    <button class="icon-btn-round" aria-label="Share"><i class="ph-fill ph-share-network"></i></button>
+                    <button class="icon-btn-round" aria-label="Email"><i
+                            class="ph-fill ph-envelope-simple"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

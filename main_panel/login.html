@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nami Lontar</title>
+    <meta name="description" content="Login to your Nami Lontar account to manage your orders and profile.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <div class="login-card">
+            <header class="login-header">
+                <div class="logo" style="margin-bottom: 2rem;">Nami Lontar</div>
+                <h2>Welcome Back</h2>
+                <p>Please enter your details to access your account.</p>
+            </header>
+
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                        <span class="checkbox-label">Keep me logged in for 30 days</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Log In</button>
+
+                <div class="social-login">
+                    <div class="social-divider">
+                        <span>Or continue with</span>
+                    </div>
+                    <div class="social-buttons">
+                        <button type="button" class="btn-social">
+                            <i class="fa-brands fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="btn-social">
+                            <i class="fa-brands fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="create-account">
+                Don't have an account? <a href="#">Create an account</a>
+            </p>
+        </div>
+    </main>
+
+    <footer style="position: absolute; bottom: 2rem; width: 100%; text-align: center; color: var(--dark-color); opacity: 0.6; font-size: 0.8rem;">
+        <div class="container">
+            <p>&copy; 2024 NAMI LONTAR. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

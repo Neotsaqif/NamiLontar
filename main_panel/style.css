@@ -1319,11 +1319,12 @@ header nav {
 .login-page {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
                 url('../assets/hero_tart_1777430124548.png') no-repeat center center/cover;
-    padding: 2rem;
+    padding: 4rem 2rem;
 }
 
 .login-card {
@@ -1337,10 +1338,20 @@ header nav {
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
     animation: fadeInUp 0.8s ease-out;
+    margin-bottom: 2rem;
 }
 
 .login-header {
     margin-bottom: 2.5rem;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.login-header .logo {
+    margin-bottom: 2rem;
 }
 
 .login-header h2 {
@@ -1391,6 +1402,8 @@ header nav {
     align-items: center;
     margin-bottom: 2rem;
     font-size: 0.9rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .forgot-password {
@@ -1485,4 +1498,28 @@ header nav {
 .create-account a {
     color: var(--primary-color);
     font-weight: 600;
+}
+
+.login-footer {
+    text-align: center;
+    color: var(--dark-color);
+    opacity: 0.6;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 2rem;
+    }
+    
+    .login-header h2 {
+        font-size: 2rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 }

@@ -104,6 +104,16 @@ header nav {
     align-items: center;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container.center {
+    justify-content: center;
+}
+
 .logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;

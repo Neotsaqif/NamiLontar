@@ -19,21 +19,21 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo-container">
+            <div>
                 <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png" alt="Logo" height="50"
                     width="50">
                 <div class="logo">Nami Lontar</div>
             </div>
 
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html" class="active">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php" class="active">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -45,7 +45,7 @@
         <!-- About Hero Section -->
         <section class="about-hero">
             <div class="hero-bg">
-                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png" alt="Bakery Background">
+                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 09_45_53 PM.png" alt="Bakery Background">
                 <div class="overlay"></div>
             </div>
             <div class="about-hero-content container">
@@ -221,7 +221,7 @@
                 <div class="link-column">
                     <h3>SUPPORT</h3>
                     <ul>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="#">Instagram</a></li>
                         <li><a href="#">Facebook</a></li>
                     </ul>

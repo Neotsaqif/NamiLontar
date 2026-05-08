@@ -25,13 +25,13 @@
                 <div class="logo">Nami Lontar</div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
                 <a href="#" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
@@ -47,7 +47,7 @@
             <aside class="sidebar">
                 <h2 class="sidebar-title">Settings</h2>
                 <nav class="sidebar-nav">
-                    <a href="profile.html" class="sidebar-item active">
+                    <a href="profile.php" class="sidebar-item active">
                         <i class="fa-solid fa-circle-user"></i>
                         Profile
                     </a>
@@ -204,7 +204,7 @@
                 <div class="link-column">
                     <h3>SUPPORT</h3>
                     <ul>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="#">Instagram</a></li>
                         <li><a href="#">Facebook</a></li>
                     </ul>

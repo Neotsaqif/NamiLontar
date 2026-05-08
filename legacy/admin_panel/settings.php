@@ -13,12 +13,12 @@
         <aside class="sidebar">
             <div class="brand">Toko Serba Ada</div>
             <nav>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="orders.html">Orders</a>
-                <a href="categories.html">Categories</a>
-                <a href="customers.html">Customers</a>
-                <a href="discounts.html">Discounts</a>
-                <a href="settings.html" class="active">Settings</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="orders.php">Orders</a>
+                <a href="categories.php">Categories</a>
+                <a href="customers.php">Customers</a>
+                <a href="discounts.php">Discounts</a>
+                <a href="settings.php" class="active">Settings</a>
             </nav>
         </aside>
 

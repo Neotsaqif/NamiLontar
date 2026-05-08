@@ -6,18 +6,18 @@ const productData = {
         rating: 5,
         reviews: 124,
         description: 'Our signature Nami Lontar (Papuan Milk Pie) is a delicate balance of creamy, rich egg custard and a buttery, flaky crust. Each tart is hand-crafted using a traditional recipe passed down through generations, ensuring an authentic taste of artisanal excellence.',
-        image: '../assets/product photo/lontar.jpeg',
+        image: '/assets/product photo/lontar.jpeg',
         thumbnails: [
-            '../assets/product photo/lontar.jpeg',
-            '../assets/product photo/full produk.jpeg',
-            '../assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/product photo/lontar.jpeg',
+            '/assets/product photo/full produk.jpeg',
+            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
         ],
         ingredients: 'Organic Stone-Ground Flour, Premium Grass-Fed Butter, Organic Free-Range Eggs, Condensed Milk, Sea Salt, Vanilla Bean.',
         storage: 'Store in a cool, dry place. For best taste, consume within 3 days. Can be refrigerated for up to 7 days.',
         artisanNote: 'We use a slow-bake method at low temperatures to ensure the custard reaches a perfect, silky consistency without any bubbles.',
         pairings: [
-            { name: 'Pastel Renyah', price: '$8.25', image: '../assets/product photo/pastel.jpeg', id: 'pastel' },
-            { name: 'Kripik Gurih', price: '$4.50', image: '../assets/product photo/kripik.jpeg', id: 'kripik' }
+            { name: 'Pastel Renyah', price: '$8.25', image: '/assets/product photo/pastel.jpeg', id: 'pastel' },
+            { name: 'Kripik Gurih', price: '$4.50', image: '/assets/product photo/kripik.jpeg', id: 'kripik' }
         ]
     },
     'pastel': {
@@ -27,18 +27,18 @@ const productData = {
         rating: 4.5,
         reviews: 86,
         description: 'Crispy on the outside, savory on the inside. Our Pastel Renyah is filled with a delicious mix of seasoned vegetables and premium protein, wrapped in a perfectly braided crust that stays crunchy for hours.',
-        image: '../assets/product photo/pastel.jpeg',
+        image: '/assets/product photo/pastel.jpeg',
         thumbnails: [
-            '../assets/product photo/pastel.jpeg',
-            '../assets/product photo/full produk.jpeg',
-            '../assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/product photo/pastel.jpeg',
+            '/assets/product photo/full produk.jpeg',
+            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
         ],
         ingredients: 'Braided Flour Crust, Seasoned Minced Chicken/Beef, Carrots, Rice Vermicelli, Hard-boiled Eggs, Traditional Spices.',
         storage: 'Best consumed fresh. Can be reheated in an air fryer or oven at 180°C for 5 minutes to restore crispiness.',
         artisanNote: 'Each braid is hand-folded by our pastry chefs to ensure the filling is perfectly sealed and the texture is consistent.',
         pairings: [
-            { name: 'Nami Lontar', price: '$15.50', image: '../assets/product photo/lontar.jpeg', id: 'lontar' },
-            { name: 'Lumpia Frozen', price: '$12.00', image: '../assets/product photo/Lumpia Frozen.png', id: 'lumpia' }
+            { name: 'Nami Lontar', price: '$15.50', image: '/assets/product photo/lontar.jpeg', id: 'lontar' },
+            { name: 'Lumpia Frozen', price: '$12.00', image: '/assets/product photo/Lumpia Frozen.png', id: 'lumpia' }
         ]
     },
     'kripik': {
@@ -48,17 +48,17 @@ const productData = {
         rating: 5,
         reviews: 52,
         description: 'Our artisanal chips are thin-sliced and seasoned with a secret blend of herbs and spices. Perfect for sharing or enjoying as a light snack throughout the day.',
-        image: '../assets/product photo/kripik.jpeg',
+        image: '/assets/product photo/kripik.jpeg',
         thumbnails: [
-            '../assets/product photo/kripik.jpeg',
-            '../assets/product photo/full produk.jpeg'
+            '/assets/product photo/kripik.jpeg',
+            '/assets/product photo/full produk.jpeg'
         ],
         ingredients: 'Premium Root Vegetables, Vegetable Oil, Natural Herbs, Sea Salt, Garlic, Traditional Seasoning.',
         storage: 'Store in an airtight container at room temperature. Keep away from direct sunlight.',
-        artisanNote: 'We slice our vegetables extra thin to achieve that perfect snap without using any artificial hardening agents.',
+        artisanNote: 'We slice our vegetables extra thin to achieve that perfect snap without any artificial hardening agents.',
         pairings: [
-            { name: 'Nami Lontar', price: '$15.50', image: '../assets/product photo/lontar.jpeg', id: 'lontar' },
-            { name: 'Pastel Renyah', price: '$8.25', image: '../assets/product photo/pastel.jpeg', id: 'pastel' }
+            { name: 'Nami Lontar', price: '$15.50', image: '/assets/product photo/lontar.jpeg', id: 'lontar' },
+            { name: 'Pastel Renyah', price: '$8.25', image: '/assets/product photo/pastel.jpeg', id: 'pastel' }
         ]
     },
     'lumpia': {
@@ -68,17 +68,17 @@ const productData = {
         rating: 4.8,
         reviews: 45,
         description: 'Enjoy our famous Lumpia at home! These frozen spring rolls are packed with our signature savory filling and ready to fry whenever you crave a hot, crispy treat.',
-        image: '../assets/product photo/Lumpia Frozen.png',
+        image: '/assets/product photo/Lumpia Frozen.png',
         thumbnails: [
-            '../assets/product photo/Lumpia Frozen.png',
-            '../assets/product photo/full produk.jpeg'
+            '/assets/product photo/Lumpia Frozen.png',
+            '/assets/product photo/full produk.jpeg'
         ],
         ingredients: 'Spring Roll Wrappers, Bamboo Shoots, Minced Protein, Traditional Seasoning, Palm Oil.',
         storage: 'Keep frozen at -18°C. Do not thaw before frying. Consume within 2 months.',
         artisanNote: 'Our wrappers are made in-house to ensure they are thin enough to be crispy but strong enough to hold the generous filling.',
         pairings: [
-            { name: 'Pastel Renyah', price: '$8.25', image: '../assets/product photo/pastel.jpeg', id: 'pastel' },
-            { name: 'Paket Lengkap', price: '$45.00', image: '../assets/product photo/full produk.jpeg', id: 'paket-lengkap' }
+            { name: 'Pastel Renyah', price: '$8.25', image: '/assets/product photo/pastel.jpeg', id: 'pastel' },
+            { name: 'Paket Lengkap', price: '$45.00', image: '/assets/product photo/full produk.jpeg', id: 'paket-lengkap' }
         ]
     },
     'paket-lengkap': {
@@ -88,21 +88,22 @@ const productData = {
         rating: 5,
         reviews: 28,
         description: 'The ultimate Nami Lontar experience. This gift box includes a curated selection of our best-selling Lontar, Pastel, and Kripik. Perfect for family gatherings or corporate gifts.',
-        image: '../assets/product photo/full produk.jpeg',
+        image: '/assets/product photo/full produk.jpeg',
         thumbnails: [
-            '../assets/product photo/full produk.jpeg',
-            '../assets/product photo/lontar.jpeg',
-            '../assets/product photo/pastel.jpeg',
-            '../assets/product photo/kripik.jpeg'
+            '/assets/product photo/full produk.jpeg',
+            '/assets/product photo/lontar.jpeg',
+            '/assets/product photo/pastel.jpeg',
+            '/assets/product photo/kripik.jpeg'
         ],
         ingredients: 'Includes all ingredients from Lontar, Pastel, and Kripik collections.',
         storage: 'Refer to individual product storage instructions.',
         artisanNote: 'A comprehensive collection of our finest work, beautifully packaged for your special moments.',
         pairings: [
-            { name: 'Lumpia Frozen', price: '$12.00', image: '../assets/product photo/Lumpia Frozen.png', id: 'lumpia' },
-            { name: 'Kripik Gurih', price: '$4.50', image: '../assets/product photo/kripik.jpeg', id: 'kripik' }
+            { name: 'Lumpia Frozen', price: '$12.00', image: '/assets/product photo/Lumpia Frozen.png', id: 'lumpia' },
+            { name: 'Kripik Gurih', price: '$4.50', image: '/assets/product photo/kripik.jpeg', id: 'kripik' }
         ]
     }
+ }
 };
 
 // Initialize Page

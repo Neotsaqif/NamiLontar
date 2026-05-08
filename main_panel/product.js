@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadProduct(productData[productId]);
     } else {
         // Redirect to home if product not found
-        // window.location.href = 'index.html';
+        // window.location.href = 'index.php';
         loadProduct(productData['lontar']); // Fallback for demo
     }
 
@@ -202,7 +202,7 @@ function loadProduct(product) {
         const pairCard = document.createElement('div');
         pairCard.className = 'pairing-card';
         pairCard.innerHTML = `
-            <a href="product.html?id=${pair.id}">
+            <a href="product.php?id=${pair.id}">
                 <div class="pairing-img">
                     <img src="${pair.image}" alt="${pair.name}">
                 </div>

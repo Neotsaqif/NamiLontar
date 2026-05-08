@@ -25,14 +25,14 @@
                 <div class="logo">Nami Lontar</div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.php" class="active">Home</a></li>
                 <li><a href="#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -68,7 +68,7 @@
             <div class="product-grid">
                 <!-- Product 1: Nami Lontar -->
                 <div class="product-card">
-                    <a href="product.html?id=lontar">
+                    <a href="product.php?id=lontar">
                         <div class="product-img">
                             <img src="../assets/product photo/lontar.jpeg" alt="Nami Lontar Original">
                         </div>
@@ -92,7 +92,7 @@
 
                 <!-- Product 2: Pastel Renyah -->
                 <div class="product-card">
-                    <a href="product.html?id=pastel">
+                    <a href="product.php?id=pastel">
                         <div class="product-img">
                             <img src="../assets/product photo/pastel.jpeg" alt="Pastel Renyah">
                         </div>
@@ -116,7 +116,7 @@
 
                 <!-- Product 3: Kripik Gurih -->
                 <div class="product-card">
-                    <a href="product.html?id=kripik">
+                    <a href="product.php?id=kripik">
                         <div class="product-img">
                             <img src="../assets/product photo/kripik.jpeg" alt="Kripik Gurih">
                         </div>
@@ -140,7 +140,7 @@
 
                 <!-- Product 4: Lumpia Frozen -->
                 <div class="product-card">
-                    <a href="product.html?id=lumpia">
+                    <a href="product.php?id=lumpia">
                         <div class="product-img">
                             <img src="../assets/product photo/Lumpia Frozen.png" alt="Lumpia Frozen">
                         </div>
@@ -164,7 +164,7 @@
 
                 <!-- Product 5: Paket Lengkap -->
                 <div class="product-card">
-                    <a href="product.html?id=paket-lengkap">
+                    <a href="product.php?id=paket-lengkap">
                         <div class="product-img">
                             <img src="../assets/product photo/full produk.jpeg" alt="Paket Lengkap Nami Lontar">
                         </div>
@@ -245,7 +245,7 @@
                 <div class="link-column">
                     <h3>SUPPORT</h3>
                     <ul>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="#">Instagram</a></li>
                         <li><a href="#">Facebook</a></li>
                     </ul>

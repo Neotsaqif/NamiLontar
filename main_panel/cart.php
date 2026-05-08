@@ -20,14 +20,14 @@
                 <div class="logo">Nami Lontar</div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -78,7 +78,7 @@
                         <button class="btn-apply">APPLY</button>
                     </div>
 
-                    <a href="checkout.html" class="btn-checkout">Proceed to Checkout</a>
+                    <a href="checkout.php" class="btn-checkout">Proceed to Checkout</a>
                     
                     <div style="text-align: center; margin-top: 1.5rem;">
                         <img src="https://img.icons8.com/color/48/000000/visa.png" width="30">
@@ -90,7 +90,7 @@
                 
                 <div style="text-align: center; margin-top: 2rem;">
                     <p style="font-size: 0.9rem; color: #888;">Need help with your order?</p>
-                    <a href="contact.html" style="font-weight: 600; color: var(--primary-color);">Chat with a Baker</a>
+                    <a href="contact.php" style="font-weight: 600; color: var(--primary-color);">Chat with a Baker</a>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
                 <div class="link-column">
                     <h3>SHOP</h3>
                     <ul>
-                        <li><a href="index.html#product">Best Sellers</a></li>
+                        <li><a href="index.php#product">Best Sellers</a></li>
                         <li><a href="#">New Arrivals</a></li>
                         <li><a href="#">Gift Sets</a></li>
                     </ul>
@@ -115,7 +115,7 @@
                 <div class="link-column">
                     <h3>SUPPORT</h3>
                     <ul>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="#">Shipping Info</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                     </ul>
@@ -148,7 +148,7 @@
             const promoText = document.getElementById('shipping-promo-text');
             
             if (items.length === 0) {
-                list.innerHTML = '<div style="padding: 3rem; text-align: center; color: #888;">Your basket is empty. <a href="index.html#product" style="color: var(--primary-color); font-weight: 600;">Go Shopping</a></div>';
+                list.innerHTML = '<div style="padding: 3rem; text-align: center; color: #888;">Your basket is empty. <a href="index.php#product" style="color: var(--primary-color); font-weight: 600;">Go Shopping</a></div>';
                 updateTotals(0, 0, 0, 0);
                 return;
             }

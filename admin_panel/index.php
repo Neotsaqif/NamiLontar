@@ -11,7 +11,7 @@
     <div class="login-container">
         <div class="login-card">
             <h1 class="login-brand">Toko Serba Ada</h1>
-            <form action="dashboard.html" method="GET">
+            <form action="dashboard.php" method="GET">
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="admin@tokoserbaada.com" required>

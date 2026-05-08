@@ -20,14 +20,14 @@
                 <div class="logo">Nami Lontar</div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -39,7 +39,7 @@
         <!-- Breadcrumbs -->
         <div class="container" style="padding: 2rem 2rem 0;">
             <p style="font-size: 0.85rem; color: #888;">
-                <a href="index.html">Home</a> / <a href="index.html#product">Shop</a> / <span id="breadcrumb-current" style="color: var(--dark-color); font-weight: 500;">Product</span>
+                <a href="index.php">Home</a> / <a href="index.php#product">Shop</a> / <span id="breadcrumb-current" style="color: var(--dark-color); font-weight: 500;">Product</span>
             </p>
         </div>
 
@@ -153,7 +153,7 @@
                 <div class="link-column">
                     <h3>SHOP</h3>
                     <ul>
-                        <li><a href="index.html#product">Best Sellers</a></li>
+                        <li><a href="index.php#product">Best Sellers</a></li>
                         <li><a href="#">New Arrivals</a></li>
                         <li><a href="#">Gift Sets</a></li>
                     </ul>
@@ -161,7 +161,7 @@
                 <div class="link-column">
                     <h3>SUPPORT</h3>
                     <ul>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="#">Shipping Info</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                     </ul>

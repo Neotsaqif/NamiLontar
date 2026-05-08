@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     forms.forEach(form => {
         form.addEventListener('submit', (e) => {
             // Ignore login form redirection
-            if (form.getAttribute('action') === 'dashboard.html') {
+            if (form.getAttribute('action') === 'dashboard.php') {
                 return;
             }
             e.preventDefault();

@@ -38,7 +38,7 @@ class CartManager {
         this.save();
         this.updateBadge();
         // If we are on the cart page, reload the UI
-        if (window.location.pathname.includes('cart.html')) {
+        if (window.location.pathname.includes('cart.php')) {
             window.location.reload();
         }
     }

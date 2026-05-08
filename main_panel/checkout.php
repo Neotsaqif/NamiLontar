@@ -20,14 +20,14 @@
                 <div class="logo">Nami Lontar</div>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -156,7 +156,7 @@
             const list = document.getElementById('checkout-items-list');
             
             if (items.length === 0) {
-                window.location.href = 'cart.html';
+                window.location.href = 'cart.php';
                 return;
             }
 
@@ -187,7 +187,7 @@
         function completePurchase() {
             alert('Thank you for your purchase! Your artisanal treats are being prepared.');
             cartManager.clear();
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         }
     </script>
 </body>

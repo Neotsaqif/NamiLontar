@@ -19,7 +19,7 @@
     <main class="login-page">
         <div class="login-card">
             <div class="login-header">
-                <a href="index.html" class="logo-container center">
+                <a href="index.php" class="logo-container center">
                     <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png" alt="Logo" height="50"
                         width="50">
                     <div class="logo">Nami Lontar</div>

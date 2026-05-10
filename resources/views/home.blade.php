@@ -6,7 +6,7 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-bg">
-        <img src="{{ asset('assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png') }}" alt="Delicious Nami Lontar Spread">
+        <img src="{{ asset('assets/product photo/cake.png') }}" alt="Delicious Nami Lontar Spread">
     </div>
     <div class="hero-content container">
         <div class="hero-text-box">

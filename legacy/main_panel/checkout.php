@@ -137,17 +137,7 @@
         </div>
     </main>
 
-    <footer class="new-footer" style="background: none; border-top: 1px solid #eee;">
-        <div class="container" style="display: flex; justify-content: space-between; padding: 2rem 0; font-size: 0.85rem; color: #888;">
-            <div class="footer-logo" style="margin: 0; font-size: 1.2rem;">NAMI LONTAR</div>
-            <div style="display: flex; gap: 2rem;">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Shipping Info</a>
-            </div>
-            <div>&copy; 2024 NAMI LONTAR. Artisanal Craftsmanship.</div>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <script src="cart-manager.js"></script>
     <script>

@@ -10,7 +10,7 @@ const productData = {
         thumbnails: [
             '/assets/product photo/lontar.jpeg',
             '/assets/product photo/full produk.jpeg',
-            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/product photo/cake.png'
         ],
         ingredients: 'Organic Stone-Ground Flour, Premium Grass-Fed Butter, Organic Free-Range Eggs, Condensed Milk, Sea Salt, Vanilla Bean.',
         storage: 'Store in a cool, dry place. For best taste, consume within 3 days. Can be refrigerated for up to 7 days.',
@@ -31,7 +31,7 @@ const productData = {
         thumbnails: [
             '/assets/product photo/pastel.jpeg',
             '/assets/product photo/full produk.jpeg',
-            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/product photo/cake.png'
         ],
         ingredients: 'Braided Flour Crust, Seasoned Minced Chicken/Beef, Carrots, Rice Vermicelli, Hard-boiled Eggs, Traditional Spices.',
         storage: 'Best consumed fresh. Can be reheated in an air fryer or oven at 180°C for 5 minutes to restore crispiness.',

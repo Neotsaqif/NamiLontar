@@ -1,10 +1,16 @@
 @extends('layouts.admin')
 
-@section('title', 'Client Orders - Toko Serba Ada')
+@section('title', 'Orders - Nami Lontar')
 
 @section('content')
 <header class="page-header">
     <h1>Client Orders</h1>
+    <div class="header-actions">
+        <div class="admin-profile">
+            <img src="{{ asset('assets/profile.png') }}" alt="Admin">
+            <span>Julian Rossi</span>
+        </div>
+    </div>
 </header>
 
 <div class="table-container">

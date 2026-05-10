@@ -38,7 +38,11 @@ class CartManager {
         this.save();
         this.updateBadge();
         // If we are on the cart page, reload the UI
+<<<<<<< HEAD:public/js/cart-manager.js
         if (window.location.pathname.includes('/cart')) {
+=======
+        if (window.location.pathname.includes('cart.php')) {
+>>>>>>> 877881dcf3225cdf7867a96537686e7846cfa144:main_panel/cart-manager.js
             window.location.reload();
         }
     }

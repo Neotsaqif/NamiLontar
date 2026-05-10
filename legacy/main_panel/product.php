@@ -13,13 +13,33 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+    <header>
+        <nav class="container">
+            <div class="logo-container">
+                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png" alt="Logo" height="50" width="50">
+                <div class="logo">Nami Lontar</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <main>
         <!-- Breadcrumbs -->
         <div class="container" style="padding: 2rem 2rem 0;">
             <p style="font-size: 0.85rem; color: #888;">
-                <a href="index.html">Home</a> / <a href="index.html#product">Shop</a> / <span id="breadcrumb-current" style="color: var(--dark-color); font-weight: 500;">Product</span>
+                <a href="index.php">Home</a> / <a href="index.php#product">Shop</a> / <span id="breadcrumb-current" style="color: var(--dark-color); font-weight: 500;">Product</span>
             </p>
         </div>
 
@@ -122,7 +142,45 @@
         </section>
     </main>
 
-    <?php include 'footer.php'; ?>
+    <footer class="new-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h2 class="footer-logo">NAMI LONTAR</h2>
+                <p>&copy; 2024 NAMI LONTAR. Crafted with<br>passion. From our hearth to your home,<br>every bite tells a story.</p>
+            </div>
+
+            <div class="footer-links-group">
+                <div class="link-column">
+                    <h3>SHOP</h3>
+                    <ul>
+                        <li><a href="index.php#product">Best Sellers</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Gift Sets</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>SUPPORT</h3>
+                    <ul>
+                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <div class="social-icons">
+                    <a href="#" class="icon-circle"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="icon-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <h3>NEWSLETTER</h3>
+                <form class="newsletter-form-footer">
+                    <input type="email" placeholder="Your email">
+                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </footer>
 
     <script src="cart-manager.js"></script>
     <script src="product.js"></script>

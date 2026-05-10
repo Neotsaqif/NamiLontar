@@ -13,7 +13,27 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+    <header>
+        <nav class="container">
+            <div class="logo-container">
+                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png" alt="Logo" height="50" width="50">
+                <div class="logo">Nami Lontar</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#product">Product</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="login.php" id="user-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.php" id="cart-btn" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <main class="container">
         <div class="checkout-grid">
@@ -126,7 +146,7 @@
             const list = document.getElementById('checkout-items-list');
             
             if (items.length === 0) {
-                window.location.href = 'cart.html';
+                window.location.href = 'cart.php';
                 return;
             }
 
@@ -157,7 +177,7 @@
         function completePurchase() {
             alert('Thank you for your purchase! Your artisanal treats are being prepared.');
             cartManager.clear();
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         }
     </script>
 </body>

@@ -1,11 +1,47 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NAMI LONTAR Project Setup
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the Nami Lontar project. Please follow these steps to set up the project on your local machine:
+
+## 🚀 Getting Started
+
+After cloning the repository, run these commands in your terminal to generate the necessary files and dependencies:
+
+### 1. Install Dependencies
+```bash
+# Install PHP dependencies
+composer install
+
+# Install JavaScript dependencies
+npm install
+```
+
+### 2. Environment Configuration
+*Note: The `.env` file is currently shared in the repository, but if you need to start fresh:*
+```bash
+# Create local .env file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+### 3. Database Setup
+Ensure you have a MySQL database named `db_namilontar`. Then run:
+```bash
+# Run database migrations
+php artisan migrate
+```
+
+### 4. Final Touches
+```bash
+# Create storage symlink
+php artisan storage:link
+
+# Start the local development server
+php artisan serve
+```
+
+---
 
 ## About Laravel
 

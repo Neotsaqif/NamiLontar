@@ -1,15 +1,15 @@
 *.log
 .DS_Store
-.env
+# .env (Removed to allow sharing)
 .env.backup
 .env.production
 .phpactor.json
 .phpunit.result.cache
 /.fleet
-/.idea
+# /.idea (Removed to allow sharing)
 /.nova
 /.phpunit.cache
-/.vscode
+# /.vscode (Removed to allow sharing)
 /.zed
 /auth.json
 /node_modules

@@ -6,7 +6,7 @@
 <!-- About Hero Section -->
 <section class="about-hero">
     <div class="hero-bg">
-        <img src="{{ asset('assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png') }}" alt="Bakery Background">
+        <img src="{{ asset('assets/product photo/cake.png') }}" alt="Bakery Background">
         <div class="overlay"></div>
     </div>
     <div class="about-hero-content container">

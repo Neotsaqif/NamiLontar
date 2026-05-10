@@ -13,27 +13,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo-container">
-                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png" alt="Logo" height="50" width="50">
-                <div class="logo">Nami Lontar</div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="nav-icons">
-                <a href="login.html" id="user-btn"><i class="fa-regular fa-user"></i></a>
-                <a href="cart.html" id="cart-btn" class="cart-icon">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            </div>
-        </nav>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main class="container">
         <div class="checkout-grid">
@@ -137,17 +117,7 @@
         </div>
     </main>
 
-    <footer class="new-footer" style="background: none; border-top: 1px solid #eee;">
-        <div class="container" style="display: flex; justify-content: space-between; padding: 2rem 0; font-size: 0.85rem; color: #888;">
-            <div class="footer-logo" style="margin: 0; font-size: 1.2rem;">NAMI LONTAR</div>
-            <div style="display: flex; gap: 2rem;">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Shipping Info</a>
-            </div>
-            <div>&copy; 2024 NAMI LONTAR. Artisanal Craftsmanship.</div>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <script src="cart-manager.js"></script>
     <script>

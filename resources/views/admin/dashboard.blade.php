@@ -1,30 +1,42 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard - Toko Serba Ada')
+@section('title', 'Dashboard - Nami Lontar')
 
 @section('content')
 <header class="page-header">
     <h1>Dashboard Overview</h1>
+    <div class="header-actions">
+        <div class="admin-profile">
+            <img src="{{ asset('assets/profile.png') }}" alt="Admin">
+            <span>Julian Rossi</span>
+        </div>
+    </div>
 </header>
 
 <div class="summary-grid">
-    <div class="summary-card">
-        <span class="summary-title">Total Revenue</span>
+    <div class="summary-card card">
+        <i class="fa-solid fa-sack-dollar summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-chart-line"></i> Total Revenue</span>
         <span class="summary-value">$24,500</span>
+        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +12% from last month</span>
     </div>
-    <div class="summary-card">
-        <span class="summary-title">Total Orders</span>
+    <div class="summary-card card">
+        <i class="fa-solid fa-box-open summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-receipt"></i> Total Orders</span>
         <span class="summary-value">1,245</span>
+        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +5% from last month</span>
     </div>
-    <div class="summary-card">
-        <span class="summary-title">Active Customers</span>
+    <div class="summary-card card">
+        <i class="fa-solid fa-users summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-user-group"></i> Active Customers</span>
         <span class="summary-value">842</span>
+        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +18% from last month</span>
     </div>
 </div>
 
 <div class="table-container">
     <div class="table-header-actions">
-        <h2 style="font-family: var(--font-sans); font-size: 1.2rem; margin:0; padding:0.5rem 0;">Recent Activity</h2>
+        <h2 style="font-family: var(--font-sans); font-size: 1.2rem; margin:0; font-weight: 500;">Recent Activity</h2>
     </div>
     <table>
         <thead>

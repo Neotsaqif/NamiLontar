@@ -17,7 +17,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body class="page-transition-enter">
     @include('layouts.partials.header')
 
     <main>
@@ -27,6 +27,28 @@
     @include('layouts.partials.footer')
 
     <script src="{{ asset('js/cart-manager.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const links = document.querySelectorAll('a[href^="{{ url('/') }}"]:not([href*="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Check if it's opening in a new tab
+                    if(e.ctrlKey || e.metaKey || this.target === '_blank') return;
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    document.body.classList.remove('page-transition-enter');
+                    document.body.classList.add('page-transition-exit');
+                    
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                });
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 

@@ -173,13 +173,18 @@
 
 <!-- Newsletter Section -->
 <section class="newsletter">
-    <div class="container">
-        <h2>Fresh from the Oven</h2>
-        <p>Join our newsletter and be the first to know about seasonal specials and weekly baked box offers.</p>
-        <form class="newsletter-form">
-            <input type="email" placeholder="Your email address" required id="newsletter-email">
-            <button type="submit" class="btn btn-dark">SUBSCRIBE</button>
-        </form>
+    <div class="container newsletter-grid">
+        <div class="newsletter-content">
+            <h2>Fresh from the Oven</h2>
+            <p>Join our newsletter and be the first to know about seasonal specials and weekly baked box offers.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required id="newsletter-email">
+                <button type="submit" class="btn btn-dark">SUBSCRIBE</button>
+            </form>
+        </div>
+        <div class="newsletter-logo">
+            <img src="{{ asset('assets/product photo/logo.png') }}" alt="Nami Lontar Logo" class="logo-gradient">
+        </div>
     </div>
 </section>
 @endsection

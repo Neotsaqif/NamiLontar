@@ -391,29 +391,37 @@ header nav {
 /* Newsletter */
 .newsletter {
     padding: 6rem 2rem;
-    text-align: center;
     background-color: var(--white);
     border-top: 1px solid #eee;
 }
 
-.newsletter h2 {
-    font-size: 2.5rem;
+.newsletter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.newsletter-content {
+    text-align: left;
+}
+
+.newsletter-content h2 {
+    font-size: 2.8rem;
     margin-bottom: 1rem;
 }
 
-.newsletter p {
+.newsletter-content p {
     margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 1.1rem;
+    color: #555;
 }
 
 .newsletter-form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     max-width: 500px;
-    margin: 0 auto;
 }
 
 .newsletter-form input {
@@ -422,6 +430,19 @@ header nav {
     border: 1px solid #ddd;
     border-radius: 4px;
     outline: none;
+}
+
+.newsletter-logo {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newsletter-logo img.logo-gradient {
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    mask-image: linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
 }
 
 /* New Footer Styles */
@@ -618,13 +639,23 @@ header nav {
     to { opacity: 0; transform: translateY(-10px); }
 }
 
-/* Navbar smooth transitions */
+/* Navbar smooth transitions & hover effects */
 header nav .logo-container img,
 header nav .logo-container .logo,
 header nav .nav-links a,
 header nav .nav-icons a {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
     display: inline-block;
+}
+
+header nav .logo-container .logo:hover,
+header nav .nav-icons a:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+header nav .nav-icons a:hover i {
+    color: var(--primary-color);
 }
 
 /* About Page Styles */

@@ -150,26 +150,23 @@
     </div>
 </section>
 
-<!-- Feature Section -->
+<!-- Bestseller Section -->
 <section class="feature container">
     <div class="feature-grid">
         <div class="feature-img">
-            <img src="{{ asset('assets/baker_kneading_1777430878902.png') }}" alt="Baker kneading dough">
+            <img src="{{ asset('assets/product photo/lontar.jpeg') }}" alt="Nami Lontar Original Bestseller">
         </div>
         <div class="feature-content">
-            <h2>Slow Fermentation, Real Flavor</h2>
-            <p>We believe that time is the most important ingredient in modern baking. Our sour dough is
-                fermented for 48 hours, resulting in a deeper, more complex flavor and a crust that's truly out
-                of this world.</p>
+            <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
+            <h2>Nami Lontar Original</h2>
+            <p>Experience our signature creation. The Nami Lontar Original combines a perfectly flaky crust with a rich, creamy custard filling that melts in your mouth. Baked fresh daily using our closely guarded traditional recipe.</p>
+            <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">$15.50</div>
             <ul class="feature-list">
-                <li><i class="fa-solid fa-check"></i> <strong>Organic Flour:</strong> We only use the finest
-                    organic stone-ground flour.</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Artisanal:</strong> Every loaf is hand-shaped by
-                    our master bakers.</li>
-                <li><i class="fa-solid fa-check"></i> <strong>No Preservatives:</strong> Just flour, water,
-                    salt, and time.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Premium Ingredients:</strong> Made with organic dairy and free-range eggs.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> Not too sweet, with a hint of vanilla.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> Baked in small batches to ensure quality.</li>
             </ul>
-            <a href="#" class="learn-more">Learn About Our Process <i class="fa-solid fa-arrow-right"></i></a>
+            <button class="btn btn-primary" onclick="addToCart('lontar')" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </div>
 </section>

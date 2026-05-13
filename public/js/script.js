@@ -110,4 +110,65 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 3. Navbar Hover "Push" Effect
+    const navItems = document.querySelectorAll('header nav .logo-container img, header nav .logo-container .logo, header nav .nav-links a, header nav .nav-icons a');
+    
+    navItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenter = itemRect.left + (itemRect.width / 2);
+            
+            navItems.forEach(otherItem => {
+                if (item !== otherItem) {
+                    const otherRect = otherItem.getBoundingClientRect();
+                    const otherCenter = otherRect.left + (otherRect.width / 2);
+                    
+                    if (otherCenter < itemCenter) {
+                        otherItem.style.transform = 'translateX(-15px) scale(0.95)';
+                    } else {
+                        otherItem.style.transform = 'translateX(15px) scale(0.95)';
+                    }
+                    otherItem.style.opacity = '0.7';
+                }
+            });
+            
+            item.style.transform = 'scale(1.15)';
+            if(item.tagName.toLowerCase() === 'a' || item.classList.contains('logo')) {
+                item.style.color = '#1a1511';
+                item.style.fontWeight = '700';
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            navItems.forEach(otherItem => {
+                otherItem.style.transform = '';
+                otherItem.style.opacity = '';
+                if(otherItem.tagName.toLowerCase() === 'a' || otherItem.classList.contains('logo')) {
+                    otherItem.style.color = '';
+                    otherItem.style.fontWeight = '';
+                }
+            });
+        });
+    });
+
+    // 4. Page Transition Animations
+    document.body.classList.add('page-transition-enter');
+    
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            // Allow default for internal links, external links, etc.
+            if (href && href.startsWith('/') && !href.includes('#')) {
+                e.preventDefault();
+                document.body.classList.remove('page-transition-enter');
+                document.body.classList.add('page-transition-exit');
+                
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 300);
+            }
+        });
+    });
 });

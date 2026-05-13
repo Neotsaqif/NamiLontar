@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (btn.textContent === 'Edit' || btn.textContent === 'View Details') {
                     // Turn row into editable
+                    btn.dataset.originalText = btn.textContent;
                     const cells = row.querySelectorAll('td:not(:last-child)');
                     cells.forEach(cell => {
                         // Don't make badges editable to keep it simple
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.textContent = 'Save';
                     btn.classList.remove('btn-secondary');
                     btn.classList.add('btn-primary');
-                } else if (btn.textContent === 'Save') {
+                } else if (btn.textContent === 'Save' || btn.textContent === 'Saved!') {
+                    if (btn.textContent === 'Saved!') return; // Prevent double clicking
                     // Save changes
                     const cells = row.querySelectorAll('td:not(:last-child)');
                     cells.forEach(cell => {
@@ -46,13 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             cell.style.outline = "none";
                         }
                     });
-                    btn.textContent = 'Edit';
+                    
+                    const originalText = btn.dataset.originalText || 'Edit';
+                    btn.textContent = originalText;
                     btn.classList.remove('btn-primary');
                     btn.classList.add('btn-secondary');
                     
                     // Show a quick visual feedback
                     btn.textContent = 'Saved!';
-                    setTimeout(() => btn.textContent = 'Edit', 1500);
+                    setTimeout(() => btn.textContent = originalText, 1500);
                 }
             }
         });

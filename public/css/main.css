@@ -24,7 +24,9 @@ body {
     overflow-x: hidden;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Playfair Display', serif;
     color: var(--dark-color);
     font-weight: 700;
@@ -67,7 +69,7 @@ ul {
 .btn-primary:hover {
     background-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-add {
@@ -94,7 +96,7 @@ header {
     top: 0;
     background: linear-gradient(135deg, #fcebb6 0%, #e6aa54 100%);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 header nav {
@@ -107,6 +109,20 @@ header nav {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
+}
+
+.logo-container img {
+    height: auto;
+    max-width: none;
+    margin-top: -35px;
+    margin-bottom: -35px;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.logo-container img:hover {
+    transform: scale(1.1);
 }
 
 .logo-container.center {
@@ -124,15 +140,18 @@ header nav {
 .nav-links {
     display: flex;
     gap: 2.5rem;
+    justify-content: center;
+    flex: 2;
 }
 
 .nav-links a {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 400;
     color: var(--text-color);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--dark-color);
     font-weight: 600;
 }
@@ -141,6 +160,8 @@ header nav {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .nav-icons i {
@@ -409,7 +430,7 @@ header nav {
     padding: 5rem 0;
     color: var(--dark-color);
     font-family: 'Inter', sans-serif;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .new-footer .footer-content {
@@ -571,6 +592,7 @@ header nav {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -883,15 +905,17 @@ header nav {
 }
 
 @media (max-width: 992px) {
-    .legacy-grid, .flagship-grid {
+
+    .legacy-grid,
+    .flagship-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
+
     .artisanal-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .about-hero h1 {
         font-size: 3rem;
     }
@@ -903,7 +927,7 @@ header nav {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
+
     .hero-text-box h1 {
         font-size: 2.5rem;
     }
@@ -913,27 +937,27 @@ header nav {
     .nav-links {
         display: none;
     }
-    
+
     .section-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .newsletter-form {
         flex-direction: column;
     }
-    
+
     .new-footer .footer-content {
         flex-direction: column;
         gap: 4rem;
     }
-    
+
     .new-footer .footer-newsletter {
         align-items: flex-start;
         width: 100%;
         max-width: 100%;
     }
-    
+
     .new-footer .footer-links-group {
         flex-direction: column;
         gap: 2rem;
@@ -994,7 +1018,7 @@ header nav {
 }
 
 .sidebar-item:not(.active):hover {
-    background-color: rgba(0,0,0,0.03);
+    background-color: rgba(0, 0, 0, 0.03);
     color: var(--dark-color);
     transform: translateX(4px);
 }
@@ -1029,7 +1053,7 @@ header nav {
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .edit-btn {
@@ -1174,6 +1198,7 @@ header nav {
     color: var(--text-color);
     cursor: default;
 }
+
 .form-group input:read-only:focus {
     border-color: #888;
     box-shadow: none;
@@ -1217,7 +1242,7 @@ header nav {
     transition: all 0.2s;
 }
 
-.custom-checkbox input:checked ~ .checkmark {
+.custom-checkbox input:checked~.checkmark {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
@@ -1230,7 +1255,7 @@ header nav {
     transition: all 0.2s;
 }
 
-.custom-checkbox input:checked ~ .checkmark i {
+.custom-checkbox input:checked~.checkmark i {
     opacity: 1;
     transform: scale(1);
 }
@@ -1331,8 +1356,8 @@ header nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
-                url('../assets/hero_tart_1777430124548.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        url('../assets/hero_tart_1777430124548.png') no-repeat center center/cover;
     padding: 4rem 2rem;
 }
 
@@ -1521,11 +1546,11 @@ header nav {
     .login-card {
         padding: 2rem;
     }
-    
+
     .login-header h2 {
         font-size: 2rem;
     }
-    
+
     .form-options {
         flex-direction: column;
         align-items: flex-start;
@@ -1599,7 +1624,7 @@ header nav {
     background: var(--white);
     padding: 4rem;
     border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
 }
 
 .contact-form-container h2 {
@@ -1661,7 +1686,7 @@ header nav {
 .btn-send:hover {
     background-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .contact-info-container h2 {
@@ -1753,11 +1778,11 @@ header nav {
         flex-direction: column;
         gap: 0;
     }
-    
+
     .contact-hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .contact-hero-content {
         padding: 2rem;
         margin: 0 1rem;
@@ -1900,7 +1925,8 @@ header nav {
     transition: var(--transition);
 }
 
-.size-btn:hover, .size-btn.active {
+.size-btn:hover,
+.size-btn.active {
     border-color: var(--dark-color);
     background-color: var(--dark-color);
     color: var(--white);
@@ -2065,12 +2091,12 @@ header nav {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
+
     .info-grid-container {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .pairings-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2080,12 +2106,12 @@ header nav {
     .pairings-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .action-row {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .qty-selector {
         justify-content: center;
     }
@@ -2100,7 +2126,7 @@ header nav {
     color: var(--white);
     padding: 1rem 2rem;
     border-radius: 4px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 2000;
     transform: translateY(100px);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -2444,10 +2470,12 @@ header nav {
 
 /* Responsive Cart/Checkout */
 @media (max-width: 992px) {
-    .basket-grid, .checkout-grid {
+
+    .basket-grid,
+    .checkout-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .summary-card {
         position: static;
     }
@@ -2458,18 +2486,17 @@ header nav {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .item-controls {
         width: 100%;
         justify-content: space-between;
     }
-    
+
     .form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .form-group.full {
         grid-column: 1;
     }
 }
-

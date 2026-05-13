@@ -599,6 +599,34 @@ header nav {
     }
 }
 
+/* Page Transitions */
+.page-transition-enter {
+    animation: pageFadeIn 0.5s ease-out forwards;
+}
+
+.page-transition-exit {
+    animation: pageFadeOut 0.3s ease-in forwards;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageFadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Navbar smooth transitions */
+header nav .logo-container img,
+header nav .logo-container .logo,
+header nav .nav-links a,
+header nav .nav-icons a {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    display: inline-block;
+}
+
 /* About Page Styles */
 .about-hero {
     position: relative;

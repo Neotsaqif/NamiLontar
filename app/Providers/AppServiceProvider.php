@@ -38,31 +38,7 @@ class AppServiceProvider extends ServiceProvider
         if (!$config) {
             return;
         }
-        $connection = config('database.default');
-        $config = config("database.connections.{$connection}");
-        
-        if (!$config) {
-            return;
-        }
 
-        // 1. Ensure Database Exists
-        if ($connection === 'sqlite') {
-            $dbPath = $config['database'];
-            if ($dbPath !== ':memory:' && !file_exists($dbPath)) {
-                try {
-                    @mkdir(dirname($dbPath), 0755, true);
-                    @touch($dbPath);
-                } catch (\Exception $e) {
-                    return;
-                }
-            }
-        } else if ($connection === 'mysql') {
-            try {
-                DB::connection()->getPdo();
-            } catch (\Exception $e) {
-                $database = $config['database'];
-                $config['database'] = null;
-                config(["database.connections.{$connection}_setup" => $config]);
         // 1. Ensure Database Exists
         if ($connection === 'sqlite') {
             $dbPath = $config['database'];
@@ -115,7 +91,6 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
         } catch (\Exception $e) {
-            // Silently fail to avoid blocking server boot
             // Silently fail to avoid blocking server boot
         }
     }

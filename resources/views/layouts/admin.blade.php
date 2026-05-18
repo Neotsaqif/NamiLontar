@@ -24,6 +24,9 @@
                 <a href="{{ url('/admin/dashboard') }}" class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                     <i class="fa-solid fa-border-all"></i> Dashboard
                 </a>
+                <a href="{{ route('admin.products.index') }}" class="{{ Request::is('admin/products*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-cookie-bite"></i> Products
+                </a>
                 <a href="{{ url('/admin/orders') }}" class="{{ Request::is('admin/orders') ? 'active' : '' }}">
                     <i class="fa-solid fa-receipt"></i> Orders
                 </a>

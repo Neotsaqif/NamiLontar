@@ -118,5 +118,6 @@ class AppServiceProvider extends ServiceProvider
             // Silently fail to avoid blocking server boot
             // Silently fail to avoid blocking server boot
         }
+            }
     }
 }

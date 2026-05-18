@@ -42,7 +42,7 @@
                     <td>Alice Johnson</td>
                     <td>3 items (Ceramic Mug, etc.)</td>
                     <td><span class="badge processing">Processing</span></td>
-                    <td>$120.00</td>
+                    <td>Rp1.200.000</td>
                     <td><button class="btn btn-secondary">View Details</button></td>
                 </tr>
                 <tr>
@@ -51,7 +51,7 @@
                     <td>Bob Smith</td>
                     <td>1 item (Linen Apron)</td>
                     <td><span class="badge delivered">Delivered</span></td>
-                    <td>$45.50</td>
+                    <td>Rp455.000</td>
                     <td><button class="btn btn-secondary">View Details</button></td>
                 </tr>
                 <tr>
@@ -60,7 +60,7 @@
                     <td>Charlie Brown</td>
                     <td>2 items (Wooden Spoon...)</td>
                     <td><span class="badge pending">Pending</span></td>
-                    <td>$89.99</td>
+                    <td>Rp899.900</td>
                     <td><button class="btn btn-secondary">View Details</button></td>
                 </tr>
             </tbody>

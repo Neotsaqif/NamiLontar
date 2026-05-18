@@ -860,6 +860,57 @@ header nav .nav-icons a:hover i {
     font-size: 1.3rem;
 }
 
+/* Review Card Custom Layout */
+.artisanal-card.review-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 3rem 2.5rem;
+    border-radius: 8px;
+}
+
+.review-top {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.review-author {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.review-middle {
+    margin-bottom: 1.5rem;
+}
+
+.star-rating {
+    display: flex;
+    gap: 0.35rem;
+    color: #f5b942; /* Premium gold/yellow for stars */
+    font-size: 1.15rem;
+}
+
+.review-bottom p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+    font-style: italic;
+}
+
 /* Chefs Section */
 .chefs {
     padding: 8rem 2rem;

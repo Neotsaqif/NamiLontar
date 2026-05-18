@@ -50,7 +50,7 @@
                 <span class="review-count" id="product-reviews">({{ $product->reviews }} reviews)</span>
             </div>
 
-            <div class="detail-price" id="product-price">${{ number_format($product->price, 2) }}</div>
+            <div class="detail-price" id="product-price">Rp{{ number_format($product->price, 0, ',', '.') }}</div>
 
             <p class="product-description" id="product-desc">
                 {{ $product->description }}
@@ -130,7 +130,7 @@
             </a>
             <div class="pairing-info">
                 <h4>{{ $pair->name }}</h4>
-                <span class="price">${{ number_format($pair->price, 2) }}</span>
+                <span class="price">Rp{{ number_format($pair->price, 0, ',', '.') }}</span>
             </div>
         </div>
         @endforeach

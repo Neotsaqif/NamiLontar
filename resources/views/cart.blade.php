@@ -17,7 +17,7 @@
 
             <div class="shipping-promo" id="shipping-promo">
                 <i class="fa-solid fa-truck"></i>
-                <span id="shipping-promo-text">You're $0.00 away from free shipping.</span>
+                <span id="shipping-promo-text">You're Rp0 away from free shipping.</span>
             </div>
         </div>
 
@@ -26,19 +26,19 @@
                 <h2>Order Summary</h2>
                 <div class="summary-row">
                     <span>Subtotal</span>
-                    <span id="summary-subtotal">$0.00</span>
+                    <span id="summary-subtotal">Rp0</span>
                 </div>
                 <div class="summary-row">
                     <span>Estimated Shipping</span>
-                    <span id="summary-shipping">$0.00</span>
+                    <span id="summary-shipping">Rp0</span>
                 </div>
                 <div class="summary-row">
                     <span>Estimated Tax</span>
-                    <span id="summary-tax">$0.00</span>
+                    <span id="summary-tax">Rp0</span>
                 </div>
                 <div class="summary-row total">
                     <span>Total</span>
-                    <span id="summary-total">$0.00</span>
+                    <span id="summary-total">Rp0</span>
                 </div>
 
                 <div class="promo-code">
@@ -100,7 +100,7 @@
                         <input type="text" value="${item.quantity}" class="qty-input" readonly>
                         <button class="qty-btn" onclick="updateQty('${item.id}', ${item.quantity + 1})">+</button>
                     </div>
-                    <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div class="item-price">Rp${(item.price * item.quantity).toLocaleString('id-ID')}</div>
                     <button class="remove-btn" onclick="cartManager.removeItem('${item.id}')">REMOVE</button>
                 </div>
             `;
@@ -110,10 +110,10 @@
         const { subtotal, shipping, tax, total } = cartManager.getTotals();
         updateTotals(subtotal, shipping, tax, total);
 
-        if (subtotal >= 50) {
+        if (subtotal >= 500000) {
             promoText.textContent = "You qualify for FREE shipping!";
         } else {
-            promoText.textContent = `You're $${(50 - subtotal).toFixed(2)} away from free shipping.`;
+            promoText.textContent = `You're Rp${(500000 - subtotal).toLocaleString('id-ID')} away from free shipping.`;
         }
     }
 
@@ -122,11 +122,13 @@
         renderCart();
     }
 
+    const formatRp = (num) => 'Rp' + num.toLocaleString('id-ID');
+
     function updateTotals(subtotal, shipping, tax, total) {
-        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-        document.getElementById('summary-shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
-        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
-        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('summary-subtotal').textContent = formatRp(subtotal);
+        document.getElementById('summary-shipping').textContent = shipping === 0 ? 'FREE' : formatRp(shipping);
+        document.getElementById('summary-tax').textContent = formatRp(tax);
+        document.getElementById('summary-total').textContent = formatRp(total);
     }
 </script>
 @endpush

@@ -57,7 +57,7 @@
                     @if($discount->type === 'Percentage')
                         {{ number_format($discount->amount, 0) }}% OFF
                     @elseif($discount->type === 'Fixed')
-                        ${{ number_format($discount->amount, 2) }} OFF
+                        Rp{{ number_format($discount->amount, 0, ',', '.') }} OFF
                     @else
                         Free Shipping
                     @endif

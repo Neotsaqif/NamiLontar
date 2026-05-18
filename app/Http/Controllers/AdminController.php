@@ -35,4 +35,9 @@ class AdminController extends Controller
     {
         return view('admin.settings');
     }
+
+    public static function formatPrice($amount)
+    {
+        return 'Rp' . number_format($amount, 0, ',', '.');
+    }
 }

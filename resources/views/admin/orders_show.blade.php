@@ -101,13 +101,13 @@
                                 {{ $item['name'] }}
                             </td>
                             <td style="padding: 1.25rem 0; text-align: center; color: var(--text-secondary);">
-                                ${{ number_format($item['price'], 2) }}
+                                {{ \App\Http\Controllers\AdminController::formatPrice($item['price']) }}
                             </td>
                             <td style="padding: 1.25rem 0; text-align: center; font-weight: 600; color: var(--text-primary);">
                                 {{ $item['quantity'] }}
                             </td>
                             <td style="padding: 1.25rem 0; text-align: right; font-weight: 600; color: var(--text-primary);">
-                                ${{ number_format($itemTotal, 2) }}
+                                {{ \App\Http\Controllers\AdminController::formatPrice($itemTotal) }}
                             </td>
                         </tr>
                         @endforeach
@@ -119,12 +119,12 @@
             <div style="border-top: 1px solid var(--card-border); margin-top: 2rem; padding-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
                 <div style="display: flex; justify-content: space-between; width: 280px; font-size: 0.95rem;">
                     <span style="color: var(--text-secondary);">Subtotal:</span>
-                    <span style="color: var(--text-primary); font-weight: 500;">${{ number_format($subtotal, 2) }}</span>
+                    <span style="color: var(--text-primary); font-weight: 500;">{{ \App\Http\Controllers\AdminController::formatPrice($subtotal) }}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 280px; font-size: 0.95rem;">
                     <span style="color: var(--text-secondary);">Shipping Cost:</span>
                     <span style="color: var(--text-primary); font-weight: 500;">
-                        {{ $order['shipping_method'] === 'Express Shipping' ? '$15.00' : 'Free' }}
+                        {{ $order['shipping_method'] === 'Express Shipping' ? \App\Http\Controllers\AdminController::formatPrice(15.00) : 'Free' }}
                     </span>
                 </div>
                 @php
@@ -134,7 +134,7 @@
                 <div style="display: flex; justify-content: space-between; width: 280px; border-top: 1px solid var(--card-border); padding-top: 1rem; font-size: 1.4rem;">
                     <span style="font-family: var(--font-serif); color: var(--text-primary); font-weight: 600;">Total:</span>
                     <span style="font-family: var(--font-serif); color: var(--accent-color); font-weight: 700; text-shadow: 0 0 15px rgba(212,175,55,0.2);">
-                        ${{ number_format($grandTotal, 2) }}
+                        {{ \App\Http\Controllers\AdminController::formatPrice($grandTotal) }}
                     </span>
                 </div>
             </div>

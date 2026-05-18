@@ -29,12 +29,8 @@
         <div class="legacy-text">
             <span class="section-tag">EST. 2024</span>
             <h2>A Legacy of Perfection</h2>
-            <p>At Nami Lontar, we believe that the best pastries come from a combination of time-honored
-                techniques and the finest ingredients. Every loaf of bread and every delicate pastry is a
-                testament to our dedication to quality.</p>
-            <p>Our journey began with a simple dream: to bring the authentic taste of artisanal baking to your
-                table. Today, we continue that mission with the same passion and attention to detail that
-                defined our very first bake.</p>
+            <p>Kami adalah UMKM kuliner rumahan yang lahir kembali di tahun 2024 dengan semangat baru untuk menyajikan aneka camilan lezat yang bikin nagih! Setelah sempat tertunda akibat pandemi Covid-19, kini kami hadir lebih siap untuk memanjakan lidah kamu lewat pilihan kue basah tradisional seperti pastel, kue lontar, dan lumpia, hingga renyahnya keripik singkong varian asin dan balado. Semua menu kami dibuat dengan penuh cinta dari dapur rumah, karena misi utama kami adalah memastikan setiap konsumen bisa mendapatkan kelezatan camilan yang mereka inginkan untuk menemani momen spesial mereka.</p>
+            <p>Buat kamu yang lagi punya acara seru seperti arisan atau kumpul keluarga, kami siap banget jadi andalan! Kami menerima pesanan dalam jumlah besar, bahkan sanggup memproduksi hingga 200 sampai 400 pcs camilan segar sekaligus. Karena semua produk kami dibuat dadakan sesuai pesanan (pre-order) demi menjaga kualitas dan rasa, pastikan kamu melakukan pemesanan minimal H-5 sebelum acara ya, khusus untuk orderan di atas 150 pcs. Yuk, bikin acaramu makin ceria dan berkesan dengan sajian lezat dari kami!</p>
             <div class="signature">
                 <span class="sig-line"></span>
                 <p>Crafted with Passion</p>
@@ -84,54 +80,7 @@
     </div>
 </section>
 
-<!-- Chefs Section -->
-<section class="chefs container">
-    <div class="section-header-about">
-        <div class="header-left">
-            <span class="tag">OUR TEAM</span>
-            <h2>Meet Our Master Chefs</h2>
-        </div>
-        <button class="btn btn-outline">JOIN OUR TEAM</button>
-    </div>
-    <div class="chef-grid">
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef1.png') }}" alt="Chef Marcus">
-            </div>
-            <div class="chef-info">
-                <h3>Marcus Chen</h3>
-                <p>Head Pastry Chef</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef2.png') }}" alt="Chef Sarah">
-            </div>
-            <div class="chef-info">
-                <h3>Sarah Jenkins</h3>
-                <p>Sourdough Specialist</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef3.png') }}" alt="Chef David">
-            </div>
-            <div class="chef-info">
-                <h3>David Miller</h3>
-                <p>Artisan Baker</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef4.png') }}" alt="Chef Elena">
-            </div>
-            <div class="chef-info">
-                <h3>Elena Rossi</h3>
-                <p>Cake Designer</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Flagship Section -->
 <section class="flagship">

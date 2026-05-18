@@ -20,14 +20,13 @@
             </div>
             <div class="thumbnail-grid" id="thumbnail-grid">
                 <div class="thumb-item active" onclick="changeImage(this, '{{ asset($product->image) }}')">
-                    <img src="{{ asset($product->image) }}" alt="Thumbnail 1">
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }} Main">
                 </div>
-                <div class="thumb-item" onclick="changeImage(this, '{{ asset('assets/product photo/full produk.jpeg') }}')">
-                    <img src="{{ asset('assets/product photo/full produk.jpeg') }}" alt="Thumbnail 2">
+                @foreach($pairings as $pair)
+                <div class="thumb-item" onclick="changeImage(this, '{{ asset($pair->image) }}')">
+                    <img src="{{ asset($pair->image) }}" alt="{{ $pair->name }}">
                 </div>
-                <div class="thumb-item" onclick="changeImage(this, '{{ asset('assets/product photo/cake.png') }}')">
-                    <img src="{{ asset('assets/product photo/cake.png') }}" alt="Thumbnail 3">
-                </div>
+                @endforeach
             </div>
         </div>
 

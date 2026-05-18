@@ -26,6 +26,17 @@
 
     @include('layouts.partials.footer')
 
+    <script>
+        window.NAMI_PRODUCTS = {
+            @foreach(\App\Models\Product::all() as $product)
+                '{{ $product->slug }}': {
+                    name: '{{ addslashes($product->name) }}',
+                    price: {{ $product->price }},
+                    image: '{{ $product->image }}'
+                },
+            @endforeach
+        };
+    </script>
     <script src="{{ asset('js/cart-manager.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

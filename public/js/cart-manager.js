@@ -1,4 +1,4 @@
-const PRODUCTS = {
+const PRODUCTS = window.NAMI_PRODUCTS || {
     'lontar': { name: 'Nami Lontar Original', price: 15.50, image: '/assets/product photo/lontar.jpeg' },
     'pastel': { name: 'Pastel Renyah', price: 8.25, image: '/assets/product photo/pastel.jpeg' },
     'kripik': { name: 'Kripik Gurih', price: 4.50, image: '/assets/product photo/kripik.jpeg' },

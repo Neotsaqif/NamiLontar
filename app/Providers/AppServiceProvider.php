@@ -32,43 +32,66 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function ensureDatabaseAndTablesExist(): void
     {
-        try {
-            // Check if database exists by attempting to connect
-            DB::connection()->getPdo();
-        } catch (\Exception $e) {
-            // Database might not exist, try to create it
-            $connection = config('database.default');
-            $config = config("database.connections.{$connection}");
-            
-            if (!$config) {
-                return;
+        $connection = config('database.default');
+        $config = config("database.connections.{$connection}");
+        
+        if (!$config) {
+            return;
+        }
+
+        // 1. Ensure Database Exists
+        if ($connection === 'sqlite') {
+            $dbPath = $config['database'];
+            if ($dbPath !== ':memory:' && !file_exists($dbPath)) {
+                try {
+                    @mkdir(dirname($dbPath), 0755, true);
+                    @touch($dbPath);
+                } catch (\Exception $e) {
+                    return;
+                }
             }
-
-            $database = $config['database'];
-
-            // Connect to server without database selection
-            $config['database'] = null;
-            config(["database.connections.{$connection}_setup" => $config]);
-
+        } else if ($connection === 'mysql') {
             try {
-                DB::connection("{$connection}_setup")->statement("CREATE DATABASE IF NOT EXISTS `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-                DB::purge("{$connection}_setup");
-                
-                // Reset original connection to use the new database
-                DB::purge($connection);
-            } catch (\Exception $e2) {
-                // If we can't even create the database, we might lack permissions
-                return;
+                DB::connection()->getPdo();
+            } catch (\Exception $e) {
+                $database = $config['database'];
+                $config['database'] = null;
+                config(["database.connections.{$connection}_setup" => $config]);
+
+                try {
+                    DB::connection("{$connection}_setup")->statement("CREATE DATABASE IF NOT EXISTS `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                    DB::purge("{$connection}_setup");
+                    DB::purge($connection);
+                } catch (\Exception $e2) {
+                    return;
+                }
             }
         }
 
-        // Now that the database exists, check if tables are missing
+        // 2. Ensure Migrations and Tables exist
         try {
-            if (!Schema::hasTable('migrations')) {
+            $hasMigrationsTable = Schema::hasTable('migrations');
+            $hasProductsTable = Schema::hasTable('products');
+            $hasCategoriesTable = Schema::hasTable('categories');
+            $hasDiscountsTable = Schema::hasTable('discounts');
+
+            if (!$hasMigrationsTable || !$hasProductsTable || !$hasCategoriesTable || !$hasDiscountsTable) {
                 Artisan::call('migrate', ['--force' => true]);
             }
+
+            // 3. Ensure seed data exists
+            if (Schema::hasTable('products') && \App\Models\Product::count() === 0) {
+                Artisan::call('db:seed', ['--force' => true]);
+            } else {
+                if (Schema::hasTable('categories') && \App\Models\Category::count() === 0) {
+                    Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--force' => true]);
+                }
+                if (Schema::hasTable('discounts') && \App\Models\Discount::count() === 0) {
+                    Artisan::call('db:seed', ['--class' => 'DiscountSeeder', '--force' => true]);
+                }
+            }
         } catch (\Exception $e) {
-            // Silently fail if migration fails
+            // Silently fail to avoid blocking server boot
         }
     }
 }

@@ -14,6 +14,7 @@ class Product extends Model
         'name',
         'price',
         'category',
+        'category_id',
         'rating',
         'reviews',
         'description',
@@ -28,4 +29,35 @@ class Product extends Model
         'rating' => 'decimal:1',
         'reviews' => 'integer',
     ];
+
+    /**
+     * Get the category that owns the product.
+     */
+    public function categoryRelation()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    /**
+     * Boot function to synchronize relational category_id and category text name.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($product) {
+            if ($product->isDirty('category_id') && $product->category_id) {
+                $category = Category::find($product->category_id);
+                if ($category) {
+                    $product->category = $category->name;
+                }
+            } else if ($product->isDirty('category') && !$product->category_id) {
+                // If text category changes, attempt to map to existing category
+                $category = Category::where('name', $product->category)->first();
+                if ($category) {
+                    $product->category_id = $category->id;
+                }
+            }
+        });
+    }
 }

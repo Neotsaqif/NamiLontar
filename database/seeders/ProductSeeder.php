@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
                 'slug' => 'lontar',
                 'name' => 'Nami Lontar Original',
                 'price' => 15.50,
-                'category' => 'SIGNATURE PRODUCT',
+                'category' => 'Signature Collection',
                 'rating' => 5.0,
                 'reviews' => 124,
                 'description' => 'Our signature Nami Lontar (Papuan Milk Pie) is a delicate balance of creamy, rich egg custard and a buttery, flaky crust. Each tart is hand-crafted using a traditional recipe passed down through generations, ensuring an authentic taste of artisanal excellence.',
@@ -81,6 +81,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $prod) {
+            $category = \App\Models\Category::where('name', $prod['category'])->first();
+            if ($category) {
+                $prod['category_id'] = $category->id;
+            }
             Product::updateOrCreate(['slug' => $prod['slug']], $prod);
         }
     }

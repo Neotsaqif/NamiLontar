@@ -60,6 +60,27 @@
 </section>
 
 <!-- Bestseller Section -->
+@if($bestseller)
+<section class="feature container">
+    <div class="feature-grid">
+        <div class="feature-img">
+            <img src="{{ asset($bestseller->image) }}" alt="{{ $bestseller->name }} Bestseller">
+        </div>
+        <div class="feature-content">
+            <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
+            <h2>{{ $bestseller->name }}</h2>
+            <p>{{ $bestseller->description }}</p>
+            <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">${{ number_format($bestseller->price, 2) }}</div>
+            <ul class="feature-list">
+                <li><i class="fa-solid fa-check"></i> <strong>Premium Ingredients:</strong> {{ $bestseller->ingredients ?: 'Made with organic dairy and free-range eggs.' }}</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> {{ $bestseller->artisan_note ?: 'Not too sweet, with a hint of vanilla.' }}</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> {{ $bestseller->storage ?: 'Baked in small batches to ensure quality.' }}</li>
+            </ul>
+            <button class="btn btn-primary" onclick="addToCart('{{ $bestseller->slug }}')" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
+        </div>
+    </div>
+</section>
+@else
 <section class="feature container">
     <div class="feature-grid">
         <div class="feature-img">
@@ -79,6 +100,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <!-- Newsletter Section -->
 <section class="newsletter">

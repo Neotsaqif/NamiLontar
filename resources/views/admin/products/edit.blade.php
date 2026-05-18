@@ -46,15 +46,13 @@
             </div>
 
             <div class="form-group">
-                <label for="category">Category</label>
-                <select id="category" name="category" required>
-                    <option value="SIGNATURE PRODUCT" {{ old('category', $product->category) == 'SIGNATURE PRODUCT' ? 'selected' : '' }}>SIGNATURE PRODUCT</option>
-                    <option value="DAILY FRESH" {{ old('category', $product->category) == 'DAILY FRESH' ? 'selected' : '' }}>DAILY FRESH</option>
-                    <option value="SNACK COLLECTION" {{ old('category', $product->category) == 'SNACK COLLECTION' ? 'selected' : '' }}>SNACK COLLECTION</option>
-                    <option value="READY TO COOK" {{ old('category', $product->category) == 'READY TO COOK' ? 'selected' : '' }}>READY TO COOK</option>
-                    <option value="GIFT BOX" {{ old('category', $product->category) == 'GIFT BOX' ? 'selected' : '' }}>GIFT BOX</option>
+                <label for="category_id">Category</label>
+                <select id="category_id" name="category_id" required>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
                 </select>
-                @error('category')
+                @error('category_id')
                     <span style="color: var(--status-red-text); font-size: 0.8rem; display: block; margin-top: 5px;">{{ $message }}</span>
                 @enderror
             </div>

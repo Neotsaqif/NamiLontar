@@ -30,7 +30,8 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = \App\Models\Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -42,7 +43,7 @@ class AdminProductController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|unique:products,slug|max:255',
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ingredients' => 'nullable|string',
@@ -74,7 +75,8 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit', compact('product'));
+        $categories = \App\Models\Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -88,7 +90,7 @@ class AdminProductController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products,slug,' . $product->id,
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ingredients' => 'nullable|string',

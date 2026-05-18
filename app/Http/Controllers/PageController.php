@@ -9,7 +9,8 @@ class PageController extends Controller
     public function home()
     {
         $products = Product::all();
-        return view('home', compact('products'));
+        $bestseller = Product::where('slug', 'lontar')->first();
+        return view('home', compact('products', 'bestseller'));
     }
 
     public function about()

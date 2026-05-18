@@ -30,13 +30,13 @@
                 <a href="{{ url('/admin/orders') }}" class="{{ Request::is('admin/orders') ? 'active' : '' }}">
                     <i class="fa-solid fa-receipt"></i> Orders
                 </a>
-                <a href="{{ url('/admin/categories') }}" class="{{ Request::is('admin/categories') ? 'active' : '' }}">
+                <a href="{{ route('admin.categories.index') }}" class="{{ Request::is('admin/categories*') ? 'active' : '' }}">
                     <i class="fa-solid fa-layer-group"></i> Categories
                 </a>
                 <a href="{{ url('/admin/customers') }}" class="{{ Request::is('admin/customers') ? 'active' : '' }}">
                     <i class="fa-solid fa-users"></i> Customers
                 </a>
-                <a href="{{ url('/admin/discounts') }}" class="{{ Request::is('admin/discounts') ? 'active' : '' }}">
+                <a href="{{ route('admin.discounts.index') }}" class="{{ Request::is('admin/discounts*') ? 'active' : '' }}">
                     <i class="fa-solid fa-tag"></i> Discounts
                 </a>
                 <a href="{{ url('/admin/settings') }}" class="{{ Request::is('admin/settings') ? 'active' : '' }}">

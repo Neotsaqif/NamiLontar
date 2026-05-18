@@ -6,8 +6,12 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function show($slug = 'lontar')
+    public function show(\Illuminate\Http\Request $request, $slug = null)
     {
+        if (empty($slug)) {
+            $slug = $request->query('id');
+        }
+
         if (empty($slug)) {
             $slug = 'lontar';
         }

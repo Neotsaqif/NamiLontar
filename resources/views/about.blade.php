@@ -28,12 +28,12 @@
     <div class="legacy-grid">
         <div class="legacy-text">
             <span class="section-tag">EST. 2024</span>
-            <h2>A Legacy of Perfection</h2>
-            <p>Kami adalah UMKM kuliner rumahan yang lahir kembali di tahun 2024 dengan semangat baru untuk menyajikan aneka camilan lezat yang bikin nagih! Setelah sempat tertunda akibat pandemi Covid-19, kini kami hadir lebih siap untuk memanjakan lidah kamu lewat pilihan kue basah tradisional seperti pastel, kue lontar, dan lumpia, hingga renyahnya keripik singkong varian asin dan balado. Semua menu kami dibuat dengan penuh cinta dari dapur rumah, karena misi utama kami adalah memastikan setiap konsumen bisa mendapatkan kelezatan camilan yang mereka inginkan untuk menemani momen spesial mereka.</p>
-            <p>Buat kamu yang lagi punya acara seru seperti arisan atau kumpul keluarga, kami siap banget jadi andalan! Kami menerima pesanan dalam jumlah besar, bahkan sanggup memproduksi hingga 200 sampai 400 pcs camilan segar sekaligus. Karena semua produk kami dibuat dadakan sesuai pesanan (pre-order) demi menjaga kualitas dan rasa, pastikan kamu melakukan pemesanan minimal H-5 sebelum acara ya, khusus untuk orderan di atas 150 pcs. Yuk, bikin acaramu makin ceria dan berkesan dengan sajian lezat dari kami!</p>
+            <h2>Siapa sih itu Nami Lontar?</h2>
+            <p>Kami adalah UMKM kuliner rumahan yang hadir kembali sejak 2024 untuk menyajikan aneka camilan lezat yang bikin nagih! Mulai dari kue tradisional seperti pastel, lontar, dan lumpia, hingga renyahnya keripik singkong balado dan asin, semua dibuat dengan penuh cinta demi memanjakan lidah kamu.</p>
+            <p>Buat acara spesialmu seperti arisan atau kumpul keluarga, kami siap memproduksi 200 hingga 400 pcs camilan segar. Karena sistemnya pre-order demi menjaga kualitas, pastikan kamu memesan minimal H-5 sebelum acara khusus untuk orderan di atas 150 pcs ya. Yuk, bikin acaramu makin ceria bersama kami!</p>
             <div class="signature">
                 <span class="sig-line"></span>
-                <p>Crafted with Passion</p>
+                <p>Dari Rumah, Untuk Hati</p>
             </div>
         </div>
         <div class="legacy-image">
@@ -44,37 +44,70 @@
     </div>
 </section>
 
-<!-- Artisanal Section -->
+<!-- Artisanal Section / Rating Section -->
 <section class="artisanal">
     <div class="container">
         <div class="section-title-centered">
-            <span class="tag">PURELY ARTISANAL</span>
-            <h2>Purely Artisanal</h2>
+            <span class="tag">Nami Lontar</span>
+            <h2>Our best rating</h2>
         </div>
         <div class="artisanal-grid">
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-wheat-awn"></i>
+            <!-- Card 1 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef1.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Budi Santoso</span>
                 </div>
-                <h3>Organic Ingredients</h3>
-                <p>We source only the finest organic flour and local ingredients to ensure the purest taste and
-                    highest nutritional value.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Kue lontar dan pastelnya beneran juara! Kulit pastelnya renyah banget dan isinya padat. Kue lontarnya lembut dan manisnya pas, nggak bikin eneg. Cocok banget buat kumpul keluarga. Pasti bakal repeat order terus!"</p>
+                </div>
             </div>
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-star"></i>
+            <!-- Card 2 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef2.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Siti Rahmawati</span>
                 </div>
-                <h3>Traditional Methods</h3>
-                <p>Our long fermentation process and hand-shaping techniques create textures and flavors that
-                    can't be rushed.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Pesen 200 pcs lumpia sama keripik singkong balado buat acara arisan, semua tamu pada nanyain beli di mana! Keripiknya renyah dan bumbunya nendang banget. Pengirimannya juga tepat waktu. Sukses terus Nami Lontar!"</p>
+                </div>
             </div>
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-bread-slice"></i>
+            <!-- Card 3 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef3.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Hendra Wijaya</span>
                 </div>
-                <h3>Baked Daily</h3>
-                <p>Every morning, our ovens are fired up to bring you fresh, golden pastries that are ready to
-                    be enjoyed.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Baru pertama kali coba kue tradisional dari Nami Lontar dan langsung jatuh cinta. Rasanya bener-bener autentik seperti buatan rumah sendiri yang penuh cinta. Packaging-nya juga rapi dan higienis. Sangat direkomendasikan!"</p>
+                </div>
             </div>
         </div>
     </div>

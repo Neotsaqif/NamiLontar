@@ -27,20 +27,19 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($customers as $customer)
             <tr>
-                <td>1</td>
-                <td>Alice Johnson</td>
-                <td>alice@example.com</td>
-                <td>5</td>
-                <td><button class="btn btn-secondary"><i class="fa-solid fa-eye"></i> View Profile</button></td>
+                <td>{{ $customer['id'] }}</td>
+                <td>{{ $customer['name'] }}</td>
+                <td>{{ $customer['email'] }}</td>
+                <td>{{ count($customer['orders']) }}</td>
+                <td>
+                    <a href="{{ url('/admin/customers/' . $customer['id']) }}" class="btn btn-secondary btn-sm">
+                        <i class="fa-solid fa-eye"></i> View Profile
+                    </a>
+                </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Bob Smith</td>
-                <td>bob@example.com</td>
-                <td>2</td>
-                <td><button class="btn btn-secondary"><i class="fa-solid fa-eye"></i> View Profile</button></td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

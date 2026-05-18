@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Settings - Nami Lontar')
+@section('title', 'Settings - Under Maintenance')
 
 @section('content')
 <header class="page-header">
@@ -13,38 +13,35 @@
     </div>
 </header>
 
-<div class="card">
-    <div class="settings-section">
-        <h2><i class="fa-solid fa-store"></i> General Information</h2>
-        <div class="form-group">
-            <label>Store Name</label>
-            <input type="text" value="Nami Lontar Bakery">
-        </div>
-        <div class="form-group">
-            <label>Contact Email</label>
-            <input type="email" value="hello@namilontar.com">
-        </div>
-        <div class="form-group">
-            <label>Store Description</label>
-            <textarea rows="4">Artisanal Pastries in Every Golden Bite. We believe that time is the most important ingredient in modern baking.</textarea>
-        </div>
-    </div>
+<div class="card" style="padding: 4rem 2rem; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; overflow: hidden; position: relative;">
+    
+    <!-- Background glowing accents -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%); z-index: 0; pointer-events: none;"></div>
 
-    <div class="settings-section">
-        <h2><i class="fa-solid fa-money-check-dollar"></i> Currency & Payment</h2>
-        <div class="form-group">
-            <label>Default Currency</label>
-            <select>
-                <option value="USD" selected>USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="IDR">IDR (Rp)</option>
-            </select>
+    <!-- Content -->
+    <div style="position: relative; z-index: 1;">
+        <!-- Animated Gear Icon -->
+        <div style="margin-bottom: 2rem; display: inline-block;">
+            <i class="fa-solid fa-gear" style="font-size: 5rem; color: var(--accent-color); animation: spin 8s linear infinite; filter: drop-shadow(0 0 15px rgba(212,175,55,0.4));"></i>
         </div>
-    </div>
 
-    <div class="settings-actions">
-        <button class="btn btn-secondary" style="margin-right: 1rem;">Cancel</button>
-        <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+        <h2 style="font-size: 2.2rem; color: var(--text-primary); margin-bottom: 1rem; font-family: var(--font-serif);">Under Maintenance</h2>
+        
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; max-width: 500px; margin: 0 auto 2.5rem;">
+            We are currently upgrading the settings engine to bring you advanced configuration features. This module will be back online shortly.
+        </p>
+
+        <a href="{{ url('/admin/dashboard') }}" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1rem; border-radius: 50px;">
+            <i class="fa-solid fa-arrow-left"></i> Return to Dashboard
+        </a>
     </div>
 </div>
+
+<style>
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+</style>
 @endsection

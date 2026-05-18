@@ -89,7 +89,7 @@
                             <td style="padding: 1.25rem 1rem;">
                                 <span class="badge {{ $order['status'] }}">{{ $order['status'] }}</span>
                             </td>
-                            <td style="padding: 1.25rem 1rem; text-align: right; font-weight: 600; color: var(--accent-color);">${{ number_format($order['total'], 2) }}</td>
+                            <td style="padding: 1.25rem 1rem; text-align: right; font-weight: 600; color: var(--accent-color);">{{ \App\Http\Controllers\AdminController::formatPrice($order['total']) }}</td>
                             <td style="padding: 1.25rem 1rem; text-align: center;">
                                 <a href="{{ url('/admin/orders/' . $order['id']) }}" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; border-radius: 6px;">
                                     View Details

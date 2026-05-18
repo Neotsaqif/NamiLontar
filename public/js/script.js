@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Don't make badges editable to keep it simple
                         if(!cell.querySelector('.badge')) {
                             cell.contentEditable = "true";
-                            cell.style.backgroundColor = "#fef9e7";
-                            cell.style.outline = "1px dashed #ccc";
+                            cell.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
+                            cell.style.outline = "1px dashed #d4af37";
                         }
                     });
                     btn.textContent = 'Save';
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Generate empty editable cells
             for(let i=0; i<colCount-1; i++) {
-                html += `<td contenteditable="true" style="background-color: #fef9e7; outline: 1px dashed #ccc;">Data Baru</td>`;
+                html += `<td contenteditable="true" style="background-color: rgba(212, 175, 55, 0.1); outline: 1px dashed #d4af37;">Data Baru</td>`;
             }
             
             // Add action buttons

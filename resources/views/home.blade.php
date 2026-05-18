@@ -28,125 +28,34 @@
     <p class="section-subtitle">Our most loved artisanal treats, prepared with traditional recipes and premium ingredients.</p>
 
     <div class="product-grid">
-        <!-- Product 1: Nami Lontar -->
+        @foreach($products as $product)
         <div class="product-card">
-            <a href="{{ url('/product/lontar') }}">
+            <a href="{{ url('/product/' . $product->slug) }}">
                 <div class="product-img">
-                    <img src="{{ asset('assets/product photo/lontar.jpeg') }}" alt="Nami Lontar Original">
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                 </div>
             </a>
             <div class="product-info">
                 <div class="product-header">
-                    <h3>Nami Lontar Original</h3>
-                    <span class="price">$15.50</span>
+                    <h3>{{ $product->name }}</h3>
+                    <span class="price">${{ number_format($product->price, 2) }}</span>
                 </div>
                 <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="reviews">(124)</span>
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= floor($product->rating))
+                            <i class="fa-solid fa-star"></i>
+                        @elseif ($i - 0.5 <= $product->rating)
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        @else
+                            <i class="fa-regular fa-star"></i>
+                        @endif
+                    @endfor
+                    <span class="reviews">({{ $product->reviews }})</span>
                 </div>
-                <button class="btn btn-add" onclick="addToCart('lontar')">ADD TO CART</button>
+                <button class="btn btn-add" onclick="addToCart('{{ $product->slug }}')">ADD TO CART</button>
             </div>
         </div>
-
-        <!-- Product 2: Pastel Renyah -->
-        <div class="product-card">
-            <a href="{{ url('/product/pastel') }}">
-                <div class="product-img">
-                    <img src="{{ asset('assets/product photo/pastel.jpeg') }}" alt="Pastel Renyah">
-                </div>
-            </a>
-            <div class="product-info">
-                <div class="product-header">
-                    <h3>Pastel Renyah</h3>
-                    <span class="price">$8.25</span>
-                </div>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <span class="reviews">(86)</span>
-                </div>
-                <button class="btn btn-add" onclick="addToCart('pastel')">ADD TO CART</button>
-            </div>
-        </div>
-
-        <!-- Product 3: Kripik Gurih -->
-        <div class="product-card">
-            <a href="{{ url('/product/kripik') }}">
-                <div class="product-img">
-                    <img src="{{ asset('assets/product photo/kripik.jpeg') }}" alt="Kripik Gurih">
-                </div>
-            </a>
-            <div class="product-info">
-                <div class="product-header">
-                    <h3>Kripik Gurih</h3>
-                    <span class="price">$4.50</span>
-                </div>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="reviews">(52)</span>
-                </div>
-                <button class="btn btn-add" onclick="addToCart('kripik')">ADD TO CART</button>
-            </div>
-        </div>
-
-        <!-- Product 4: Lumpia Frozen -->
-        <div class="product-card">
-            <a href="{{ url('/product/lumpia') }}">
-                <div class="product-img">
-                    <img src="{{ asset('assets/product photo/Lumpia Frozen.png') }}" alt="Lumpia Frozen">
-                </div>
-            </a>
-            <div class="product-info">
-                <div class="product-header">
-                    <h3>Lumpia Frozen</h3>
-                    <span class="price">$12.00</span>
-                </div>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="reviews">(45)</span>
-                </div>
-                <button class="btn btn-add" onclick="addToCart('lumpia')">ADD TO CART</button>
-            </div>
-        </div>
-
-        <!-- Product 5: Paket Lengkap -->
-        <div class="product-card">
-            <a href="{{ url('/product/paket-lengkap') }}">
-                <div class="product-img">
-                    <img src="{{ asset('assets/product photo/full produk.jpeg') }}" alt="Paket Lengkap Nami Lontar">
-                </div>
-            </a>
-            <div class="product-info">
-                <div class="product-header">
-                    <h3>Paket Lengkap</h3>
-                    <span class="price">$45.00</span>
-                </div>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="reviews">(28)</span>
-                </div>
-                <button class="btn btn-add" onclick="addToCart('paket-lengkap')">ADD TO CART</button>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 

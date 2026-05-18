@@ -175,4 +175,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 5. Smooth Scrolling for Product Section
+    const productLinks = document.querySelectorAll('a[href*="#product"]');
+    productLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetElement = document.querySelector('#product');
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                history.pushState(null, null, '#product');
+            }
+        });
+    });
 });

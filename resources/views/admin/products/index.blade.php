@@ -60,7 +60,7 @@
                     </span>
                 </td>
                 <td style="font-family: var(--font-sans); font-weight: bold; color: var(--accent-color);">
-                    ${{ number_format($product->price, 2) }}
+                    Rp{{ number_format($product->price, 0, ',', '.') }}
                 </td>
                 <td>
                     <div style="display: flex; align-items: center; gap: 5px; color: var(--accent-color); font-size: 0.85rem;">

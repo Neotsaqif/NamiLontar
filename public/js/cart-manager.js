@@ -1,9 +1,9 @@
 const PRODUCTS = window.NAMI_PRODUCTS || {
-    'lontar': { name: 'Nami Lontar Original', price: 15.50, image: '/assets/product photo/lontar.jpeg' },
-    'pastel': { name: 'Pastel Renyah', price: 8.25, image: '/assets/product photo/pastel.jpeg' },
-    'kripik': { name: 'Kripik Gurih', price: 4.50, image: '/assets/product photo/kripik.jpeg' },
-    'lumpia': { name: 'Lumpia Frozen', price: 12.00, image: '/assets/product photo/Lumpia Frozen.png' },
-    'paket-lengkap': { name: 'Paket Lengkap', price: 45.00, image: '/assets/product photo/full produk.jpeg' }
+    'lontar': { name: 'Nami Lontar Original', price: 150000, image: '/assets/product photo/lontar.jpeg' },
+    'pastel': { name: 'Pastel Renyah', price: 85000, image: '/assets/product photo/pastel.jpeg' },
+    'kripik': { name: 'Kripik Gurih', price: 45000, image: '/assets/product photo/kripik.jpeg' },
+    'lumpia': { name: 'Lumpia Frozen', price: 120000, image: '/assets/product photo/Lumpia Frozen.png' },
+    'paket-lengkap': { name: 'Paket Lengkap', price: 450000, image: '/assets/product photo/full produk.jpeg' }
 };
 
 class CartManager {
@@ -58,7 +58,7 @@ class CartManager {
 
     getTotals() {
         const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const shipping = subtotal > 50 ? 0 : 5.00;
+        const shipping = subtotal > 500000 ? 0 : 50000;
         const tax = subtotal * 0.1; // 10% tax
         const total = subtotal + shipping + tax;
         return { subtotal, shipping, tax, total };

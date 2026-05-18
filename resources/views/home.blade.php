@@ -38,7 +38,7 @@
             <div class="product-info">
                 <div class="product-header">
                     <h3>{{ $product->name }}</h3>
-                    <span class="price">${{ number_format($product->price, 2) }}</span>
+                    <span class="price">Rp{{ number_format($product->price, 0, ',', '.') }}</span>
                 </div>
                 <div class="rating">
                     @for ($i = 1; $i <= 5; $i++)
@@ -70,7 +70,7 @@
             <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
             <h2>{{ $bestseller->name }}</h2>
             <p>{{ $bestseller->description }}</p>
-            <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">${{ number_format($bestseller->price, 2) }}</div>
+            <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">Rp{{ number_format($bestseller->price, 0, ',', '.') }}</div>
             <ul class="feature-list">
                 <li><i class="fa-solid fa-check"></i> <strong>Premium Ingredients:</strong> {{ $bestseller->ingredients ?: 'Made with organic dairy and free-range eggs.' }}</li>
                 <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> {{ $bestseller->artisan_note ?: 'Not too sweet, with a hint of vanilla.' }}</li>

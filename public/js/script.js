@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Table CRUD (Add, Edit, Delete)
     const tableContainer = document.querySelector('.table-container');
-    
+
     if (tableContainer) {
         tableContainer.addEventListener('click', (e) => {
+            // Check if this button is part of a real Laravel form (e.g. backend Delete form)
+            const form = e.target.closest('form');
+            if (form && form.querySelector('input[name="_token"]')) {
+                // This is a real Laravel backend form. Let the form's own onsubmit/action handle it.
+                return;
+            }
+
+            // Check if this button is a real Laravel navigation link (e.g. backend Edit link)
+            const link = e.target.closest('a');
+            if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+                // This is a real navigation link. Let the browser navigate.
+                return;
+            }
+
             // Delete Action
             if (e.target.textContent === 'Delete' || e.target.classList.contains('delete-btn')) {
                 if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
@@ -11,24 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (row) row.remove();
                 }
             }
-            
+
             // Edit / Save Action
-            const isEditAction = e.target.textContent === 'Edit' || 
-                               e.target.textContent === 'Save' || 
-                               e.target.textContent === 'View Details' || 
-                               e.target.classList.contains('edit-btn');
-                               
+            const isEditAction = e.target.textContent === 'Edit' ||
+                e.target.textContent === 'Save' ||
+                e.target.textContent === 'View Details' ||
+                e.target.classList.contains('edit-btn');
+
             if (isEditAction) {
                 const row = e.target.closest('tr');
                 const btn = e.target;
-                
+
                 if (btn.textContent === 'Edit' || btn.textContent === 'View Details') {
                     // Turn row into editable
                     btn.dataset.originalText = btn.textContent;
                     const cells = row.querySelectorAll('td:not(:last-child)');
                     cells.forEach(cell => {
                         // Don't make badges editable to keep it simple
-                        if(!cell.querySelector('.badge')) {
+                        if (!cell.querySelector('.badge')) {
                             cell.contentEditable = "true";
                             cell.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
                             cell.style.outline = "1px dashed #d4af37";
@@ -42,18 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Save changes
                     const cells = row.querySelectorAll('td:not(:last-child)');
                     cells.forEach(cell => {
-                        if(!cell.querySelector('.badge')) {
+                        if (!cell.querySelector('.badge')) {
                             cell.contentEditable = "false";
                             cell.style.backgroundColor = "";
                             cell.style.outline = "none";
                         }
                     });
-                    
+
                     const originalText = btn.dataset.originalText || 'Edit';
                     btn.textContent = originalText;
                     btn.classList.remove('btn-primary');
                     btn.classList.add('btn-secondary');
-                    
+
                     // Show a quick visual feedback
                     btn.textContent = 'Saved!';
                     setTimeout(() => btn.textContent = originalText, 1500);
@@ -65,28 +79,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle Add New Button
     const addBtns = document.querySelectorAll('header .btn-primary');
     addBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            // Check if it's a real link
+            const link = btn.closest('a');
+            if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+                return;
+            }
             const tbody = document.querySelector('table tbody');
             if (!tbody) return;
-            
+
             const thead = document.querySelector('table thead tr');
             if (!thead) return;
             const colCount = thead.children.length;
-            
+
             const tr = document.createElement('tr');
             let html = '';
-            
+
             // Generate empty editable cells
-            for(let i=0; i<colCount-1; i++) {
+            for (let i = 0; i < colCount - 1; i++) {
                 html += `<td contenteditable="true" style="background-color: rgba(212, 175, 55, 0.1); outline: 1px dashed #d4af37;">Data Baru</td>`;
             }
-            
+
             // Add action buttons
             html += `<td>
                 <button class="btn btn-primary edit-btn">Save</button>
                 <button class="btn delete-btn" style="color: var(--status-red-text); margin-left: 0.5rem; background: none; border: none; cursor: pointer;">Delete</button>
             </td>`;
-            
+
             tr.innerHTML = html;
             tbody.insertBefore(tr, tbody.firstChild);
         });
@@ -96,6 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', (e) => {
+            // Check if this is a real Laravel backend form (has _token for CSRF)
+            if (form.querySelector('input[name="_token"]')) {
+                // This is a real Laravel form. Let it submit to the server!
+                return;
+            }
+
             // Ignore login form redirection
             if (form.getAttribute('action') === 'dashboard.php') {
                 return;
@@ -117,17 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Navbar Hover "Push" Effect
     const navItems = document.querySelectorAll('header nav .logo-container img, header nav .logo-container .logo, header nav .nav-links a, header nav .nav-icons a');
-    
+
     navItems.forEach(item => {
         item.addEventListener('mouseenter', () => {
             const itemRect = item.getBoundingClientRect();
             const itemCenter = itemRect.left + (itemRect.width / 2);
-            
+
             navItems.forEach(otherItem => {
                 if (item !== otherItem) {
                     const otherRect = otherItem.getBoundingClientRect();
                     const otherCenter = otherRect.left + (otherRect.width / 2);
-                    
+
                     if (otherCenter < itemCenter) {
                         otherItem.style.transform = 'translateX(-15px) scale(0.95)';
                     } else {
@@ -136,19 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     otherItem.style.opacity = '0.7';
                 }
             });
-            
+
             item.style.transform = 'scale(1.15)';
-            if(item.tagName.toLowerCase() === 'a' || item.classList.contains('logo')) {
+            if (item.tagName.toLowerCase() === 'a' || item.classList.contains('logo')) {
                 item.style.color = '#1a1511';
                 item.style.fontWeight = '700';
             }
         });
-        
+
         item.addEventListener('mouseleave', () => {
             navItems.forEach(otherItem => {
                 otherItem.style.transform = '';
                 otherItem.style.opacity = '';
-                if(otherItem.tagName.toLowerCase() === 'a' || otherItem.classList.contains('logo')) {
+                if (otherItem.tagName.toLowerCase() === 'a' || otherItem.classList.contains('logo')) {
                     otherItem.style.color = '';
                     otherItem.style.fontWeight = '';
                 }
@@ -158,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Page Transition Animations
     document.body.classList.add('page-transition-enter');
-    
+
     const links = document.querySelectorAll('a');
     links.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -168,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 document.body.classList.remove('page-transition-enter');
                 document.body.classList.add('page-transition-exit');
-                
+
                 setTimeout(() => {
                     window.location.href = link.href;
                 }, 300);

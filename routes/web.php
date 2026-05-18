@@ -21,7 +21,10 @@ Route::get('/product/{id?}', [ProductController::class, 'show']);
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/orders', [AdminController::class, 'orders']);
+    Route::get('/orders/{id}', [AdminController::class, 'orderShow'])->name('admin.orders.show');
+    Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.updateStatus');
     Route::get('/customers', [AdminController::class, 'customers']);
+    Route::get('/customers/{id}', [AdminController::class, 'customerShow'])->name('admin.customers.show');
     Route::get('/settings', [AdminController::class, 'settings']);
     
     // Product CRUD

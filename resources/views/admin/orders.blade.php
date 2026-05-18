@@ -36,33 +36,25 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($orders as $order)
             <tr>
-                <td>#ORD-1025</td>
-                <td>Oct 24, 2026</td>
-                <td>Alice Johnson</td>
-                <td>3 items (Ceramic Mug, etc.)</td>
-                <td><span class="badge processing">Processing</span></td>
-                <td>$120.00</td>
-                <td><button class="btn btn-secondary">View Details</button></td>
+                <td>#{{ $order['id'] }}</td>
+                <td>{{ $order['date'] }}</td>
+                <td>
+                    <a href="{{ url('/admin/customers/' . $order['customer_id']) }}" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">
+                        {{ $order['customer_name'] }}
+                    </a>
+                </td>
+                <td>{{ $order['items_summary'] }}</td>
+                <td><span class="badge {{ $order['status'] }}">{{ $order['status'] }}</span></td>
+                <td>${{ number_format($order['total'], 2) }}</td>
+                <td>
+                    <a href="{{ url('/admin/orders/' . $order['id']) }}" class="btn btn-secondary btn-sm">
+                        View Details
+                    </a>
+                </td>
             </tr>
-            <tr>
-                <td>#ORD-1024</td>
-                <td>Oct 23, 2026</td>
-                <td>Bob Smith</td>
-                <td>1 item (Linen Apron)</td>
-                <td><span class="badge delivered">Delivered</span></td>
-                <td>$45.50</td>
-                <td><button class="btn btn-secondary">View Details</button></td>
-            </tr>
-            <tr>
-                <td>#ORD-1023</td>
-                <td>Oct 22, 2026</td>
-                <td>Charlie Brown</td>
-                <td>2 items (Wooden Spoon...)</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>$89.99</td>
-                <td><button class="btn btn-secondary">View Details</button></td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

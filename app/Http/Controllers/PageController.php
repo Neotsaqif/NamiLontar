@@ -32,4 +32,24 @@ class PageController extends Controller
     {
         return view('auth.login');
     }
+
+    public function profile()
+    {
+        return view('profile');
+    }
+
+    public function transactions()
+    {
+        return view('transactions');
+    }
+
+    public function orders()
+    {
+        return view('orders');
+    }
+
+    public function tracking($id)
+    {
+        return view('tracking', compact('id'));
+    }
 }

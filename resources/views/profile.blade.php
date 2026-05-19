@@ -1,0 +1,148 @@
+@extends('layouts.app')
+
+@section('title', 'Profile | Nami Lontar')
+
+@section('content')
+<!-- Main Content Layout -->
+<div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+        <h2 class="sidebar-title">Settings</h2>
+        <nav class="sidebar-nav">
+            <a href="{{ url('/profile') }}" class="sidebar-item active">
+                <i class="fa-solid fa-circle-user"></i>
+                Profile
+            </a>
+            <a href="{{ url('/transactions') }}" class="sidebar-item">
+                <i class="fa-solid fa-receipt"></i>
+                Transactions
+            </a>
+            <a href="{{ url('/orders') }}" class="sidebar-item">
+                <i class="fa-solid fa-box"></i>
+                Orders
+            </a>
+            <a href="{{ url('/login') }}" class="sidebar-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sign Out
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Right Content Pane -->
+    <div class="content-pane">
+
+        <!-- Main Profile Area -->
+        <section class="profile-summary">
+            <div class="profile-info-group">
+                <div class="profile-photo-container">
+                    <img src="{{ asset('assets/profile.png') }}" alt="Julian Rossi" class="profile-photo">
+                    <button class="edit-btn" aria-label="Edit Profile"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+                <div class="profile-text">
+                    <h1 class="profile-name">Julian Rossi</h1>
+                    <p class="profile-membership">Member since October 2023 &bull; Artisanal Tier</p>
+                </div>
+            </div>
+            <button class="save-btn">SAVE CHANGES</button>
+        </section>
+
+        <!-- Cards Area -->
+        <section class="cards-grid">
+            <!-- Personal Information Card -->
+            <div class="card">
+                <h3 class="card-title">Personal Information</h3>
+                <div class="form-group">
+                    <label>FULL NAME</label>
+                    <input type="text" value="Julian Rossi" readonly>
+                </div>
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" value="julian.rossi@artisanal.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label>PHONE NUMBER</label>
+                    <input type="tel" value="+1 (555) 234-8890" readonly>
+                </div>
+            </div>
+
+            <!-- Shipping Preference Card -->
+            <div class="card">
+                <h3 class="card-title">Shipping Preference</h3>
+                <div class="form-group">
+                    <label>STREET ADDRESS</label>
+                    <input type="text" value="882 Boulangerie Way" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>CITY</label>
+                        <input type="text" value="Pastryville" readonly>
+                    </div>
+                    <div class="form-group half">
+                        <label>POSTAL CODE</label>
+                        <input type="text" value="90210" readonly>
+                    </div>
+                </div>
+                <div class="checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" checked>
+                        <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                        <span class="checkbox-label">Use as default billing address</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Orders & Transactions Section -->
+        <section class="transactions-section">
+            <div class="section-header">
+                <h2 class="section-title">Recent Orders & Transactions</h2>
+                <a href="#" class="view-all">VIEW ALL ACTIVITY</a>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ORDER ID</th>
+                            <th>DATE</th>
+                            <th>ITEMS</th>
+                            <th>STATUS</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#MB-92842</td>
+                            <td>Oct 24, 2023</td>
+                            <td>Sourdough Loaf, Butter Croissant (x4)</td>
+                            <td><span class="badge badge-green">DELIVERED</span></td>
+                            <td class="total-col">$42.50</td>
+                        </tr>
+                        <tr>
+                            <td>#MB-92711</td>
+                            <td>Oct 18, 2023</td>
+                            <td>Classic Baguette (x2), Pain au Chocolat</td>
+                            <td><span class="badge badge-green">DELIVERED</span></td>
+                            <td class="total-col">$28.15</td>
+                        </tr>
+                        <tr>
+                            <td>#MB-92605</td>
+                            <td>Oct 12, 2023</td>
+                            <td>Monthly Bread Box Subscription</td>
+                            <td><span class="badge badge-blue">IN TRANSIT</span></td>
+                            <td class="total-col">$120.00</td>
+                        </tr>
+                        <tr>
+                            <td>#MB-92589</td>
+                            <td>Oct 05, 2023</td>
+                            <td>Rustic Rye Bread, Sea Salt Focaccia</td>
+                            <td><span class="badge badge-gray">CANCELLED</span></td>
+                            <td class="total-col">$34.90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</div>
+@endsection

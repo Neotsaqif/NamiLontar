@@ -19,11 +19,9 @@
     <main class="login-page">
         <div class="login-card">
             <div class="login-header">
-                <a href="{{ url('/') }}" class="logo-container center">
-                    <img src="{{ asset('assets/product photo/logo.png') }}" alt="Logo" height="50"
-                        width="50">
-                    <div class="logo">Nami Lontar</div>
-                </a>
+                <div class="center">
+                    <img src="{{ asset('assets/product photo/logo.png') }}" alt="Logo" height="200" width="200">
+                </div>
                 <h2>Welcome Back</h2>
                 <p>Please enter your details to access your account.</p>
             </div>

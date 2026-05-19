@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/customers', [AdminController::class, 'customers']);
     Route::get('/customers/{id}', [AdminController::class, 'customerShow'])->name('admin.customers.show');
     Route::get('/settings', [AdminController::class, 'settings']);
-    
+
     // Product CRUD
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');

@@ -899,7 +899,8 @@ header nav .nav-icons a:hover i {
 .star-rating {
     display: flex;
     gap: 0.35rem;
-    color: #f5b942; /* Premium gold/yellow for stars */
+    color: #f5b942;
+    /* Premium gold/yellow for stars */
     font-size: 1.15rem;
 }
 

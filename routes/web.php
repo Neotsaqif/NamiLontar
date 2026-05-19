@@ -12,6 +12,10 @@ Route::get('/about', [PageController::class, 'about']);
 Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/cart', [PageController::class, 'cart']);
 Route::get('/login', [PageController::class, 'login']);
+Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
+Route::get('/orders', [PageController::class, 'orders'])->name('orders');
+Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDiscountController;

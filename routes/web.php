@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminProductController;
@@ -10,17 +13,40 @@ use App\Http\Controllers\AdminProductController;
 Route::get('/', [PageController::class, 'home']);
 Route::get('/about', [PageController::class, 'about']);
 Route::get('/contact', [PageController::class, 'contact']);
-Route::get('/cart', [PageController::class, 'cart']);
-Route::get('/login', [PageController::class, 'login']);
-Route::get('/profile', [PageController::class, 'profile'])->name('profile');
-Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
-Route::get('/orders', [PageController::class, 'orders'])->name('orders');
-Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
+
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDiscountController;
 
 Route::get('/product/{id?}', [ProductController::class, 'show']);
+
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Profile & Orders
+    Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+    Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
+    Route::get('/orders', [PageController::class, 'orders'])->name('orders');
+    Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
+    
+    // Cart Routes
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/api/cart/add', [CartController::class, 'add']);
+    Route::post('/api/cart/update', [CartController::class, 'update']);
+    Route::post('/api/cart/remove', [CartController::class, 'remove']);
+    Route::get('/api/cart', [CartController::class, 'getCart']);
+    
+    // Checkout Routes
+    Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);

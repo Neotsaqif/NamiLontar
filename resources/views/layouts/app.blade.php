@@ -7,6 +7,7 @@
     <title>@yield('title', 'Nami Lontar | Artisanal Cakes & Pastries')</title>
     <meta name="description"
         content="Experience the perfect balance of flavors with Nami Lontar. Artisanal cakes and pastries made with passion.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

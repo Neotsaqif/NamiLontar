@@ -12,7 +12,11 @@
             <li><a href="{{ url('/contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">Contact</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="{{ url('/login') }}" id="user-btn"><i class="fa-regular fa-user"></i></a>
+            @auth
+                <a href="{{ url('/profile') }}" id="user-btn"><i class="fa-solid fa-user"></i></a>
+            @else
+                <a href="{{ url('/login') }}" id="user-btn"><i class="fa-regular fa-user"></i></a>
+            @endauth
             <a href="{{ url('/cart') }}" id="cart-btn" class="cart-icon">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count">0</span>

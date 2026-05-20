@@ -4,6 +4,11 @@
 
 @section('content')
 <!-- Hero Section -->
+@if(session('success'))
+<div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 1rem; text-align: center; font-weight: bold;">
+    {{ session('success') }}
+</div>
+@endif
 <section class="hero">
     <div class="hero-bg">
         <img src="{{ asset('assets/product photo/cake.png') }}" alt="Delicious Nami Lontar Spread">

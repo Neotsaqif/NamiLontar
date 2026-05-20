@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
             [
                 'slug' => 'lontar',
                 'name' => 'Nami Lontar Original',
-                'price' => 15.50,
+                'price' => 150000,
                 'category' => 'Signature Collection',
                 'rating' => 5.0,
                 'reviews' => 124,
@@ -29,7 +29,7 @@ class ProductSeeder extends Seeder
             [
                 'slug' => 'pastel',
                 'name' => 'Pastel Renyah',
-                'price' => 8.25,
+                'price' => 85000,
                 'category' => 'DAILY FRESH',
                 'rating' => 4.5,
                 'reviews' => 86,
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
             [
                 'slug' => 'kripik',
                 'name' => 'Kripik Gurih',
-                'price' => 4.50,
+                'price' => 45000,
                 'category' => 'SNACK COLLECTION',
                 'rating' => 5.0,
                 'reviews' => 52,
@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
             [
                 'slug' => 'lumpia',
                 'name' => 'Lumpia Frozen',
-                'price' => 12.00,
+                'price' => 120000,
                 'category' => 'READY TO COOK',
                 'rating' => 4.8,
                 'reviews' => 45,
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
             [
                 'slug' => 'paket-lengkap',
                 'name' => 'Paket Lengkap',
-                'price' => 45.00,
+                'price' => 450000,
                 'category' => 'GIFT BOX',
                 'rating' => 5.0,
                 'reviews' => 28,

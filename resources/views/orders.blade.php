@@ -51,38 +51,37 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $months = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+                        @endphp
+                        @forelse($orders as $order)
                         <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#ORD-92842</td>
-                            <td>25 Mei 2026</td>
-                            <td>Pastel Renyah (50 pcs), Kue Lontar (2 box)</td>
-                            <td><span class="badge badge-green">TERKIRIM</span></td>
-                            <td class="total-col">Rp 425.000</td>
-                            <td><a href="{{ url('/orders/92842/tracking') }}" class="btn-view-detail">View Detail</a></td>
+                            <td style="font-weight: 600; color: var(--dark-color);">#ORD-{{ strtoupper(substr($order->id, 0, 8)) }}</td>
+                            <td>
+                                {{ $order->created_at->format('d') }} {{ $months[$order->created_at->month] }} {{ $order->created_at->format('Y') }}
+                            </td>
+                            <td>
+                                @foreach($order->items as $item)
+                                    {{ $item->product ? $item->product->name : 'Unknown Product' }} ({{ $item->quantity }} pcs)@if(!$loop->last), @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @if($order->status === 'completed')
+                                    <span class="badge badge-green">TERKIRIM</span>
+                                @elseif($order->status === 'cancelled')
+                                    <span class="badge badge-gray">DIBATALKAN</span>
+                                @else
+                                    <span class="badge badge-blue">DIPROSES</span>
+                                @endif
+                            </td>
+                            <td class="total-col">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</td>
+                            <td><a href="{{ url('/orders/' . $order->id . '/tracking') }}" class="btn-view-detail">View Detail</a></td>
                         </tr>
+                        @empty
                         <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#ORD-92711</td>
-                            <td>19 Mei 2026</td>
-                            <td>Keripik Singkong Balado (100 pcs)</td>
-                            <td><span class="badge badge-green">TERKIRIM</span></td>
-                            <td class="total-col">Rp 285.000</td>
-                            <td><a href="{{ url('/orders/92711/tracking') }}" class="btn-view-detail">View Detail</a></td>
+                            <td colspan="6" style="text-align: center; padding: 3rem; color: #888;">Belum ada pesanan.</td>
                         </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#ORD-92605</td>
-                            <td>15 Mei 2026</td>
-                            <td>Paket Pre-order Arisan (300 pcs)</td>
-                            <td><span class="badge badge-blue">DIPROSES (H-2)</span></td>
-                            <td class="total-col">Rp 1.200.000</td>
-                            <td><a href="{{ url('/orders/92605/tracking') }}" class="btn-view-detail">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#ORD-92589</td>
-                            <td>08 Mei 2026</td>
-                            <td>Lumpia Goreng Spesial (150 pcs)</td>
-                            <td><span class="badge badge-gray">DIBATALKAN</span></td>
-                            <td class="total-col">Rp 349.000</td>
-                            <td><a href="{{ url('/orders/92589/tracking') }}" class="btn-view-detail">View Detail</a></td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

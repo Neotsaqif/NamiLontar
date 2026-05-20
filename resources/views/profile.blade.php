@@ -21,7 +21,10 @@
                 <i class="fa-solid fa-box"></i>
                 Orders
             </a>
-            <a href="{{ url('/login') }}" class="sidebar-item">
+            <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+                @csrf
+            </form>
+            <a href="#" class="sidebar-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sign Out
             </a>
@@ -39,8 +42,8 @@
                     <button class="edit-btn" aria-label="Edit Profile"><i class="fa-solid fa-pencil"></i></button>
                 </div>
                 <div class="profile-text">
-                    <h1 class="profile-name">Julian Rossi</h1>
-                    <p class="profile-membership">Member since October 2023 &bull; Artisanal Tier</p>
+                    <h1 class="profile-name">{{ $user->name }}</h1>
+                    <p class="profile-membership">Member since {{ $user->created_at->format('F Y') }} &bull; Nami Lontar Customer</p>
                 </div>
             </div>
             <button class="save-btn">SAVE CHANGES</button>
@@ -53,11 +56,11 @@
                 <h3 class="card-title">Personal Information</h3>
                 <div class="form-group">
                     <label>FULL NAME</label>
-                    <input type="text" value="Julian Rossi" readonly>
+                    <input type="text" value="{{ $user->name }}" readonly>
                 </div>
                 <div class="form-group">
                     <label>EMAIL ADDRESS</label>
-                    <input type="email" value="julian.rossi@artisanal.com" readonly>
+                    <input type="email" value="{{ $user->email }}" readonly>
                 </div>
                 <div class="form-group">
                     <label>PHONE NUMBER</label>
@@ -110,34 +113,31 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($orders as $order)
                         <tr>
-                            <td>#MB-92842</td>
-                            <td>Oct 24, 2023</td>
-                            <td>Sourdough Loaf, Butter Croissant (x4)</td>
-                            <td><span class="badge badge-green">DELIVERED</span></td>
-                            <td class="total-col">$42.50</td>
+                            <td>#{{ strtoupper(substr($order->id, 0, 8)) }}</td>
+                            <td>{{ $order->created_at->format('M d, Y') }}</td>
+                            <td>
+                                @foreach($order->items as $item)
+                                    {{ $item->product ? $item->product->name : 'Unknown Product' }} (x{{ $item->quantity }})@if(!$loop->last), @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @if($order->status === 'completed')
+                                    <span class="badge badge-green">DELIVERED</span>
+                                @elseif($order->status === 'cancelled')
+                                    <span class="badge badge-gray">CANCELLED</span>
+                                @else
+                                    <span class="badge badge-blue">{{ strtoupper($order->status) }}</span>
+                                @endif
+                            </td>
+                            <td class="total-col">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>#MB-92711</td>
-                            <td>Oct 18, 2023</td>
-                            <td>Classic Baguette (x2), Pain au Chocolat</td>
-                            <td><span class="badge badge-green">DELIVERED</span></td>
-                            <td class="total-col">$28.15</td>
+                            <td colspan="5" style="text-align: center; padding: 2rem;">No orders found yet.</td>
                         </tr>
-                        <tr>
-                            <td>#MB-92605</td>
-                            <td>Oct 12, 2023</td>
-                            <td>Monthly Bread Box Subscription</td>
-                            <td><span class="badge badge-blue">IN TRANSIT</span></td>
-                            <td class="total-col">$120.00</td>
-                        </tr>
-                        <tr>
-                            <td>#MB-92589</td>
-                            <td>Oct 05, 2023</td>
-                            <td>Rustic Rye Bread, Sea Salt Focaccia</td>
-                            <td><span class="badge badge-gray">CANCELLED</span></td>
-                            <td class="total-col">$34.90</td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

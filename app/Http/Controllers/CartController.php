@@ -22,10 +22,10 @@ class CartController extends Controller
         
         $items = $carts->map(function ($cart) {
             return [
-                'id' => $cart->product_id,
+                'id' => $cart->product->slug ?? $cart->product_id,
                 'name' => $cart->product->name ?? 'Unknown Product',
                 'price' => (float) ($cart->product->price ?? 0),
-                'image' => $cart->product->image_url ?? '',
+                'image' => $cart->product->image ?? '',
                 'quantity' => $cart->quantity
             ];
         });
@@ -41,7 +41,12 @@ class CartController extends Controller
         ]);
 
         $user = Auth::user();
-        $productId = $request->product_id;
+        
+        $product = Product::where('id', $request->product_id)
+            ->orWhere('slug', $request->product_id)
+            ->firstOrFail();
+            
+        $productId = $product->id;
 
         $cart = Cart::where('user_id', $user->id)
                     ->where('product_id', $productId)
@@ -70,8 +75,12 @@ class CartController extends Controller
 
         $user = Auth::user();
         
+        $product = Product::where('id', $request->product_id)
+            ->orWhere('slug', $request->product_id)
+            ->firstOrFail();
+            
         $cart = Cart::where('user_id', $user->id)
-                    ->where('product_id', $request->product_id)
+                    ->where('product_id', $product->id)
                     ->first();
 
         if ($cart) {
@@ -90,8 +99,12 @@ class CartController extends Controller
 
         $user = Auth::user();
         
+        $product = Product::where('id', $request->product_id)
+            ->orWhere('slug', $request->product_id)
+            ->firstOrFail();
+        
         Cart::where('user_id', $user->id)
-            ->where('product_id', $request->product_id)
+            ->where('product_id', $product->id)
             ->delete();
 
         return response()->json(['success' => true]);

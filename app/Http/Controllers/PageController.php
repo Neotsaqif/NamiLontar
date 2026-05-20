@@ -35,21 +35,44 @@ class PageController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $orders = \App\Models\Order::where('user_id', $user->id)
+            ->with('items.product')
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
+        return view('profile', compact('user', 'orders'));
     }
 
     public function transactions()
     {
-        return view('transactions');
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $orders = \App\Models\Order::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
+        return view('transactions', compact('user', 'orders'));
     }
 
     public function orders()
     {
-        return view('orders');
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $orders = \App\Models\Order::where('user_id', $user->id)
+            ->with('items.product')
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
+        return view('orders', compact('user', 'orders'));
     }
 
     public function tracking($id)
     {
-        return view('tracking', compact('id'));
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $order = \App\Models\Order::where('id', $id)
+            ->where('user_id', $user->id)
+            ->with('items.product')
+            ->firstOrFail();
+            
+        return view('tracking', compact('order'));
     }
 }

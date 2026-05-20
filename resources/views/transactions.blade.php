@@ -50,41 +50,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $months = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+                            $payment_methods = ['Transfer Bank - BCA', 'QRIS (Gopay/OVO)', 'Transfer Bank - Mandiri'];
+                        @endphp
+                        @forelse($orders as $order)
                         <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-92842</td>
-                            <td>24 Mei 2026</td>
-                            <td>Transfer Bank - BCA</td>
-                            <td><span class="badge badge-green">BERHASIL</span></td>
-                            <td class="total-col">Rp 425.000</td>
+                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-{{ strtoupper(substr($order->id, 0, 8)) }}</td>
+                            <td>
+                                {{ $order->created_at->format('d') }} {{ $months[$order->created_at->month] }} {{ $order->created_at->format('Y') }}
+                            </td>
+                            <td>{{ $payment_methods[$order->id % 3] }}</td>
+                            <td>
+                                @if($order->status === 'completed')
+                                    <span class="badge badge-green">BERHASIL</span>
+                                @elseif($order->status === 'cancelled')
+                                    <span class="badge badge-gray">DIBATALKAN</span>
+                                @else
+                                    <span class="badge badge-blue">MENUNGGU VERIFIKASI</span>
+                                @endif
+                            </td>
+                            <td class="total-col">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-92711</td>
-                            <td>18 Mei 2026</td>
-                            <td>QRIS (Gopay/OVO)</td>
-                            <td><span class="badge badge-green">BERHASIL</span></td>
-                            <td class="total-col">Rp 285.000</td>
+                            <td colspan="5" style="text-align: center; padding: 3rem; color: #888;">Belum ada riwayat transaksi.</td>
                         </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-92605</td>
-                            <td>12 Mei 2026</td>
-                            <td>Transfer Bank - Mandiri</td>
-                            <td><span class="badge badge-blue">MENUNGGU VERIFIKASI</span></td>
-                            <td class="total-col">Rp 1.200.000</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-92589</td>
-                            <td>05 Mei 2026</td>
-                            <td>Virtual Account - BRI</td>
-                            <td><span class="badge badge-gray">DIBATALKAN</span></td>
-                            <td class="total-col">Rp 349.000</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--dark-color);">#TRX-92102</td>
-                            <td>20 Apr 2026</td>
-                            <td>QRIS (Dana/LinkAja)</td>
-                            <td><span class="badge badge-green">BERHASIL</span></td>
-                            <td class="total-col">Rp 550.000</td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

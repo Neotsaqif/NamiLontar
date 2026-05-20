@@ -29,7 +29,7 @@ class CheckoutController extends Controller
                 $subtotal += ($cart->product->price * $cart->quantity);
             }
 
-            $shipping = $subtotal > 50 ? 0 : 5.00;
+            $shipping = $subtotal > 500000 ? 0 : 50000;
             $tax = $subtotal * 0.1;
             $totalAmount = $subtotal + $shipping + $tax;
 

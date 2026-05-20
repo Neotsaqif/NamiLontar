@@ -13,10 +13,7 @@ use App\Http\Controllers\AdminProductController;
 Route::get('/', [PageController::class, 'home']);
 Route::get('/about', [PageController::class, 'about']);
 Route::get('/contact', [PageController::class, 'contact']);
-Route::get('/profile', [PageController::class, 'profile'])->name('profile');
-Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
-Route::get('/orders', [PageController::class, 'orders'])->name('orders');
-Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
+
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDiscountController;
@@ -33,6 +30,12 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Profile & Orders
+    Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+    Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
+    Route::get('/orders', [PageController::class, 'orders'])->name('orders');
+    Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
     
     // Cart Routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

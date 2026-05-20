@@ -23,32 +23,35 @@
             <!-- Order Summary moved to bottom left based on mockup -->
             <div class="tracking-card summary-card mt-4">
                 <h3 class="card-heading">Order Summary</h3>
+                @php
+                    $subtotal = 0;
+                @endphp
+                @foreach($order->items as $item)
+                @php
+                    $subtotal += $item->price * $item->quantity;
+                @endphp
                 <div class="summary-item">
-                    <div class="item-img-placeholder" style="background-image: url('{{ asset('assets/pastry_sourdough_1777430184266.png') }}')"></div>
+                    <div class="item-img-placeholder" style="background-image: url('{{ asset($item->product ? $item->product->image : 'assets/product photo/lontar.jpeg') }}')"></div>
                     <div class="item-details">
-                        <h4>Pastel Renyah (50 pcs)</h4>
-                        <p>Quantity: 1</p>
+                        <h4>{{ $item->product ? $item->product->name : 'Unknown Product' }}</h4>
+                        <p>Quantity: {{ $item->quantity }}</p>
                     </div>
-                    <div class="item-price">Rp 200.000</div>
+                    <div class="item-price">Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</div>
                 </div>
-                <div class="summary-item">
-                    <div class="item-img-placeholder" style="background-image: url('{{ asset('assets/pastry_danish_1777430801114.png') }}')"></div>
-                    <div class="item-details">
-                        <h4>Kue Lontar (2 box)</h4>
-                        <p>Quantity: 2</p>
-                    </div>
-                    <div class="item-price">Rp 225.000</div>
-                </div>
+                @endforeach
                 
                 <div class="summary-divider"></div>
                 
+                @php
+                    $shipping = $subtotal > 500000 ? 0 : 50000;
+                @endphp
                 <div class="summary-row">
                     <span>Delivery Fee</span>
-                    <span>Rp 0</span>
+                    <span>{{ $shipping === 0 ? 'FREE' : 'Rp ' . number_format($shipping, 0, ',', '.') }}</span>
                 </div>
                 <div class="summary-row total-row">
                     <span>Total</span>
-                    <span>Rp 425.000</span>
+                    <span>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                 </div>
             </div>
         </div>
@@ -128,7 +131,7 @@
                 </div>
                 
                 <h3 class="card-heading-small mt-4">ORDER NUMBER</h3>
-                <p class="order-number-text">#ORD-{{ $id ?? '92842' }}</p>
+                <p class="order-number-text">#ORD-{{ strtoupper(substr($order->id, 0, 8)) }}</p>
                 
                 <button class="btn-full-dark mt-4">VIEW RECEIPT</button>
             </div>

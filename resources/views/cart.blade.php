@@ -46,7 +46,10 @@
                     <button class="btn-apply">APPLY</button>
                 </div>
 
-                <a href="{{ url('/checkout') }}" class="btn-checkout">Proceed to Checkout</a>
+                <form action="{{ route('checkout.process') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn-checkout" style="width: 100%; border: none; cursor: pointer;">Proceed to Checkout</button>
+                </form>
                 
                 <div style="text-align: center; margin-top: 1.5rem;">
                     <img src="https://img.icons8.com/color/48/000000/visa.png" width="30">

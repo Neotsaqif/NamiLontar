@@ -26,7 +26,17 @@
                 <p>Please enter your details to access your account.</p>
             </div>
 
-            <form class="login-form" action="#" method="POST">
+            @if($errors->any())
+                <div class="alert alert-danger" style="color: red; margin-bottom: 1rem; font-size: 0.9rem;">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form class="login-form" action="{{ url('/login') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -66,7 +76,7 @@
             </form>
 
             <p class="create-account">
-                Don't have an account? <a href="#">Create an account</a>
+                Don't have an account? <a href="{{ url('/register') }}">Create an account</a>
             </p>
         </div>
 

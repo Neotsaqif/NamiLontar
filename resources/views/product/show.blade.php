@@ -71,7 +71,7 @@
                     <input type="text" value="1" class="qty-input" id="qty-input">
                     <button class="qty-btn" id="qty-plus">+</button>
                 </div>
-                <button class="btn btn-large" onclick="cartManager.addItem('{{ $product->slug }}', parseInt(document.getElementById('qty-input').value))">
+                <button class="btn btn-large" onclick="cartManager.addItem('{{ $product->slug }}', parseInt(document.getElementById('qty-input').value), event)">
                     <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
                 </button>
                 <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>

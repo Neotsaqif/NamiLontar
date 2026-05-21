@@ -176,6 +176,40 @@ header nav {
 
 .cart-icon {
     position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+@keyframes cartJelly {
+    0% { transform: scale(1, 1); }
+    25% { transform: scale(1.4, 0.6); }
+    45% { transform: scale(0.6, 1.4); }
+    60% { transform: scale(1.2, 0.8); }
+    75% { transform: scale(0.85, 1.15); }
+    90% { transform: scale(1.05, 0.95); }
+    100% { transform: scale(1, 1); }
+}
+
+.cart-icon.jelly {
+    animation: cartJelly 0.65s ease-in-out forwards;
+}
+
+/* Flying item helper with a cute glow and arching curve */
+.cart-fly-item {
+    position: fixed;
+    z-index: 99999;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(212, 163, 115, 0.5), 0 0 0 4px rgba(255, 255, 255, 1);
+    pointer-events: none;
+    transform-origin: center;
+    transition: 
+        left 1.25s cubic-bezier(0.25, 1, 0.5, 1), 
+        top 1.25s cubic-bezier(0.3, -0.35, 0.2, 1), 
+        width 1.25s cubic-bezier(0.25, 1, 0.5, 1), 
+        height 1.25s cubic-bezier(0.25, 1, 0.5, 1), 
+        transform 1.25s cubic-bezier(0.175, 0.885, 0.32, 1.2),
+        opacity 1.25s ease;
 }
 
 .cart-count {

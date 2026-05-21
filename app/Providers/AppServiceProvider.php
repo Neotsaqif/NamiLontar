@@ -54,6 +54,14 @@ class AppServiceProvider extends ServiceProvider
             try {
                 DB::connection()->getPdo();
             } catch (\Exception $e) {
+                // If MySQL is down, automatically fallback to SQLite
+                if (str_contains($e->getMessage(), 'actively refused it') || str_contains($e->getMessage(), 'Connection refused') || str_contains($e->getMessage(), 'No connection')) {
+                    config(['database.default' => 'sqlite']);
+                    config(['database.connections.sqlite.database' => database_path('database.sqlite')]);
+                    $this->ensureDatabaseAndTablesExist();
+                    return;
+                }
+
                 $database = $config['database'];
                 $config['database'] = null;
                 config(["database.connections.{$connection}_setup" => $config]);
@@ -74,8 +82,11 @@ class AppServiceProvider extends ServiceProvider
             $hasProductsTable = Schema::hasTable('products');
             $hasCategoriesTable = Schema::hasTable('categories');
             $hasDiscountsTable = Schema::hasTable('discounts');
+            $hasCartsTable = Schema::hasTable('carts');
+            $hasOrdersTable = Schema::hasTable('orders');
+            $hasOrderItemsTable = Schema::hasTable('order_items');
 
-            if (!$hasMigrationsTable || !$hasProductsTable || !$hasCategoriesTable || !$hasDiscountsTable) {
+            if (!$hasMigrationsTable || !$hasProductsTable || !$hasCategoriesTable || !$hasDiscountsTable || !$hasCartsTable || !$hasOrdersTable || !$hasOrderItemsTable) {
                 Artisan::call('migrate', ['--force' => true]);
             }
 

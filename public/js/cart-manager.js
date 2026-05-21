@@ -30,8 +30,23 @@ class CartManager {
         }
     }
 
-    async addItem(productId, quantity = 1) {
+    async addItem(productId, quantity = 1, event = null) {
         try {
+            // Find the image to animate
+            let imgToAnimate = null;
+            if (event) {
+                const target = event.currentTarget || event.target;
+                if (target) {
+                    const card = target.closest('.product-card') || target.closest('.feature-grid') || target.closest('.product-hero-grid') || target.closest('.pairing-card');
+                    if (card) {
+                        imgToAnimate = card.querySelector('img');
+                    }
+                }
+            }
+            if (!imgToAnimate) {
+                imgToAnimate = document.querySelector(`img[src*="${productId}"], img[alt*="${productId}"]`);
+            }
+
             const response = await fetch('/api/cart/add', {
                 method: 'POST',
                 headers: {
@@ -49,12 +64,63 @@ class CartManager {
             }
 
             if (response.ok) {
-                this.showNotification('Product added to cart!');
+                if (imgToAnimate) {
+                    this.animateFly(imgToAnimate);
+                } else {
+                    this.showNotification('Product added to cart!');
+                }
                 await this.init(); // Refresh cart data
             }
         } catch (e) {
             console.error('Error adding item', e);
         }
+    }
+
+    animateFly(imgElement) {
+        const cartBtn = document.getElementById('cart-btn');
+        if (!cartBtn) {
+            this.showNotification('Product added to cart!');
+            return;
+        }
+
+        const imgRect = imgElement.getBoundingClientRect();
+        const cartRect = cartBtn.getBoundingClientRect();
+
+        const clone = imgElement.cloneNode();
+        clone.classList.add('cart-fly-item');
+        clone.style.left = `${imgRect.left}px`;
+        clone.style.top = `${imgRect.top}px`;
+        clone.style.width = `${imgRect.width}px`;
+        clone.style.height = `${imgRect.height}px`;
+        clone.style.transform = 'scale(1)';
+
+        document.body.appendChild(clone);
+
+        // Force reflow
+        clone.offsetWidth;
+
+        // Step 1: Cute initial pop
+        clone.style.transform = 'scale(1.15)';
+
+        // Step 2: Arched flight to cart
+        setTimeout(() => {
+            clone.style.left = `${cartRect.left + cartRect.width / 2 - 20}px`;
+            clone.style.top = `${cartRect.top + cartRect.height / 2 - 20}px`;
+            clone.style.width = '40px';
+            clone.style.height = '40px';
+            clone.style.opacity = '0.2';
+            clone.style.transform = 'scale(0.15) rotate(540deg)';
+        }, 120);
+
+        clone.addEventListener('transitionend', (e) => {
+            // Trigger completion only on 'left' transition to avoid duplicate triggers
+            if (e.propertyName === 'left') {
+                clone.remove();
+                cartBtn.classList.add('jelly');
+                setTimeout(() => cartBtn.classList.remove('jelly'), 700);
+                this.showNotification('Product added to cart!');
+            }
+        });
     }
 
     async removeItem(productId) {
@@ -135,6 +201,9 @@ class CartManager {
 const cartManager = new CartManager();
 
 // Global add to cart function for simple access
-function addToCart(id) {
-    cartManager.addItem(id, 1);
+function addToCart(id, event = null) {
+    if (!event && typeof window.event !== 'undefined') {
+        event = window.event;
+    }
+    cartManager.addItem(id, 1, event);
 }

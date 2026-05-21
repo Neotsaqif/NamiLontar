@@ -57,7 +57,7 @@
                     @endfor
                     <span class="reviews">({{ $product->reviews }})</span>
                 </div>
-                <button class="btn btn-add" onclick="addToCart('{{ $product->slug }}')">ADD TO CART</button>
+                <button class="btn btn-add" onclick="addToCart('{{ $product->slug }}', event)">ADD TO CART</button>
             </div>
         </div>
         @endforeach
@@ -81,7 +81,7 @@
                 <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> {{ $bestseller->artisan_note ?: 'Not too sweet, with a hint of vanilla.' }}</li>
                 <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> {{ $bestseller->storage ?: 'Baked in small batches to ensure quality.' }}</li>
             </ul>
-            <button class="btn btn-primary" onclick="addToCart('{{ $bestseller->slug }}')" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-primary" onclick="addToCart('{{ $bestseller->slug }}', event)" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </div>
 </section>
@@ -101,7 +101,7 @@
                 <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> Not too sweet, with a hint of vanilla.</li>
                 <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> Baked in small batches to ensure quality.</li>
             </ul>
-            <button class="btn btn-primary" onclick="addToCart('lontar')" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-primary" onclick="addToCart('lontar', event)" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </div>
 </section>

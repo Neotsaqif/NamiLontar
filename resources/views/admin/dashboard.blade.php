@@ -13,24 +13,62 @@
     </div>
 </header>
 
+@push('styles')
+<style>
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(129, 199, 132, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(129, 199, 132, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(129, 199, 132, 0);
+    }
+}
+.pulse-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-green-text);
+    box-shadow: 0 0 10px var(--status-green-text);
+    animation: pulse 1.8s infinite ease-in-out;
+}
+.visitor-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+</style>
+@endpush
+
 <div class="summary-grid">
     <div class="summary-card card">
-        <i class="fa-solid fa-sack-dollar summary-icon"></i>
-        <span class="summary-title"><i class="fa-solid fa-chart-line"></i> Total Revenue</span>
-        <span class="summary-value">$24,500</span>
-        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +12% from last month</span>
+        <i class="fa-solid fa-chart-line summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-money-bill-trend-up"></i> Weekly Sales</span>
+        <span class="summary-value">Rp{{ number_format($weeklySales, 0, ',', '.') }}</span>
+        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> {{ $salesTrend }}</span>
     </div>
     <div class="summary-card card">
-        <i class="fa-solid fa-box-open summary-icon"></i>
-        <span class="summary-title"><i class="fa-solid fa-receipt"></i> Total Orders</span>
-        <span class="summary-value">1,245</span>
-        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +5% from last month</span>
+        <i class="fa-solid fa-cart-shopping summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-receipt"></i> Weekly Orders</span>
+        <span class="summary-value">{{ $weeklyOrders }}</span>
+        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> {{ $ordersTrend }}</span>
     </div>
     <div class="summary-card card">
-        <i class="fa-solid fa-users summary-icon"></i>
-        <span class="summary-title"><i class="fa-solid fa-user-group"></i> Active Customers</span>
-        <span class="summary-value">842</span>
-        <span class="trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +18% from last month</span>
+        <i class="fa-solid fa-globe summary-icon"></i>
+        <span class="summary-title"><i class="fa-solid fa-users-viewfinder"></i> Visitor Online</span>
+        <div class="visitor-container">
+            <span class="summary-value">{{ $visitorOnline }}</span>
+            <span class="pulse-indicator" title="Live active visitors"></span>
+        </div>
+        <span class="trend-up" style="color: var(--text-secondary);"><i class="fa-solid fa-clock"></i> Active sessions now</span>
     </div>
 </div>
 

@@ -1042,12 +1042,18 @@ header nav .nav-icons a:hover i {
 
 .detail {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 }
 
 .detail i {
     color: var(--primary-color);
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.detail p {
+    margin-bottom: 0 !important;
 }
 
 .flagship-visual {

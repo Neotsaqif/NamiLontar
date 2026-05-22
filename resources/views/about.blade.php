@@ -120,18 +120,16 @@
     <div class="container flagship-grid">
         <div class="flagship-content">
             <span class="tag">LOCATION</span>
-            <h2>Our Flagship Store</h2>
-            <p>Visit us in the heart of the city, where the aroma of fresh bread fills the air. Our flagship
-                store is designed to be a sanctuary for pastry lovers, offering a cozy atmosphere and our full
-                range of artisanal bakes.</p>
+            <h2>Toko Kami?</h2>
+            <p>Jika teman teman ingin mampir ke toko kami untuk berkonsultasi serta bernegosiasi dengan kami, jangan ragu untuk mampir yaa.</p>
             <div class="location-details">
                 <div class="detail">
                     <i class="fa-solid fa-location-dot"></i>
-                    <p>123 Bakery Lane, Artisan District</p>
+                    <p>Perumahan Alana Crown Blok B18, Teluk, Purwokerto selatan, Banyumas, Jawa tengah</p>
                 </div>
                 <div class="detail">
                     <i class="fa-solid fa-clock"></i>
-                    <p>Mon - Sun: 7:00 AM - 8:00 PM</p>
+                    <p>Senin - Jumat : 09.00 - 17.00 WIB</p>
                 </div>
             </div>
         </div>

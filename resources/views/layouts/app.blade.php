@@ -41,6 +41,12 @@
     <script src="{{ asset('js/cart-manager.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            @if(session('clear_cart'))
+                if (typeof cartManager !== 'undefined') {
+                    cartManager.clearCart();
+                }
+            @endif
+
             const links = document.querySelectorAll('a[href^="{{ url('/') }}"]:not([href*="#"])');
             
             links.forEach(link => {

@@ -46,8 +46,9 @@
                     <button class="btn-apply">APPLY</button>
                 </div>
 
-                <form action="{{ route('checkout.process') }}" method="POST">
+                <form id="checkout-form" action="{{ route('checkout.process') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="cart_data" id="cart-data-input">
                     <button type="submit" class="btn-checkout" style="width: 100%; border: none; cursor: pointer;">Proceed to Checkout</button>
                 </form>
                 
@@ -72,6 +73,22 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         renderCart();
+
+        // Handle checkout form submission
+        const checkoutForm = document.getElementById('checkout-form');
+        const cartDataInput = document.getElementById('cart-data-input');
+
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (e) => {
+                const cartData = cartManager.getCart();
+                if (cartData.length === 0) {
+                    e.preventDefault();
+                    alert('Your basket is empty!');
+                    return;
+                }
+                cartDataInput.value = JSON.stringify(cartData);
+            });
+        }
     });
 
     function renderCart() {

@@ -2,77 +2,85 @@
 class CartManager {
     constructor() {
         this.cart = [];
+        this.storageKey = 'nami_lontar_cart';
         this.init();
     }
 
-    async init() {
-        // Fetch initial cart state from server
+    init() {
+        // Load initial cart state from localStorage
         try {
-            const response = await fetch('/api/cart', {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
-            if (response.ok) {
-                this.cart = await response.json();
-                this.updateBadge();
-                if (typeof renderCart === 'function') {
-                    renderCart();
-                }
-            } else if (response.status === 401) {
-                // Not logged in, cart is empty
+            const savedCart = localStorage.getItem(this.storageKey);
+            if (savedCart) {
+                this.cart = JSON.parse(savedCart);
+            } else {
                 this.cart = [];
-                this.updateBadge();
+            }
+            this.updateBadge();
+            if (typeof renderCart === 'function') {
+                renderCart();
             }
         } catch (e) {
-            console.error('Error loading cart', e);
+            console.error('Error loading cart from localStorage', e);
+            this.cart = [];
         }
     }
 
-    async addItem(productId, quantity = 1, event = null) {
+    save() {
         try {
-            // Find the image to animate
-            let imgToAnimate = null;
-            if (event) {
-                const target = event.currentTarget || event.target;
-                if (target) {
-                    const card = target.closest('.product-card') || target.closest('.feature-grid') || target.closest('.product-hero-grid') || target.closest('.pairing-card');
-                    if (card) {
-                        imgToAnimate = card.querySelector('img');
-                    }
-                }
-            }
-            if (!imgToAnimate) {
-                imgToAnimate = document.querySelector(`img[src*="${productId}"], img[alt*="${productId}"]`);
-            }
-
-            const response = await fetch('/api/cart/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                },
-                body: JSON.stringify({ product_id: productId, quantity })
-            });
-
-            if (response.status === 401) {
-                // Redirect to login
-                window.location.href = '/login';
-                return;
-            }
-
-            if (response.ok) {
-                if (imgToAnimate) {
-                    this.animateFly(imgToAnimate);
-                } else {
-                    this.showNotification('Product added to cart!');
-                }
-                await this.init(); // Refresh cart data
+            localStorage.setItem(this.storageKey, JSON.stringify(this.cart));
+            this.updateBadge();
+            if (typeof renderCart === 'function') {
+                renderCart();
             }
         } catch (e) {
-            console.error('Error adding item', e);
+            console.error('Error saving cart to localStorage', e);
+        }
+    }
+
+    addItem(productId, quantity = 1, event = null) {
+        // Get product details from window.NAMI_PRODUCTS
+        const productInfo = window.NAMI_PRODUCTS ? window.NAMI_PRODUCTS[productId] : null;
+        
+        if (!productInfo && !productId) {
+            console.error('Product not found in system');
+            return;
+        }
+
+        const existingItem = this.cart.find(item => item.id === productId);
+
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            this.cart.push({
+                id: productId,
+                name: productInfo ? productInfo.name : productId,
+                price: productInfo ? productInfo.price : 0,
+                image: productInfo ? productInfo.image : '',
+                quantity: quantity
+            });
+        }
+
+        this.save();
+
+        // Animation logic
+        let imgToAnimate = null;
+        if (event) {
+            const target = event.currentTarget || event.target;
+            if (target) {
+                const card = target.closest('.product-card') || target.closest('.feature-grid') || target.closest('.product-hero-grid') || target.closest('.pairing-card');
+                if (card) {
+                    imgToAnimate = card.querySelector('img');
+                }
+            }
+        }
+        if (!imgToAnimate) {
+            imgToAnimate = document.querySelector(`img[src*="${productId}"], img[alt*="${productId}"]`);
+        }
+
+        if (imgToAnimate) {
+            this.animateFly(imgToAnimate);
+        } else {
+            this.showNotification('Product added to cart!');
         }
     }
 
@@ -113,7 +121,6 @@ class CartManager {
         }, 120);
 
         clone.addEventListener('transitionend', (e) => {
-            // Trigger completion only on 'left' transition to avoid duplicate triggers
             if (e.propertyName === 'left') {
                 clone.remove();
                 cartBtn.classList.add('jelly');
@@ -123,45 +130,23 @@ class CartManager {
         });
     }
 
-    async removeItem(productId) {
-        try {
-            const response = await fetch('/api/cart/remove', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                },
-                body: JSON.stringify({ product_id: productId })
-            });
+    removeItem(productId) {
+        this.cart = this.cart.filter(item => item.id !== productId);
+        this.save();
+    }
 
-            if (response.ok) {
-                await this.init();
-            }
-        } catch (e) {
-            console.error('Error removing item', e);
+    updateQuantity(productId, quantity) {
+        if (quantity < 1) return;
+        const item = this.cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = quantity;
+            this.save();
         }
     }
 
-    async updateQuantity(productId, quantity) {
-        if (quantity < 1) return;
-        try {
-            const response = await fetch('/api/cart/update', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                },
-                body: JSON.stringify({ product_id: productId, quantity })
-            });
-
-            if (response.ok) {
-                await this.init();
-            }
-        } catch (e) {
-            console.error('Error updating quantity', e);
-        }
+    clearCart() {
+        this.cart = [];
+        this.save();
     }
 
     getCart() {
@@ -200,7 +185,6 @@ class CartManager {
 
 const cartManager = new CartManager();
 
-// Global add to cart function for simple access
 function addToCart(id, event = null) {
     if (!event && typeof window.event !== 'undefined') {
         event = window.event;

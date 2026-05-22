@@ -28,6 +28,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
@@ -37,14 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [PageController::class, 'orders'])->name('orders');
     Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
     
-    // Cart Routes
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/api/cart/add', [CartController::class, 'add']);
-    Route::post('/api/cart/update', [CartController::class, 'update']);
-    Route::post('/api/cart/remove', [CartController::class, 'remove']);
-    Route::get('/api/cart', [CartController::class, 'getCart']);
-    
-    // Checkout Routes
+    // Checkout Route
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 });
 

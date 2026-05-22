@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -13,11 +12,14 @@ class CheckoutController extends Controller
 {
     public function process(Request $request)
     {
-        $user = Auth::user();
-        
-        $carts = Cart::with('product')->where('user_id', $user->id)->get();
+        $request->validate([
+            'cart_data' => 'required|json'
+        ]);
 
-        if ($carts->isEmpty()) {
+        $user = Auth::user();
+        $cartItems = json_decode($request->input('cart_data'), true);
+
+        if (empty($cartItems)) {
             return redirect()->back()->withErrors(['cart' => 'Your cart is empty.']);
         }
 
@@ -25,8 +27,8 @@ class CheckoutController extends Controller
             DB::beginTransaction();
 
             $subtotal = 0;
-            foreach ($carts as $cart) {
-                $subtotal += ($cart->product->price * $cart->quantity);
+            foreach ($cartItems as $item) {
+                $subtotal += ($item['price'] * $item['quantity']);
             }
 
             $shipping = $subtotal > 500000 ? 0 : 50000;
@@ -36,24 +38,30 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'user_id' => $user->id,
                 'total_amount' => $totalAmount,
-                'status' => 'completed', // Hardcode completed for now as per simple flow
+                'status' => 'completed',
             ]);
 
-            foreach ($carts as $cart) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $cart->product_id,
-                    'quantity' => $cart->quantity,
-                    'price' => $cart->product->price,
-                ]);
-            }
+            foreach ($cartItems as $item) {
+                // Find product by slug or id to get the correct product_id for DB
+                $product = \App\Models\Product::where('slug', $item['id'])
+                    ->orWhere('id', $item['id'])
+                    ->first();
 
-            Cart::where('user_id', $user->id)->delete();
+                if ($product) {
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $product->id,
+                        'quantity' => $item['quantity'],
+                        'price' => $product->price,
+                    ]);
+                }
+            }
 
             DB::commit();
 
-            // Should redirect to a success page or show message
-            return redirect('/')->with('success', 'Order has been placed successfully!');
+            // Store success message and a flag to clear localStorage on next page load
+            return redirect('/')->with('success', 'Order has been placed successfully!')
+                               ->with('clear_cart', true);
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['checkout' => 'Failed to process checkout. Please try again.']);

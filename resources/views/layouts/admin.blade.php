@@ -18,32 +18,7 @@
 
     <div class="app-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="brand">NAMI LONTAR</div>
-            <nav>
-                <a href="{{ url('/admin/dashboard') }}" class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                    <i class="fa-solid fa-border-all"></i> Dashboard
-                </a>
-                <a href="{{ route('admin.products.index') }}" class="{{ Request::is('admin/products*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-cookie-bite"></i> Products
-                </a>
-                <a href="{{ url('/admin/orders') }}" class="{{ Request::is('admin/orders') ? 'active' : '' }}">
-                    <i class="fa-solid fa-receipt"></i> Orders
-                </a>
-                <a href="{{ route('admin.categories.index') }}" class="{{ Request::is('admin/categories*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-layer-group"></i> Categories
-                </a>
-                <a href="{{ url('/admin/customers') }}" class="{{ Request::is('admin/customers') ? 'active' : '' }}">
-                    <i class="fa-solid fa-users"></i> Customers
-                </a>
-                <a href="{{ route('admin.discounts.index') }}" class="{{ Request::is('admin/discounts*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tag"></i> Discounts
-                </a>
-                <a href="{{ url('/admin/settings') }}" class="{{ Request::is('admin/settings') ? 'active' : '' }}">
-                    <i class="fa-solid fa-gear"></i> Settings
-                </a>
-            </nav>
-        </aside>
+        @include('layouts.partials.admin_sidebar')
 
         <!-- Main Content -->
         <main class="main-content">

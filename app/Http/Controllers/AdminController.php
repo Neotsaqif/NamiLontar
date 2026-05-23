@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -28,7 +30,10 @@ class AdminController extends Controller
         $salesTrend = $realWeeklySales > 0 ? '+15.2% from last week' : '+12.4% from last week';
         $ordersTrend = $realWeeklyOrders > 0 ? '+10.5% from last week' : '+8.2% from last week';
 
-        return view('admin.dashboard', compact('weeklySales', 'weeklyOrders', 'visitorOnline', 'salesTrend', 'ordersTrend'));
+        // Recent Orders
+        $recentOrders = Order::with('user')->orderBy('created_at', 'desc')->take(10)->get();
+
+        return view('admin.dashboard', compact('weeklySales', 'weeklyOrders', 'visitorOnline', 'salesTrend', 'ordersTrend', 'recentOrders'));
     }
 
     public function orders()
@@ -65,7 +70,29 @@ class AdminController extends Controller
 
     public function customers()
     {
-        return view('admin.customers');
+        $users = User::withCount('orders')->get();
+        return view('admin.customers', compact('users'));
+    }
+
+    public function customerShow($id)
+    {
+        $user = User::with(['orders' => function($q) {
+            $q->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+        return view('admin.customers_show', compact('user'));
+    }
+
+    public function updateUserRole(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $validated = $request->validate([
+            'role' => 'required|string|in:user,admin',
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->back()->with('success', 'User role updated successfully!');
     }
 
     public function discounts()

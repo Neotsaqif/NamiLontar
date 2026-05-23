@@ -8,7 +8,7 @@
     <div class="header-actions">
         <div class="admin-profile">
             <img src="{{ asset('assets/profile.png') }}" alt="Admin">
-            <span>Julian Rossi</span>
+            <span>Admin</span>
         </div>
     </div>
 </header>
@@ -22,19 +22,21 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Total Orders</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($customers as $customer)
+            @foreach($users as $user)
             <tr>
-                <td>{{ $customer['id'] }}</td>
-                <td>{{ $customer['name'] }}</td>
-                <td>{{ $customer['email'] }}</td>
-                <td>{{ count($customer['orders']) }}</td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td><span class="badge {{ $user->role }}">{{ strtoupper($user->role) }}</span></td>
+                <td>{{ $user->orders_count }}</td>
                 <td>
-                    <a href="{{ url('/admin/customers/' . $customer['id']) }}" class="btn btn-secondary btn-sm">
+                    <a href="{{ route('admin.customers.show', $user->id) }}" class="btn btn-secondary btn-sm">
                         <i class="fa-solid fa-eye"></i> View Profile
                     </a>
                 </td>

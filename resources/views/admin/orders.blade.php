@@ -8,7 +8,7 @@
         <div class="header-actions">
             <div class="admin-profile">
                 <img src="{{ asset('assets/profile.png') }}" alt="Admin">
-                <span>Julian Rossi</span>
+                <span>Admin</span>
             </div>
         </div>
     </header>

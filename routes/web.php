@@ -50,8 +50,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/orders', [AdminController::class, 'orders']);
     Route::get('/orders/{id}', [AdminController::class, 'orderShow'])->name('admin.orders.show');
     Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.updateStatus');
-    Route::get('/customers', [AdminController::class, 'customers']);
+    Route::get('/customers', [AdminController::class, 'customers'])->name('admin.customers');
     Route::get('/customers/{id}', [AdminController::class, 'customerShow'])->name('admin.customers.show');
+    Route::post('/customers/{id}/role', [AdminController::class, 'updateUserRole'])->name('admin.customers.updateRole');
     Route::get('/settings', [AdminController::class, 'settings']);
 
     // Product CRUD

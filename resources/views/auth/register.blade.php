@@ -20,7 +20,7 @@
         <div class="login-card">
             <div class="login-header">
                 <a href="{{ url('/') }}" class="logo-container center">
-                    <img src="{{ asset('assets/product photo/logo.png') }}" alt="Logo" height="50"
+                    <img src="{{ asset('assets/Logo.png') }}" alt="Logo" height="50"
                         width="50">
                     <div class="logo">Nami Lontar</div>
                 </a>

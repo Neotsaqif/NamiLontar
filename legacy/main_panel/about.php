@@ -81,7 +81,7 @@
                 </div>
                 <div class="legacy-image">
                     <div class="image-frame">
-                        <img src="../assets/about_legacy.png" alt="Artisan Baker">
+                        <img src="../assets/about us.png" alt="Artisan Baker">
                     </div>
                 </div>
             </div>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="flagship-visual">
                     <div class="store-illustration">
-                        <img src="../assets/flagship_store.png" alt="Nami Lontar Flagship Store">
+                        <img src="../assets/about us lokasi.png" alt="Nami Lontar Flagship Store">
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@
 @endif
 <section class="hero">
     <div class="hero-bg">
-        <img src="{{ asset('assets/product photo/cake.png') }}" alt="Delicious Nami Lontar Spread">
+        <img src="{{ asset('assets/full product header.png') }}" alt="Delicious Nami Lontar Spread">
     </div>
     <div class="hero-content container">
         <div class="hero-text-box">
@@ -89,7 +89,7 @@
 <section class="feature container">
     <div class="feature-grid">
         <div class="feature-img">
-            <img src="{{ asset('assets/product photo/lontar.jpeg') }}" alt="Nami Lontar Original Bestseller">
+            <img src="{{ asset('product-photos/main/lontar.jpeg') }}" alt="Nami Lontar Original Bestseller">
         </div>
         <div class="feature-content">
             <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
@@ -119,7 +119,7 @@
             </form>
         </div>
         <div class="newsletter-logo">
-            <img src="{{ asset('assets/product photo/logo.png') }}" alt="Nami Lontar Logo" class="logo-gradient">
+            <img src="{{ asset('assets/Logo.png') }}" alt="Nami Lontar Logo" class="logo-gradient">
         </div>
     </div>
 </section>

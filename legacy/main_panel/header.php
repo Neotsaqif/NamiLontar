@@ -1,7 +1,7 @@
 <header>
     <nav class="container">
         <div class="logo-container">
-            <img src="../assets/product photo/logo.png" alt="Logo" height="50"
+            <img src="../assets/Logo.png" alt="Logo" height="50"
                 width="50">
             <div class="logo">Nami Lontar</div>
         </div>

@@ -27,7 +27,7 @@
                 @foreach($order->items as $item)
                 @php $subtotal += $item->price * $item->quantity; @endphp
                 <div class="summary-item">
-                    <div class="item-img-placeholder" style="background-image: url('{{ asset($item->product ? $item->product->image : 'assets/product photo/lontar.jpeg') }}')"></div>
+                    <div class="item-img-placeholder" style="background-image: url('{{ asset($item->product ? $item->product->image : 'product-photos/main/lontar.jpeg') }}')"></div>
                     <div class="item-details">
                         <h4>{{ $item->product ? $item->product->name : 'Unknown Product' }}</h4>
                         <p>Quantity: {{ $item->quantity }}</p>

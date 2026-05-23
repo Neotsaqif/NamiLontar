@@ -6,7 +6,7 @@
 <!-- About Hero Section -->
 <section class="about-hero">
     <div class="hero-bg">
-        <img src="{{ asset('assets/product photo/cake.png') }}" alt="Bakery Background">
+        <img src="{{ asset('assets/full product header.png') }}" alt="Bakery Background">
         <div class="overlay"></div>
     </div>
     <div class="about-hero-content container">
@@ -38,7 +38,7 @@
         </div>
         <div class="legacy-image">
             <div class="image-frame">
-                <img src="{{ asset('assets/about_legacy.png') }}" alt="Artisan Baker">
+                <img src="{{ asset('assets/about us.png') }}" alt="Artisan Baker">
             </div>
         </div>
     </div>
@@ -135,7 +135,7 @@
         </div>
         <div class="flagship-visual">
             <div class="store-illustration">
-                <img src="{{ asset('assets/flagship_store.png') }}" alt="Nami Lontar Flagship Store">
+                <img src="{{ asset('assets/about us lokasi.png') }}" alt="Nami Lontar Flagship Store">
             </div>
         </div>
     </div>

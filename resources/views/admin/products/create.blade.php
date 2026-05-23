@@ -62,7 +62,7 @@
             <label for="image">Product Image</label>
             <div style="display: flex; align-items: center; gap: 20px; border: 1px dashed var(--card-border); padding: 1.5rem; border-radius: 12px; background: rgba(255,255,255,0.01);">
                 <div style="width: 80px; height: 80px; border-radius: 10px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); overflow: hidden;">
-                    <img id="image-preview" src="{{ asset('assets/product photo/logo.png') }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+                    <img id="image-preview" src="{{ asset('assets/Logo.png') }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
                 </div>
                 <div style="flex: 1;">
                     <input type="file" id="image" name="image" accept="image/*" required style="border: none; background: transparent; padding: 0;" onchange="previewFile()">

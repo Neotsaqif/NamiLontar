@@ -33,8 +33,8 @@
         
         <!-- Profile Card -->
         <div class="card" style="padding: 2rem; text-align: center;">
-            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-color); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; color: white; margin: 0 auto 1.5rem;">
-                {{ strtoupper(substr($user->name, 0, 1)) }}
+            <div style="margin-bottom: 1.5rem;">
+                <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             </div>
             <h2 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 0.25rem;">{{ $user->name }}</h2>
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Joined on {{ $user->created_at->format('M d, Y') }}</p>

@@ -51,14 +51,24 @@
             </div>
         @endif
 
-        <form action="{{ route('profile.update') }}" method="POST">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Main Profile Area -->
             <section class="profile-summary">
                 <div class="profile-info-group">
                     <div class="profile-photo-container">
-                        <img src="{{ asset('assets/profile.png') }}" alt="User Profile" class="profile-photo">
-                        <button type="button" class="edit-btn" aria-label="Edit Profile"><i class="fa-solid fa-pencil"></i></button>
+                        <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="profile-photo" id="profile-preview">
+                        <label for="profile_photo" class="edit-btn" title="Upload New Photo">
+                            <i class="fa-solid fa-pencil"></i>
+                        </label>
+                        <input type="file" name="profile_photo" id="profile_photo" style="display: none;" accept="image/*" onchange="previewImage(this)">
+                        
+                        @if($user->profile_photo)
+                        <button type="button" class="remove-photo-btn" onclick="deletePhoto()" title="Remove Photo">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <input type="hidden" name="delete_photo" id="delete_photo" value="0">
+                        @endif
                     </div>
                     <div class="profile-text">
                         <h1 class="profile-name">{{ $user->name }}</h1>
@@ -167,3 +177,72 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .remove-photo-btn {
+        position: absolute;
+        top: 2px;
+        left: -2px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ef4444;
+        color: var(--white);
+        border: 2px solid var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        transition: transform 0.2s, background-color 0.2s;
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+    }
+    
+    .remove-photo-btn:hover {
+        transform: scale(1.1);
+        background-color: #dc2626;
+    }
+
+    .profile-photo-container label.edit-btn {
+        cursor: pointer;
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                document.getElementById('profile-preview').src = e.target.result;
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+            
+            // Reset delete_photo if a new photo is selected
+            const deleteInput = document.getElementById('delete_photo');
+            if (deleteInput) deleteInput.value = "0";
+        }
+    }
+
+    function deletePhoto() {
+        if (confirm('Are you sure you want to remove your profile photo?')) {
+            const deleteInput = document.getElementById('delete_photo');
+            if (deleteInput) {
+                deleteInput.value = "1";
+                document.getElementById('profile-preview').src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent('{{ $user->name }}') + '&color=F6F6F7&background=5145CD';
+                
+                // Hide the remove button immediately
+                const removeBtn = document.querySelector('.remove-photo-btn');
+                if (removeBtn) removeBtn.style.display = 'none';
+                
+                // Clear the file input if any
+                document.getElementById('profile_photo').value = '';
+            }
+        }
+    }
+</script>
+@endpush

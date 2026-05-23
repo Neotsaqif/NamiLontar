@@ -27,7 +27,20 @@ class User extends Authenticatable
         'city',
         'postal_code',
         'role',
+        'profile_photo',
     ];
+
+    /**
+     * Get the profile photo URL.
+     */
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->profile_photo) {
+            return asset('storage/' . $this->profile_photo);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=F6F6F7&background=5145CD';
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -44,6 +44,23 @@ class PageController extends Controller
         return view('profile', compact('user', 'orders'));
     }
 
+    public function updateProfile(\Illuminate\Http\Request $request)
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:100',
+            'postal_code' => 'nullable|string|max:10',
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+
     public function transactions()
     {
         $user = \Illuminate\Support\Facades\Auth::user();
@@ -74,5 +91,20 @@ class PageController extends Controller
             ->firstOrFail();
             
         return view('tracking', compact('order'));
+    }
+
+    public function completeOrder(\Illuminate\Http\Request $request, $id)
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $order = \App\Models\Order::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        if ($order->status === 'delivery') {
+            $order->update(['status' => 'completed']);
+            return redirect()->back()->with('success', 'Order marked as completed. Thank you!');
+        }
+
+        return redirect()->back()->with('error', 'Unable to complete order at this stage.');
     }
 }

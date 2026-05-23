@@ -33,7 +33,29 @@ class AdminController extends Controller
 
     public function orders()
     {
-        return view('admin.orders');
+        $orders = Order::with('user')->orderBy('created_at', 'desc')->get();
+        return view('admin.orders', compact('orders'));
+    }
+
+    public function orderShow($id)
+    {
+        $order = Order::with('user', 'items.product')->findOrFail($id);
+        return view('admin.orders_show', compact('order'));
+    }
+
+    public function updateOrderStatus(\Illuminate\Http\Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        
+        $validated = $request->validate([
+            'status' => 'required|string|in:pending,accepted,rejected,processing,delivery,completed',
+            'driver' => 'nullable|string|max:255',
+            'estimated_arrival' => 'nullable|date',
+        ]);
+
+        $order->update($validated);
+
+        return redirect()->back()->with('success', 'Order updated successfully!');
     }
 
     public function categories()

@@ -12,7 +12,16 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
-        'status', // e.g. pending, completed, cancelled
+        'status',
+        'address',
+        'city',
+        'postal_code',
+        'driver',
+        'estimated_arrival',
+    ];
+
+    protected $casts = [
+        'estimated_arrival' => 'datetime',
     ];
 
     public function user()

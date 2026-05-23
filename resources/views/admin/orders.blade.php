@@ -36,33 +36,21 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($orders as $order)
                 <tr>
-                    <td>#ORD-1025</td>
-                    <td>Oct 24, 2026</td>
-                    <td>Alice Johnson</td>
-                    <td>3 items (Ceramic Mug, etc.)</td>
-                    <td><span class="badge processing">Processing</span></td>
-                    <td>Rp1.200.000</td>
-                    <td><button class="btn btn-secondary">View Details</button></td>
+                    <td>#{{ $order->id }}</td>
+                    <td>{{ $order->created_at->format('M d, Y') }}</td>
+                    <td>{{ $order->user->name }}</td>
+                    <td>
+                        @foreach($order->items as $item)
+                            {{ $item->product ? $item->product->name : 'Unknown' }} (x{{ $item->quantity }})@if(!$loop->last), @endif
+                        @endforeach
+                    </td>
+                    <td><span class="badge {{ $order->status }}">{{ strtoupper($order->status) }}</span></td>
+                    <td>Rp{{ number_format($order->total_amount, 0, ',', '.') }}</td>
+                    <td><a href="{{ url('/admin/orders/' . $order->id) }}" class="btn btn-secondary">View Details</a></td>
                 </tr>
-                <tr>
-                    <td>#ORD-1024</td>
-                    <td>Oct 23, 2026</td>
-                    <td>Bob Smith</td>
-                    <td>1 item (Linen Apron)</td>
-                    <td><span class="badge delivered">Delivered</span></td>
-                    <td>Rp455.000</td>
-                    <td><button class="btn btn-secondary">View Details</button></td>
-                </tr>
-                <tr>
-                    <td>#ORD-1023</td>
-                    <td>Oct 22, 2026</td>
-                    <td>Charlie Brown</td>
-                    <td>2 items (Wooden Spoon...)</td>
-                    <td><span class="badge pending">Pending</span></td>
-                    <td>Rp899.900</td>
-                    <td><button class="btn btn-secondary">View Details</button></td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

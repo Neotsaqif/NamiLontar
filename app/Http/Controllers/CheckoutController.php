@@ -17,6 +17,12 @@ class CheckoutController extends Controller
         ]);
 
         $user = Auth::user();
+        
+        // Enforce address requirement
+        if (empty($user->address) || empty($user->city) || empty($user->postal_code)) {
+            return redirect()->route('profile')->with('warning', 'Please complete your shipping address before checking out.');
+        }
+
         $cartItems = json_decode($request->input('cart_data'), true);
 
         if (empty($cartItems)) {
@@ -38,7 +44,10 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'user_id' => $user->id,
                 'total_amount' => $totalAmount,
-                'status' => 'completed',
+                'status' => 'pending',
+                'address' => $user->address,
+                'city' => $user->city,
+                'postal_code' => $user->postal_code,
             ]);
 
             foreach ($cartItems as $item) {

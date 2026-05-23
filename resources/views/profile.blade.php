@@ -33,21 +33,34 @@
 
     <!-- Right Content Pane -->
     <div class="content-pane">
-
-        <!-- Main Profile Area -->
-        <section class="profile-summary">
-            <div class="profile-info-group">
-                <div class="profile-photo-container">
-                    <img src="{{ asset('assets/profile.png') }}" alt="Julian Rossi" class="profile-photo">
-                    <button class="edit-btn" aria-label="Edit Profile"><i class="fa-solid fa-pencil"></i></button>
-                </div>
-                <div class="profile-text">
-                    <h1 class="profile-name">{{ $user->name }}</h1>
-                    <p class="profile-membership">Member since {{ $user->created_at->format('F Y') }} &bull; Nami Lontar Customer</p>
-                </div>
+        @if(session('success'))
+            <div class="alert alert-success" style="margin-bottom: 2rem; padding: 1rem; background: #e6f7e6; color: #2e7d32; border-radius: 8px; border: 1px solid #c8e6c9;">
+                <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
             </div>
-            <button class="save-btn">SAVE CHANGES</button>
-        </section>
+        @endif
+
+        @if(session('warning'))
+            <div class="alert alert-warning" style="margin-bottom: 2rem; padding: 1rem; background: #fff3e0; color: #e65100; border-radius: 8px; border: 1px solid #ffe0b2;">
+                <i class="fa-solid fa-circle-exclamation"></i> {{ session('warning') }}
+            </div>
+        @endif
+
+        <form action="{{ route('profile.update') }}" method="POST">
+            @csrf
+            <!-- Main Profile Area -->
+            <section class="profile-summary">
+                <div class="profile-info-group">
+                    <div class="profile-photo-container">
+                        <img src="{{ asset('assets/profile.png') }}" alt="User Profile" class="profile-photo">
+                        <button type="button" class="edit-btn" aria-label="Edit Profile"><i class="fa-solid fa-pencil"></i></button>
+                    </div>
+                    <div class="profile-text">
+                        <h1 class="profile-name">{{ $user->name }}</h1>
+                        <p class="profile-membership">Member since {{ $user->created_at->format('F Y') }} &bull; Nami Lontar Customer</p>
+                    </div>
+                </div>
+                <button type="submit" class="save-btn">SAVE CHANGES</button>
+            </section>
 
         <!-- Cards Area -->
         <section class="cards-grid">
@@ -56,15 +69,16 @@
                 <h3 class="card-title">Personal Information</h3>
                 <div class="form-group">
                     <label>FULL NAME</label>
-                    <input type="text" value="{{ $user->name }}" readonly>
+                    <input type="text" name="name" value="{{ $user->name }}" required>
                 </div>
                 <div class="form-group">
                     <label>EMAIL ADDRESS</label>
-                    <input type="email" value="{{ $user->email }}" readonly>
+                    <input type="email" value="{{ $user->email }}" disabled style="background: #f5f5f5; cursor: not-allowed;">
+                    <small style="color: #888; font-size: 0.7rem;">Email cannot be changed.</small>
                 </div>
                 <div class="form-group">
                     <label>PHONE NUMBER</label>
-                    <input type="tel" value="+1 (555) 234-8890" readonly>
+                    <input type="tel" name="phone" value="{{ $user->phone }}" placeholder="+1 (555) 234-8890">
                 </div>
             </div>
 
@@ -73,16 +87,16 @@
                 <h3 class="card-title">Shipping Preference</h3>
                 <div class="form-group">
                     <label>STREET ADDRESS</label>
-                    <input type="text" value="882 Boulangerie Way" readonly>
+                    <input type="text" name="address" value="{{ $user->address }}" placeholder="882 Boulangerie Way">
                 </div>
                 <div class="form-row">
                     <div class="form-group half">
                         <label>CITY</label>
-                        <input type="text" value="Pastryville" readonly>
+                        <input type="text" name="city" value="{{ $user->city }}" placeholder="Pastryville">
                     </div>
                     <div class="form-group half">
                         <label>POSTAL CODE</label>
-                        <input type="text" value="90210" readonly>
+                        <input type="text" name="postal_code" value="{{ $user->postal_code }}" placeholder="90210">
                     </div>
                 </div>
                 <div class="checkbox-group">
@@ -94,6 +108,7 @@
                 </div>
             </div>
         </section>
+    </form>
 
         <!-- Recent Orders & Transactions Section -->
         <section class="transactions-section">

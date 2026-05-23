@@ -1,1 +1,1 @@
-*.sqlite*
+# *.sqlite* (Removed to allow versioning)

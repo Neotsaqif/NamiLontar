@@ -97,6 +97,35 @@
             <i class="fa-solid fa-check-double"></i> All drivers responding
         </div>
     </div>
+
+    {{-- Auto-Sync Settings --}}
+    <div class="kpi-card" style="grid-column: span 3; background: rgba(255,255,255,0.02);">
+        <form action="{{ route('admin.systemSettings.update') }}" method="POST" style="display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
+            @csrf
+            <div style="display: flex; align-items: center; gap: 2rem; flex: 1;">
+                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                    <label style="margin-bottom: 0.5rem; display: block; font-size: 0.8rem; text-transform: uppercase;">Primary Database (Source of Truth)</label>
+                    <select name="primary_database" class="view-dropdown" style="width: 100%; padding: 0.75rem;">
+                        <option value="mysql" {{ $primary === 'mysql' ? 'selected' : '' }}>MySQL (Production)</option>
+                        <option value="sqlite" {{ $primary === 'sqlite' ? 'selected' : '' }}>SQLite (Local)</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                    <label style="margin-bottom: 0.5rem; display: block; font-size: 0.8rem; text-transform: uppercase;">Auto-Sync Mode</label>
+                    <select name="auto_sync_enabled" class="view-dropdown" style="width: 100%; padding: 0.75rem;">
+                        <option value="0" {{ $autoSync === '0' ? 'selected' : '' }}>Disabled (Manual Only)</option>
+                        <option value="1" {{ $autoSync === '1' ? 'selected' : '' }}>Enabled (Sync on Page Load)</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-secondary" style="height: fit-content; padding: 0.85rem 2rem;">
+                <i class="fa-solid fa-floppy-disk"></i> SAVE SETTINGS
+            </button>
+        </form>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7;">
+            <i class="fa-solid fa-info-circle"></i> When Enabled, the system will automatically reconcile databases whenever drift is detected on page load, using the Primary Database as the source.
+        </p>
+    </div>
 </div>
 
 {{-- Integrity Report Table --}}
@@ -110,8 +139,8 @@
         <thead>
             <tr>
                 <th>Table Identity</th>
-                <th style="text-align: center;">MySQL Count</th>
                 <th style="text-align: center;">SQLite Count</th>
+                <th style="text-align: center;">MySQL Count</th>
                 <th style="text-align: right;">Integrity Status</th>
             </tr>
         </thead>
@@ -119,10 +148,10 @@
             @foreach($report as $item)
             <tr>
                 <td style="font-weight: 500; letter-spacing: 0.5px;">{{ strtoupper($item['table']) }}</td>
-                <td style="text-align: center; color: var(--text-primary); font-family: var(--font-sans);">{{ number_format($item['mysql'], 0, ',', '.') }}</td>
                 <td style="text-align: center; color: var(--text-primary); font-family: var(--font-sans);">
                     {{ $item['sqlite'] === -1 ? 'INITIALIZING' : number_format($item['sqlite'], 0, ',', '.') }}
                 </td>
+                <td style="text-align: center; color: var(--text-primary); font-family: var(--font-sans);">{{ number_format($item['mysql'], 0, ',', '.') }}</td>
                 <td style="text-align: right;">
                     @if($item['status'] === 'Match')
                         <span class="badge delivered" style="font-size: 0.7rem;">Synced</span>

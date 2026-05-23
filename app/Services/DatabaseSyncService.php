@@ -15,6 +15,7 @@ class DatabaseSyncService
         'carts',
         'orders',
         'order_items',
+        'system_settings',
     ];
 
     /**

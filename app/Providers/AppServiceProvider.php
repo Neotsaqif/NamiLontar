@@ -22,6 +22,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // 1. Check for Primary Database Setting to switch connection dynamically
+        try {
+            if (Schema::hasTable('system_settings')) {
+                $primary = DB::table('system_settings')->where('key', 'primary_database')->value('value');
+                if ($primary && in_array($primary, ['mysql', 'sqlite'])) {
+                    config(['database.default' => $primary]);
+                }
+            }
+        } catch (\Exception $e) {
+            // Silently skip if DB/Table not ready yet
+        }
+
         if (app()->environment('local')) {
             $this->ensureDatabaseAndTablesExist();
         }

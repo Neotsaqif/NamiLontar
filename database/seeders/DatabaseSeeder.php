@@ -21,11 +21,5 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin123@gmail.com'],
             ['name' => 'admin', 'password' => bcrypt('admin123')]
         );
-
-        $this->call([
-            'Database\Seeders\CategorySeeder',
-            'Database\Seeders\ProductSeeder',
-            'Database\Seeders\DiscountSeeder',
-        ]);
     }
 }

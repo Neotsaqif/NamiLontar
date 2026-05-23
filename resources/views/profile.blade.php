@@ -21,6 +21,12 @@
                 <i class="fa-solid fa-box"></i>
                 Orders
             </a>
+            @if(Auth::user()->role === 'admin')
+            <a href="{{ url('/admin/dashboard') }}" class="sidebar-item" style="color: var(--primary-color); font-weight: 600;">
+                <i class="fa-solid fa-gauge-high"></i>
+                Admin Dashboard
+            </a>
+            @endif
             <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
                 @csrf
             </form>

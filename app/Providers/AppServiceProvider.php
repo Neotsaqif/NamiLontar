@@ -90,28 +90,33 @@ class AppServiceProvider extends ServiceProvider
 
         // 2. Ensure Migrations and Tables exist
         try {
-            $hasMigrationsTable = Schema::hasTable('migrations');
-            $hasProductsTable = Schema::hasTable('products');
-            $hasCategoriesTable = Schema::hasTable('categories');
-            $hasDiscountsTable = Schema::hasTable('discounts');
-            $hasCartsTable = Schema::hasTable('carts');
-            $hasOrdersTable = Schema::hasTable('orders');
-            $hasOrderItemsTable = Schema::hasTable('order_items');
+            $requiredTables = [
+                'migrations',
+                'users',
+                'products',
+                'categories',
+                'discounts',
+                'carts',
+                'orders',
+                'order_items',
+                'system_settings',
+            ];
 
-            if (!$hasMigrationsTable || !$hasProductsTable || !$hasCategoriesTable || !$hasDiscountsTable || !$hasCartsTable || !$hasOrdersTable || !$hasOrderItemsTable) {
+            $missingTable = false;
+            foreach ($requiredTables as $table) {
+                if (!Schema::hasTable($table)) {
+                    $missingTable = true;
+                    break;
+                }
+            }
+
+            if ($missingTable) {
                 Artisan::call('migrate', ['--force' => true]);
             }
 
-            // 3. Ensure seed data exists
-            if (Schema::hasTable('products') && \App\Models\Product::count() === 0) {
+            // 3. Ensure seed data exists (Admin account only, as per previous requirement)
+            if (Schema::hasTable('users') && \App\Models\User::count() === 0) {
                 Artisan::call('db:seed', ['--force' => true]);
-            } else {
-                if (Schema::hasTable('categories') && \App\Models\Category::count() === 0) {
-                    Artisan::call('db:seed', ['--class' => 'CategorySeeder', '--force' => true]);
-                }
-                if (Schema::hasTable('discounts') && \App\Models\Discount::count() === 0) {
-                    Artisan::call('db:seed', ['--class' => 'DiscountSeeder', '--force' => true]);
-                }
             }
         } catch (\Exception $e) {
             // Silently fail to avoid blocking server boot

@@ -56,8 +56,8 @@ class AdminProductController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '_' . Str::slug($request->input('name')) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/product photo'), $filename);
-            $data['image'] = '/assets/product photo/' . $filename;
+            $file->move(public_path('product-photos/main'), $filename);
+            $data['image'] = '/product-photos/main/' . $filename;
         }
 
         // Set default rating & reviews for demonstration
@@ -101,18 +101,19 @@ class AdminProductController extends Controller
         $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            // Delete old file if exists and is uploaded
-            if ($product->image && str_starts_with($product->image, '/assets/product photo/')) {
+            // Move old file to trash if exists
+            if ($product->image && str_starts_with($product->image, '/product-photos/main/')) {
                 $oldPath = public_path(substr($product->image, 1));
                 if (file_exists($oldPath)) {
-                    @unlink($oldPath);
+                    $trashFilename = 'trashed_' . time() . '_' . basename($oldPath);
+                    @rename($oldPath, public_path('product-photos/trash/' . $trashFilename));
                 }
             }
 
             $file = $request->file('image');
             $filename = time() . '_' . Str::slug($request->input('name')) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/product photo'), $filename);
-            $data['image'] = '/assets/product photo/' . $filename;
+            $file->move(public_path('product-photos/main'), $filename);
+            $data['image'] = '/product-photos/main/' . $filename;
         }
 
         $product->update($data);
@@ -127,11 +128,12 @@ class AdminProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // Delete image file if exists
-        if ($product->image && str_starts_with($product->image, '/assets/product photo/')) {
+        // Move image file to trash if exists
+        if ($product->image && str_starts_with($product->image, '/product-photos/main/')) {
             $filePath = public_path(substr($product->image, 1));
             if (file_exists($filePath)) {
-                @unlink($filePath);
+                $trashFilename = 'trashed_' . time() . '_' . basename($filePath);
+                @rename($filePath, public_path('product-photos/trash/' . $trashFilename));
             }
         }
 

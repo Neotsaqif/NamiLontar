@@ -19,6 +19,9 @@
         <a href="{{ route('admin.discounts.index') }}" class="{{ Request::is('admin/discounts*') ? 'active' : '' }}">
             <i class="fa-solid fa-tag"></i> Discounts
         </a>
+        <a href="{{ route('admin.databaseSync') }}" class="{{ Request::is('admin/database-sync') ? 'active' : '' }}">
+            <i class="fa-solid fa-sync"></i> Database Sync
+        </a>
         <a href="{{ url('/admin/settings') }}" class="{{ Request::is('admin/settings') ? 'active' : '' }}">
             <i class="fa-solid fa-gear"></i> Settings
         </a>

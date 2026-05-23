@@ -105,6 +105,29 @@ class AdminController extends Controller
         return view('admin.settings');
     }
 
+    public function databaseSync(\App\Services\DatabaseSyncService $syncService)
+    {
+        $syncService->ensureSchema();
+        $report = $syncService->getIntegrityReport();
+        return view('admin.db_sync', compact('report'));
+    }
+
+    public function processSync(Request $request, \App\Services\DatabaseSyncService $syncService)
+    {
+        $validated = $request->validate([
+            'source' => 'required|string|in:mysql,sqlite',
+            'target' => 'required|string|in:mysql,sqlite',
+        ]);
+
+        if ($validated['source'] === $validated['target']) {
+            return redirect()->back()->with('error', 'Source and target must be different.');
+        }
+
+        $syncService->sync($validated['source'], $validated['target']);
+
+        return redirect()->back()->with('success', "Database synchronized successfully! ({$validated['source']} -> {$validated['target']})");
+    }
+
     public static function formatPrice($amount)
     {
         return 'Rp' . number_format($amount, 0, ',', '.');

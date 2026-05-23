@@ -54,6 +54,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/customers/{id}', [AdminController::class, 'customerShow'])->name('admin.customers.show');
     Route::post('/customers/{id}/role', [AdminController::class, 'updateUserRole'])->name('admin.customers.updateRole');
     Route::get('/settings', [AdminController::class, 'settings']);
+    Route::get('/database-sync', [AdminController::class, 'databaseSync'])->name('admin.databaseSync');
+    Route::post('/database-sync/process', [AdminController::class, 'processSync'])->name('admin.databaseSync.process');
 
     // Product CRUD
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');

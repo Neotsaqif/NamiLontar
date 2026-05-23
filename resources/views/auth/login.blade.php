@@ -20,7 +20,7 @@
         <div class="login-card">
             <div class="login-header">
                 <div class="center">
-                    <img src="{{ asset('assets/product photo/logo.png') }}" alt="Logo" height="200" width="200">
+                    <img src="{{ asset('assets/Logo.png') }}" alt="Logo" height="200" width="200">
                 </div>
                 <h2>Welcome Back</h2>
                 <p>Please enter your details to access your account.</p>

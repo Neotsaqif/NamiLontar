@@ -1,7 +1,7 @@
 <header>
     <nav class="container">
         <div class="logo-container">
-            <img src="{{ asset('assets/product photo/logo.png') }}" alt="Logo" height="70"
+            <img src="{{ asset('assets/Logo.png') }}" alt="Logo" height="70"
                 width="70">
             <div class="logo">Nami Lontar</div>
         </div>

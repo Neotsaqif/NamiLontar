@@ -20,16 +20,12 @@
                 </div>
             </div>
             
-            <!-- Order Summary moved to bottom left based on mockup -->
+            <!-- Order Summary -->
             <div class="tracking-card summary-card mt-4">
                 <h3 class="card-heading">Order Summary</h3>
-                @php
-                    $subtotal = 0;
-                @endphp
+                @php $subtotal = 0; @endphp
                 @foreach($order->items as $item)
-                @php
-                    $subtotal += $item->price * $item->quantity;
-                @endphp
+                @php $subtotal += $item->price * $item->quantity; @endphp
                 <div class="summary-item">
                     <div class="item-img-placeholder" style="background-image: url('{{ asset($item->product ? $item->product->image : 'assets/product photo/lontar.jpeg') }}')"></div>
                     <div class="item-details">
@@ -41,16 +37,8 @@
                 @endforeach
                 
                 <div class="summary-divider"></div>
-                
-                @php
-                    $shipping = $subtotal > 500000 ? 0 : 50000;
-                @endphp
-                <div class="summary-row">
-                    <span>Delivery Fee</span>
-                    <span>{{ $shipping === 0 ? 'FREE' : 'Rp ' . number_format($shipping, 0, ',', '.') }}</span>
-                </div>
                 <div class="summary-row total-row">
-                    <span>Total</span>
+                    <span>Total Amount</span>
                     <span>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                 </div>
             </div>
@@ -59,13 +47,26 @@
         <!-- Right Column: Status & Details -->
         <div class="tracking-right">
             
-            <!-- Estimated Arrival Card -->
+            @if(session('success'))
+                <div class="alert alert-success" style="margin-bottom: 1rem; padding: 1rem; background: #e6f7e6; color: #2e7d32; border-radius: 8px;">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Arrival & Action Card -->
             <div class="tracking-card arrival-card">
                 <p class="arrival-label">Estimated Arrival</p>
-                <h2 class="arrival-time">12:45 PM</h2>
+                <h2 class="arrival-time">{{ $order->estimated_arrival ? $order->estimated_arrival->format('h:i A') : 'TBD' }}</h2>
                 <div class="arrival-status">
-                    <span class="status-dot"></span> Out for Delivery
+                    <span class="status-dot {{ $order->status }}"></span> {{ strtoupper($order->status) }}
                 </div>
+                
+                @if($order->status === 'delivery')
+                    <form action="{{ route('orders.complete', $order->id) }}" method="POST" style="margin-top: 1.5rem;">
+                        @csrf
+                        <button type="submit" class="btn-full-dark" style="background: var(--accent-color); font-weight: 700; color: green;">COMPLETE DELIVERY</button>
+                    </form>
+                @endif
             </div>
 
             <!-- Driver Info Card -->
@@ -73,46 +74,48 @@
                 <div class="driver-info">
                     <img src="{{ asset('assets/chef1.png') }}" alt="Driver" class="driver-photo">
                     <div class="driver-details">
-                        <h4>Budi Santoso</h4>
-                        <p><i class="fa-solid fa-star"></i> 4.9 (120+ Deliveries)</p>
+                        <h4>{{ $order->driver ?? 'Assigning Driver...' }}</h4>
+                        <p><i class=""></i>"We're on the way!"</p>
                     </div>
                 </div>
+                <!-- @if($order->driver)
                 <div class="driver-actions">
                     <button class="btn-action"><i class="fa-regular fa-message"></i> MESSAGE</button>
                     <button class="btn-action"><i class="fa-solid fa-phone"></i> CALL</button>
                 </div>
+                @endif -->
             </div>
 
             <!-- Delivery Progress Timeline -->
             <div class="tracking-card progress-card">
                 <h3 class="card-heading-small">DELIVERY PROGRESS</h3>
                 <div class="timeline">
-                    <div class="timeline-item completed">
+                    <div class="timeline-item {{ in_array($order->status, ['pending', 'accepted', 'processing', 'delivery', 'completed']) ? 'completed' : '' }}">
                         <div class="timeline-icon"><i class="fa-solid fa-check"></i></div>
                         <div class="timeline-content">
                             <h4>Order Received</h4>
-                            <p>11:30 AM</p>
+                            <p>{{ $order->created_at->format('h:i A') }}</p>
                         </div>
                     </div>
-                    <div class="timeline-item completed">
-                        <div class="timeline-icon"><i class="fa-solid fa-check"></i></div>
+                    <div class="timeline-item {{ in_array($order->status, ['delivery', 'completed']) ? 'completed' : (in_array($order->status, ['accepted', 'processing']) ? 'active' : 'pending') }}">
+                        <div class="timeline-icon"><i class="fa-solid fa-utensils"></i></div>
                         <div class="timeline-content">
-                            <h4>Preparing your order</h4>
-                            <p>11:45 AM</p>
+                            <h4>Preparing Order</h4>
+                            <p>{{ $order->status == 'processing' ? 'Your order is being prepared' : ($order->status == 'delivery' || $order->status == 'completed' ? 'Order has been packed' : '') }}</p>
                         </div>
                     </div>
-                    <div class="timeline-item active">
+                    <div class="timeline-item {{ $order->status == 'completed' ? 'completed' : ($order->status == 'delivery' ? 'active' : 'pending') }}">
                         <div class="timeline-icon"><i class="fa-solid fa-motorcycle"></i></div>
                         <div class="timeline-content">
                             <h4>Out for Delivery</h4>
-                            <p>In Progress</p>
+                            <p>{{ $order->status == 'delivery' ? 'Your driver is on the way!' : ($order->status == 'completed' ? 'Successfully Delivered' : '') }}</p>
                         </div>
                     </div>
-                    <div class="timeline-item pending">
-                        <div class="timeline-icon"></div>
+                    <div class="timeline-item {{ $order->status == 'completed' ? 'completed' : 'pending' }}">
+                        <div class="timeline-icon"><i class="fa-solid fa-house-chimney"></i></div>
                         <div class="timeline-content">
                             <h4>Delivered</h4>
-                            <p>Estimated 12:45 PM</p>
+                            <p>{{ $order->status == 'completed' ? 'Your order is completed at ' : 'Estimated ' }}{{ $order->estimated_arrival ? $order->estimated_arrival->format('h:i A') : 'TBD' }}</p>
                         </div>
                     </div>
                 </div>
@@ -124,16 +127,13 @@
                 <div class="address-info">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
-                        <p>Mutiara Heights Residency</p>
-                        <p>Tower A, Unit 12-04</p>
-                        <p>Jakarta Selatan, 12780</p>
+                        <p style="font-weight: 700; color: var(--text-primary);">{{ $order->address }}</p>
+                        <p>{{ $order->city }}, {{ $order->postal_code }}</p>
                     </div>
                 </div>
                 
                 <h3 class="card-heading-small mt-4">ORDER NUMBER</h3>
                 <p class="order-number-text">#ORD-{{ strtoupper(substr($order->id, 0, 8)) }}</p>
-                
-                <button class="btn-full-dark mt-4">VIEW RECEIPT</button>
             </div>
 
         </div>

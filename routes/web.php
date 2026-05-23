@@ -35,8 +35,10 @@ Route::middleware('auth')->group(function () {
     
     // Profile & Orders
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+    Route::post('/profile', [PageController::class, 'updateProfile'])->name('profile.update');
     Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
     Route::get('/orders', [PageController::class, 'orders'])->name('orders');
+    Route::post('/orders/{id}/complete', [PageController::class, 'completeOrder'])->name('orders.complete');
     Route::get('/orders/{id}/tracking', [PageController::class, 'tracking'])->name('tracking');
     
     // Checkout Route

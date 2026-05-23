@@ -54,9 +54,33 @@ class PageController extends Controller
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:100',
             'postal_code' => 'nullable|string|max:10',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'delete_photo' => 'nullable|boolean',
         ]);
 
-        $user->update($validated);
+        if ($request->has('delete_photo') && $request->delete_photo) {
+            if ($user->profile_photo) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->profile_photo);
+                $user->profile_photo = null;
+            }
+        }
+
+        if ($request->hasFile('profile_photo')) {
+            // Delete old photo if exists
+            if ($user->profile_photo) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->profile_photo);
+            }
+            
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $user->profile_photo = $path;
+        }
+
+        $user->name = $validated['name'];
+        $user->phone = $validated['phone'];
+        $user->address = $validated['address'];
+        $user->city = $validated['city'];
+        $user->postal_code = $validated['postal_code'];
+        $user->save();
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }

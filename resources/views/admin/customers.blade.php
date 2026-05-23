@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Photo</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
@@ -31,6 +32,9 @@
             @foreach($users as $user)
             <tr>
                 <td>{{ $user->id }}</td>
+                <td>
+                    <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td><span class="badge {{ $user->role }}">{{ strtoupper($user->role) }}</span></td>

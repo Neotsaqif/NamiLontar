@@ -109,7 +109,37 @@ class AdminController extends Controller
     {
         $syncService->ensureSchema();
         $report = $syncService->getIntegrityReport();
-        return view('admin.db_sync', compact('report'));
+        
+        $settings = \App\Models\SystemSetting::pluck('value', 'key')->toArray();
+        $autoSync = $settings['auto_sync_enabled'] ?? '0';
+        $primary = $settings['primary_database'] ?? 'mysql';
+
+        // Auto-sync logic: if drift detected and auto-sync is ON
+        $hasDrift = collect($report)->contains('status', 'Mismatch');
+        if ($autoSync === '1' && $hasDrift) {
+            $source = $primary;
+            $target = $primary === 'mysql' ? 'sqlite' : 'mysql';
+            $syncService->sync($source, $target);
+            // Refresh report after sync
+            $report = $syncService->getIntegrityReport();
+            session()->flash('success', "Auto-sync performed successfully ({$source} → {$target})");
+        }
+
+        return view('admin.db_sync', compact('report', 'autoSync', 'primary'));
+    }
+
+    public function updateSystemSettings(Request $request)
+    {
+        foreach ($request->except('_token') as $key => $value) {
+            \App\Models\SystemSetting::updateOrCreate(['key' => $key], ['value' => $value]);
+            
+            // Special handling for primary_database: update in both DBs to prevent getting stuck
+            if ($key === 'primary_database') {
+                \Illuminate\Support\Facades\DB::connection('mysql')->table('system_settings')->updateOrInsert(['key' => $key], ['value' => $value]);
+                \Illuminate\Support\Facades\DB::connection('sqlite')->table('system_settings')->updateOrInsert(['key' => $key], ['value' => $value]);
+            }
+        }
+        return redirect()->back()->with('success', 'System settings updated.');
     }
 
     public function processSync(Request $request, \App\Services\DatabaseSyncService $syncService)

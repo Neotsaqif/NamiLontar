@@ -56,6 +56,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/settings', [AdminController::class, 'settings']);
     Route::get('/database-sync', [AdminController::class, 'databaseSync'])->name('admin.databaseSync');
     Route::post('/database-sync/process', [AdminController::class, 'processSync'])->name('admin.databaseSync.process');
+    Route::post('/system-settings', [AdminController::class, 'updateSystemSettings'])->name('admin.systemSettings.update');
 
     // Product CRUD
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');

@@ -12,13 +12,13 @@
     <div class="tracking-grid">
         <!-- Left Column: Map -->
         <div class="tracking-left">
-            <div class="map-container">
+            <!-- <div class="map-container">
                 <img src="{{ asset('assets/delivery_map_ui.png') }}" alt="Live Delivery Map" class="map-image">
                 <div class="map-overlay-text">
                     <h2>LIVE</h2>
                     <h3>MAP TRACKING</h3>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Order Summary -->
             <div class="tracking-card summary-card mt-4">

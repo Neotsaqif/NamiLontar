@@ -53,9 +53,12 @@
                 </form>
                 
                 <div style="text-align: center; margin-top: 1.5rem;">
-                    <img src="https://img.icons8.com/color/48/000000/visa.png" width="30">
-                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" width="30">
-                    <img src="https://img.icons8.com/color/48/000000/bank-card-front-side.png" width="30">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 0.5rem;">
+                        <img src="{{ asset('assets/gopay.svg') }}" alt="GoPay" style="height: 20px; width: auto;">
+                        <img src="{{ asset('assets/ovo.svg') }}" alt="OVO" style="height: 20px; width: auto;">
+                        <img src="{{ asset('assets/dana.svg') }}" alt="DANA" style="height: 20px; width: auto;">
+                        <img src="{{ asset('assets/qris.svg') }}" alt="QRIS" style="height: 22px; width: auto;">
+                    </div>
                     <p style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">SECURE CHECKOUT BY MIDTRANS</p>
                 </div>
 

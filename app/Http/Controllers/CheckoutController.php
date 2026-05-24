@@ -88,7 +88,11 @@ class CheckoutController extends Controller
                         'country_code' => 'IDN'
                     ]
                 ],
+                'callbacks' => [
+                    'finish' => route('cart.index') . '?payment=success',
+                ],
             ];
+
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
             $order->snap_token = $snapToken;

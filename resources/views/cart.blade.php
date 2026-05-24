@@ -73,6 +73,32 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Handle payment redirect status FIRST (before renderCart)
+        const params = new URLSearchParams(window.location.search);
+        const paymentStatus = params.get('payment');
+        if (paymentStatus) {
+            const messages = {
+                success: { text: '✅ Payment successful! Your order is confirmed.', color: '#2e7d32' },
+                pending: { text: '⏳ Payment pending. We\'ll notify you once confirmed.', color: '#e65100' },
+                failed:  { text: '❌ Payment failed. Please try again.', color: '#c62828' },
+            };
+            const msg = messages[paymentStatus];
+            // Clear cart for success/pending outcomes
+            if (paymentStatus === 'success' || paymentStatus === 'pending') {
+                cartManager.clearCart();
+            }
+            if (msg) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `position:fixed;top:1.5rem;right:1.5rem;background:${msg.color};color:#fff;padding:1rem 1.5rem;border-radius:12px;font-weight:600;z-index:9999;box-shadow:0 8px 20px rgba(0,0,0,0.2);opacity:1;transition:opacity .4s`;
+                toast.textContent = msg.text;
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 4000);
+            }
+            // Clean URL
+            window.history.replaceState({}, '', '{{ route('cart.index') }}');
+        }
+
+        // Render AFTER clearing so cart shows empty
         renderCart();
 
         // Handle checkout form submission
@@ -91,7 +117,6 @@
             });
         }
     });
-
     function renderCart() {
         const items = cartManager.getCart();
         const list = document.getElementById('basket-items-list');

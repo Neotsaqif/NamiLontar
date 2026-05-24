@@ -38,30 +38,21 @@
     payButton.onclick = function () {
         window.snap.pay('{{ $snapToken }}', {
             onSuccess: function (result) {
-                /* You may add your own implementation here */
-                alert("payment success!"); 
-                console.log(result);
-                // Clear cart
                 cartManager.clearCart();
-                window.location.href = "{{ route('orders') }}";
+                window.location.href = "{{ route('cart.index') }}?payment=success";
             },
             onPending: function (result) {
-                /* You may add your own implementation here */
-                alert("wating your payment!"); 
-                console.log(result);
                 cartManager.clearCart();
-                window.location.href = "{{ route('orders') }}";
+                window.location.href = "{{ route('cart.index') }}?payment=pending";
             },
             onError: function (result) {
-                /* You may add your own implementation here */
-                alert("payment failed!"); 
-                console.log(result);
+                window.location.href = "{{ route('cart.index') }}?payment=failed";
             },
             onClose: function () {
-                /* You may add your own implementation here */
-                alert('you closed the popup without finishing the payment');
+                // user closed without finishing — stay on payment page
             }
         });
     };
+
 </script>
 @endpush

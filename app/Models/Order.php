@@ -18,7 +18,9 @@ class Order extends Model
         'postal_code',
         'driver',
         'estimated_arrival',
+        'snap_token',
     ];
+
 
     protected $casts = [
         'estimated_arrival' => 'datetime',

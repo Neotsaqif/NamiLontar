@@ -55,9 +55,10 @@
                 <div style="text-align: center; margin-top: 1.5rem;">
                     <img src="https://img.icons8.com/color/48/000000/visa.png" width="30">
                     <img src="https://img.icons8.com/color/48/000000/mastercard.png" width="30">
-                    <img src="https://img.icons8.com/color/48/000000/paypal.png" width="30">
-                    <p style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">SECURE CHECKOUT BY ARTISANPAY</p>
+                    <img src="https://img.icons8.com/color/48/000000/bank-card-front-side.png" width="30">
+                    <p style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">SECURE CHECKOUT BY MIDTRANS</p>
                 </div>
+
             </div>
             
             <div style="text-align: center; margin-top: 2rem;">

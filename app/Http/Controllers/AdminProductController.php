@@ -92,7 +92,7 @@ class AdminProductController extends Controller
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'ingredients' => 'nullable|string',
             'storage' => 'nullable|string',
             'artisan_note' => 'nullable|string',

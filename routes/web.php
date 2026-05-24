@@ -28,6 +28,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
+
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::middleware('auth')->group(function () {
@@ -45,7 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/orders', [AdminController::class, 'orders']);
     Route::get('/orders/{id}', [AdminController::class, 'orderShow'])->name('admin.orders.show');

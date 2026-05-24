@@ -1,8 +1,8 @@
 <footer class="new-footer">
     <div class="container footer-content">
         <div class="footer-brand">
-            <h2 class="footer-logo">MBUH BAKERY</h2>
-            <p>&copy; 2024 MBUH BAKERY. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
+            <h2 class="footer-logo">NAMI LONTAR</h2>
+            <p>&copy; 2024 NAMI LONTAR. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
                 story.</p>
         </div>
 

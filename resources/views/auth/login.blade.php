@@ -19,16 +19,24 @@
     <main class="login-page">
         <div class="login-card">
             <div class="login-header">
-                <a href="{{ url('/') }}" class="logo-container center">
-                    <img src="{{ asset('assets/product photo/ChatGPT Image May 6, 2026, 08_09_35 AM.png') }}" alt="Logo" height="50"
-                        width="50">
-                    <div class="logo">Nami Lontar</div>
-                </a>
+                <div class="center">
+                    <img src="{{ asset('assets/Logo.png') }}" alt="Logo" height="200" width="200">
+                </div>
                 <h2>Welcome Back</h2>
                 <p>Please enter your details to access your account.</p>
             </div>
 
-            <form class="login-form" action="#" method="POST">
+            @if($errors->any())
+                <div class="alert alert-danger" style="color: red; margin-bottom: 1rem; font-size: 0.9rem;">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form class="login-form" action="{{ url('/login') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -68,7 +76,7 @@
             </form>
 
             <p class="create-account">
-                Don't have an account? <a href="#">Create an account</a>
+                Don't have an account? <a href="{{ url('/register') }}">Create an account</a>
             </p>
         </div>
 

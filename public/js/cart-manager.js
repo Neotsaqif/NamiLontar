@@ -1,60 +1,152 @@
-const PRODUCTS = {
-    'lontar': { name: 'Nami Lontar Original', price: 15.50, image: '/assets/product photo/lontar.jpeg' },
-    'pastel': { name: 'Pastel Renyah', price: 8.25, image: '/assets/product photo/pastel.jpeg' },
-    'kripik': { name: 'Kripik Gurih', price: 4.50, image: '/assets/product photo/kripik.jpeg' },
-    'lumpia': { name: 'Lumpia Frozen', price: 12.00, image: '/assets/product photo/Lumpia Frozen.png' },
-    'paket-lengkap': { name: 'Paket Lengkap', price: 45.00, image: '/assets/product photo/full produk.jpeg' }
-};
 
 class CartManager {
     constructor() {
-        this.cart = JSON.parse(localStorage.getItem('nami_cart')) || [];
-        this.updateBadge();
+        this.cart = [];
+        this.storageKey = 'nami_lontar_cart';
+        this.init();
     }
 
-    addItem(productId, quantity = 1) {
-        const product = PRODUCTS[productId];
-        if (!product) return;
+    init() {
+        // Load initial cart state from localStorage
+        try {
+            const savedCart = localStorage.getItem(this.storageKey);
+            if (savedCart) {
+                this.cart = JSON.parse(savedCart);
+            } else {
+                this.cart = [];
+            }
+            this.updateBadge();
+            if (typeof renderCart === 'function') {
+                renderCart();
+            }
+        } catch (e) {
+            console.error('Error loading cart from localStorage', e);
+            this.cart = [];
+        }
+    }
+
+    save() {
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.cart));
+            this.updateBadge();
+            if (typeof renderCart === 'function') {
+                renderCart();
+            }
+        } catch (e) {
+            console.error('Error saving cart to localStorage', e);
+        }
+    }
+
+    addItem(productId, quantity = 1, event = null) {
+        // Get product details from window.NAMI_PRODUCTS
+        const productInfo = window.NAMI_PRODUCTS ? window.NAMI_PRODUCTS[productId] : null;
+        
+        if (!productInfo && !productId) {
+            console.error('Product not found in system');
+            return;
+        }
 
         const existingItem = this.cart.find(item => item.id === productId);
+
         if (existingItem) {
             existingItem.quantity += quantity;
         } else {
             this.cart.push({
                 id: productId,
-                name: product.name,
-                price: product.price,
-                image: product.image,
+                name: productInfo ? productInfo.name : productId,
+                price: productInfo ? productInfo.price : 0,
+                image: productInfo ? productInfo.image : '',
                 quantity: quantity
             });
         }
+
         this.save();
-        this.updateBadge();
-        this.showNotification(`${product.name} added to cart!`);
+
+        // Animation logic
+        let imgToAnimate = null;
+        if (event) {
+            const target = event.currentTarget || event.target;
+            if (target) {
+                const card = target.closest('.product-card') || target.closest('.feature-grid') || target.closest('.product-hero-grid') || target.closest('.pairing-card');
+                if (card) {
+                    imgToAnimate = card.querySelector('img');
+                }
+            }
+        }
+        if (!imgToAnimate) {
+            imgToAnimate = document.querySelector(`img[src*="${productId}"], img[alt*="${productId}"]`);
+        }
+
+        if (imgToAnimate) {
+            this.animateFly(imgToAnimate);
+        } else {
+            this.showNotification('Product added to cart!');
+        }
+    }
+
+    animateFly(imgElement) {
+        const cartBtn = document.getElementById('cart-btn');
+        if (!cartBtn) {
+            this.showNotification('Product added to cart!');
+            return;
+        }
+
+        const imgRect = imgElement.getBoundingClientRect();
+        const cartRect = cartBtn.getBoundingClientRect();
+
+        const clone = imgElement.cloneNode();
+        clone.classList.add('cart-fly-item');
+        clone.style.left = `${imgRect.left}px`;
+        clone.style.top = `${imgRect.top}px`;
+        clone.style.width = `${imgRect.width}px`;
+        clone.style.height = `${imgRect.height}px`;
+        clone.style.transform = 'scale(1)';
+
+        document.body.appendChild(clone);
+
+        // Force reflow
+        clone.offsetWidth;
+
+        // Step 1: Cute initial pop
+        clone.style.transform = 'scale(1.15)';
+
+        // Step 2: Arched flight to cart
+        setTimeout(() => {
+            clone.style.left = `${cartRect.left + cartRect.width / 2 - 20}px`;
+            clone.style.top = `${cartRect.top + cartRect.height / 2 - 20}px`;
+            clone.style.width = '40px';
+            clone.style.height = '40px';
+            clone.style.opacity = '0.2';
+            clone.style.transform = 'scale(0.15) rotate(540deg)';
+        }, 120);
+
+        clone.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'left') {
+                clone.remove();
+                cartBtn.classList.add('jelly');
+                setTimeout(() => cartBtn.classList.remove('jelly'), 700);
+                this.showNotification('Product added to cart!');
+            }
+        });
     }
 
     removeItem(productId) {
         this.cart = this.cart.filter(item => item.id !== productId);
         this.save();
-        this.updateBadge();
-        // If we are on the cart page, reload the UI
-<<<<<<< HEAD:public/js/cart-manager.js
-        if (window.location.pathname.includes('/cart')) {
-=======
-        if (window.location.pathname.includes('cart.php')) {
->>>>>>> 877881dcf3225cdf7867a96537686e7846cfa144:main_panel/cart-manager.js
-            window.location.reload();
+    }
+
+    updateQuantity(productId, quantity) {
+        if (quantity < 1) return;
+        const item = this.cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = quantity;
+            this.save();
         }
     }
 
-
-    updateQuantity(productId, quantity) {
-        const item = this.cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity = Math.max(1, quantity);
-            this.save();
-            this.updateBadge();
-        }
+    clearCart() {
+        this.cart = [];
+        this.save();
     }
 
     getCart() {
@@ -63,14 +155,10 @@ class CartManager {
 
     getTotals() {
         const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const shipping = subtotal > 50 ? 0 : 5.00;
+        const shipping = subtotal > 500000 || subtotal === 0 ? 0 : 50000;
         const tax = subtotal * 0.1; // 10% tax
         const total = subtotal + shipping + tax;
         return { subtotal, shipping, tax, total };
-    }
-
-    save() {
-        localStorage.setItem('nami_cart', JSON.stringify(this.cart));
     }
 
     updateBadge() {
@@ -93,17 +181,13 @@ class CartManager {
             setTimeout(() => notification.remove(), 500);
         }, 3000);
     }
-
-    clear() {
-        this.cart = [];
-        this.save();
-        this.updateBadge();
-    }
 }
 
 const cartManager = new CartManager();
 
-// Global add to cart function for simple access
-function addToCart(id) {
-    cartManager.addItem(id, 1);
+function addToCart(id, event = null) {
+    if (!event && typeof window.event !== 'undefined') {
+        event = window.event;
+    }
+    cartManager.addItem(id, 1, event);
 }

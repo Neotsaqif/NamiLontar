@@ -6,11 +6,11 @@ const productData = {
         rating: 5,
         reviews: 124,
         description: 'Our signature Nami Lontar (Papuan Milk Pie) is a delicate balance of creamy, rich egg custard and a buttery, flaky crust. Each tart is hand-crafted using a traditional recipe passed down through generations, ensuring an authentic taste of artisanal excellence.',
-        image: '/assets/product photo/lontar.jpeg',
+        image: '/product-photos/main/lontar.jpeg',
         thumbnails: [
-            '/assets/product photo/lontar.jpeg',
+            '/product-photos/main/lontar.jpeg',
             '/assets/product photo/full produk.jpeg',
-            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/full product header.png'
         ],
         ingredients: 'Organic Stone-Ground Flour, Premium Grass-Fed Butter, Organic Free-Range Eggs, Condensed Milk, Sea Salt, Vanilla Bean.',
         storage: 'Store in a cool, dry place. For best taste, consume within 3 days. Can be refrigerated for up to 7 days.',
@@ -31,13 +31,13 @@ const productData = {
         thumbnails: [
             '/assets/product photo/pastel.jpeg',
             '/assets/product photo/full produk.jpeg',
-            '/assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png'
+            '/assets/full product header.png'
         ],
         ingredients: 'Braided Flour Crust, Seasoned Minced Chicken/Beef, Carrots, Rice Vermicelli, Hard-boiled Eggs, Traditional Spices.',
         storage: 'Best consumed fresh. Can be reheated in an air fryer or oven at 180°C for 5 minutes to restore crispiness.',
         artisanNote: 'Each braid is hand-folded by our pastry chefs to ensure the filling is perfectly sealed and the texture is consistent.',
         pairings: [
-            { name: 'Nami Lontar', price: '$15.50', image: '/assets/product photo/lontar.jpeg', id: 'lontar' },
+            { name: 'Nami Lontar', price: '$15.50', image: '/product-photos/main/lontar.jpeg', id: 'lontar' },
             { name: 'Lumpia Frozen', price: '$12.00', image: '/assets/product photo/Lumpia Frozen.png', id: 'lumpia' }
         ]
     },
@@ -57,7 +57,7 @@ const productData = {
         storage: 'Store in an airtight container at room temperature. Keep away from direct sunlight.',
         artisanNote: 'We slice our vegetables extra thin to achieve that perfect snap without any artificial hardening agents.',
         pairings: [
-            { name: 'Nami Lontar', price: '$15.50', image: '/assets/product photo/lontar.jpeg', id: 'lontar' },
+            { name: 'Nami Lontar', price: '$15.50', image: '/product-photos/main/lontar.jpeg', id: 'lontar' },
             { name: 'Pastel Renyah', price: '$8.25', image: '/assets/product photo/pastel.jpeg', id: 'pastel' }
         ]
     },
@@ -91,7 +91,7 @@ const productData = {
         image: '/assets/product photo/full produk.jpeg',
         thumbnails: [
             '/assets/product photo/full produk.jpeg',
-            '/assets/product photo/lontar.jpeg',
+            '/product-photos/main/lontar.jpeg',
             '/assets/product photo/pastel.jpeg',
             '/assets/product photo/kripik.jpeg'
         ],

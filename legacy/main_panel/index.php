@@ -44,7 +44,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-bg">
-                <img src="../assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png" alt="Delicious Nami Lontar Spread">
+                <img src="../assets/full product header.png" alt="Delicious Nami Lontar Spread">
             </div>
             <div class="hero-content container">
                 <div class="hero-text-box">
@@ -70,7 +70,7 @@
                 <div class="product-card">
                     <a href="product.php?id=lontar">
                         <div class="product-img">
-                            <img src="../assets/product photo/lontar.jpeg" alt="Nami Lontar Original">
+                            <img src="../product-photos/main/lontar.jpeg" alt="Nami Lontar Original">
                         </div>
                     </a>
                     <div class="product-info">

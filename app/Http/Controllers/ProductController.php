@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function show($id = null)
+    public function show(\Illuminate\Http\Request $request, $slug = null)
     {
-        return view('product.show', compact('id'));
+        if (empty($slug)) {
+            $slug = $request->query('id');
+        }
+
+        if (empty($slug)) {
+            $slug = 'lontar';
+        }
+
+        $product = Product::where('slug', $slug)->firstOrFail();
+        $pairings = Product::where('id', '!=', $product->id)->take(2)->get();
+
+        return view('product.show', compact('product', 'pairings'));
     }
 }

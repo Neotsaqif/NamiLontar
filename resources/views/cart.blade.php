@@ -17,7 +17,7 @@
 
             <div class="shipping-promo" id="shipping-promo">
                 <i class="fa-solid fa-truck"></i>
-                <span id="shipping-promo-text">You're $0.00 away from free shipping.</span>
+                <span id="shipping-promo-text">You're Rp0 away from free shipping.</span>
             </div>
         </div>
 
@@ -26,19 +26,19 @@
                 <h2>Order Summary</h2>
                 <div class="summary-row">
                     <span>Subtotal</span>
-                    <span id="summary-subtotal">$0.00</span>
+                    <span id="summary-subtotal">Rp0</span>
                 </div>
                 <div class="summary-row">
                     <span>Estimated Shipping</span>
-                    <span id="summary-shipping">$0.00</span>
+                    <span id="summary-shipping">Rp0</span>
                 </div>
                 <div class="summary-row">
                     <span>Estimated Tax</span>
-                    <span id="summary-tax">$0.00</span>
+                    <span id="summary-tax">Rp0</span>
                 </div>
                 <div class="summary-row total">
                     <span>Total</span>
-                    <span id="summary-total">$0.00</span>
+                    <span id="summary-total">Rp0</span>
                 </div>
 
                 <div class="promo-code">
@@ -46,14 +46,19 @@
                     <button class="btn-apply">APPLY</button>
                 </div>
 
-                <a href="{{ url('/checkout') }}" class="btn-checkout">Proceed to Checkout</a>
+                <form id="checkout-form" action="{{ route('checkout.process') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="cart_data" id="cart-data-input">
+                    <button type="submit" class="btn-checkout" style="width: 100%; border: none; cursor: pointer;">Proceed to Checkout</button>
+                </form>
                 
                 <div style="text-align: center; margin-top: 1.5rem;">
                     <img src="https://img.icons8.com/color/48/000000/visa.png" width="30">
                     <img src="https://img.icons8.com/color/48/000000/mastercard.png" width="30">
-                    <img src="https://img.icons8.com/color/48/000000/paypal.png" width="30">
-                    <p style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">SECURE CHECKOUT BY ARTISANPAY</p>
+                    <img src="https://img.icons8.com/color/48/000000/bank-card-front-side.png" width="30">
+                    <p style="font-size: 0.7rem; color: #aaa; margin-top: 0.5rem;">SECURE CHECKOUT BY MIDTRANS</p>
                 </div>
+
             </div>
             
             <div style="text-align: center; margin-top: 2rem;">
@@ -68,9 +73,50 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        renderCart();
-    });
+        // Handle payment redirect status FIRST (before renderCart)
+        const params = new URLSearchParams(window.location.search);
+        const paymentStatus = params.get('payment');
+        if (paymentStatus) {
+            const messages = {
+                success: { text: '✅ Payment successful! Your order is confirmed.', color: '#2e7d32' },
+                pending: { text: '⏳ Payment pending. We\'ll notify you once confirmed.', color: '#e65100' },
+                failed:  { text: '❌ Payment failed. Please try again.', color: '#c62828' },
+            };
+            const msg = messages[paymentStatus];
+            // Clear cart for success/pending outcomes
+            if (paymentStatus === 'success' || paymentStatus === 'pending') {
+                cartManager.clearCart();
+            }
+            if (msg) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `position:fixed;top:1.5rem;right:1.5rem;background:${msg.color};color:#fff;padding:1rem 1.5rem;border-radius:12px;font-weight:600;z-index:9999;box-shadow:0 8px 20px rgba(0,0,0,0.2);opacity:1;transition:opacity .4s`;
+                toast.textContent = msg.text;
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 4000);
+            }
+            // Clean URL
+            window.history.replaceState({}, '', '{{ route('cart.index') }}');
+        }
 
+        // Render AFTER clearing so cart shows empty
+        renderCart();
+
+        // Handle checkout form submission
+        const checkoutForm = document.getElementById('checkout-form');
+        const cartDataInput = document.getElementById('cart-data-input');
+
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (e) => {
+                const cartData = cartManager.getCart();
+                if (cartData.length === 0) {
+                    e.preventDefault();
+                    alert('Your basket is empty!');
+                    return;
+                }
+                cartDataInput.value = JSON.stringify(cartData);
+            });
+        }
+    });
     function renderCart() {
         const items = cartManager.getCart();
         const list = document.getElementById('basket-items-list');
@@ -100,7 +146,7 @@
                         <input type="text" value="${item.quantity}" class="qty-input" readonly>
                         <button class="qty-btn" onclick="updateQty('${item.id}', ${item.quantity + 1})">+</button>
                     </div>
-                    <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div class="item-price">Rp${(item.price * item.quantity).toLocaleString('id-ID')}</div>
                     <button class="remove-btn" onclick="cartManager.removeItem('${item.id}')">REMOVE</button>
                 </div>
             `;
@@ -110,10 +156,10 @@
         const { subtotal, shipping, tax, total } = cartManager.getTotals();
         updateTotals(subtotal, shipping, tax, total);
 
-        if (subtotal >= 50) {
+        if (subtotal >= 500000) {
             promoText.textContent = "You qualify for FREE shipping!";
         } else {
-            promoText.textContent = `You're $${(50 - subtotal).toFixed(2)} away from free shipping.`;
+            promoText.textContent = `You're Rp${(500000 - subtotal).toLocaleString('id-ID')} away from free shipping.`;
         }
     }
 
@@ -122,11 +168,13 @@
         renderCart();
     }
 
+    const formatRp = (num) => 'Rp' + num.toLocaleString('id-ID');
+
     function updateTotals(subtotal, shipping, tax, total) {
-        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-        document.getElementById('summary-shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
-        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
-        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('summary-subtotal').textContent = formatRp(subtotal);
+        document.getElementById('summary-shipping').textContent = shipping === 0 ? 'FREE' : formatRp(shipping);
+        document.getElementById('summary-tax').textContent = formatRp(tax);
+        document.getElementById('summary-total').textContent = formatRp(total);
     }
 </script>
 @endpush

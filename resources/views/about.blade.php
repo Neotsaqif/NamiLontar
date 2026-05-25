@@ -6,7 +6,7 @@
 <!-- About Hero Section -->
 <section class="about-hero">
     <div class="hero-bg">
-        <img src="{{ asset('assets/product photo/ChatGPT Image May 6, 2026, 08_00_11 AM.png') }}" alt="Bakery Background">
+        <img src="{{ asset('assets/full product header.png') }}" alt="Bakery Background">
         <div class="overlay"></div>
     </div>
     <div class="about-hero-content container">
@@ -28,134 +28,114 @@
     <div class="legacy-grid">
         <div class="legacy-text">
             <span class="section-tag">EST. 2024</span>
-            <h2>A Legacy of Perfection</h2>
-            <p>At Nami Lontar, we believe that the best pastries come from a combination of time-honored
-                techniques and the finest ingredients. Every loaf of bread and every delicate pastry is a
-                testament to our dedication to quality.</p>
-            <p>Our journey began with a simple dream: to bring the authentic taste of artisanal baking to your
-                table. Today, we continue that mission with the same passion and attention to detail that
-                defined our very first bake.</p>
+            <h2>Siapa sih itu Nami Lontar?</h2>
+            <p>Kami adalah UMKM kuliner rumahan yang hadir kembali sejak 2024 untuk menyajikan aneka camilan lezat yang bikin nagih! Mulai dari kue tradisional seperti pastel, lontar, dan lumpia, hingga renyahnya keripik singkong balado dan asin, semua dibuat dengan penuh cinta demi memanjakan lidah kamu.</p>
+            <p>Buat acara spesialmu seperti arisan atau kumpul keluarga, kami siap memproduksi 200 hingga 400 pcs camilan segar. Karena sistemnya pre-order demi menjaga kualitas, pastikan kamu memesan minimal H-5 sebelum acara khusus untuk orderan di atas 150 pcs ya. Yuk, bikin acaramu makin ceria bersama kami!</p>
             <div class="signature">
                 <span class="sig-line"></span>
-                <p>Crafted with Passion</p>
+                <p>Dari Rumah, Untuk Hati</p>
             </div>
         </div>
         <div class="legacy-image">
             <div class="image-frame">
-                <img src="{{ asset('assets/about_legacy.png') }}" alt="Artisan Baker">
+                <img src="{{ asset('assets/about us.png') }}" alt="Artisan Baker">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Artisanal Section -->
+<!-- Artisanal Section / Rating Section -->
 <section class="artisanal">
     <div class="container">
         <div class="section-title-centered">
-            <span class="tag">PURELY ARTISANAL</span>
-            <h2>Purely Artisanal</h2>
+            <span class="tag">Nami Lontar</span>
+            <h2>Our best rating</h2>
         </div>
         <div class="artisanal-grid">
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-wheat-awn"></i>
+            <!-- Card 1 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef1.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Budi Santoso</span>
                 </div>
-                <h3>Organic Ingredients</h3>
-                <p>We source only the finest organic flour and local ingredients to ensure the purest taste and
-                    highest nutritional value.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Kue lontar dan pastelnya beneran juara! Kulit pastelnya renyah banget dan isinya padat. Kue lontarnya lembut dan manisnya pas, nggak bikin eneg. Cocok banget buat kumpul keluarga. Pasti bakal repeat order terus!"</p>
+                </div>
             </div>
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-star"></i>
+            <!-- Card 2 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef2.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Siti Rahmawati</span>
                 </div>
-                <h3>Traditional Methods</h3>
-                <p>Our long fermentation process and hand-shaping techniques create textures and flavors that
-                    can't be rushed.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Pesen 200 pcs lumpia sama keripik singkong balado buat acara arisan, semua tamu pada nanyain beli di mana! Keripiknya renyah dan bumbunya nendang banget. Pengirimannya juga tepat waktu. Sukses terus Nami Lontar!"</p>
+                </div>
             </div>
-            <div class="artisanal-card">
-                <div class="icon-box">
-                    <i class="fa-solid fa-bread-slice"></i>
+            <!-- Card 3 -->
+            <div class="artisanal-card review-card">
+                <div class="review-top">
+                    <img src="{{ asset('assets/chef3.png') }}" alt="User Profile" class="review-avatar">
+                    <span class="review-author">Hendra Wijaya</span>
                 </div>
-                <h3>Baked Daily</h3>
-                <p>Every morning, our ovens are fired up to bring you fresh, golden pastries that are ready to
-                    be enjoyed.</p>
+                <div class="review-middle">
+                    <div class="star-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-bottom">
+                    <p>"Baru pertama kali coba kue tradisional dari Nami Lontar dan langsung jatuh cinta. Rasanya bener-bener autentik seperti buatan rumah sendiri yang penuh cinta. Packaging-nya juga rapi dan higienis. Sangat direkomendasikan!"</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Chefs Section -->
-<section class="chefs container">
-    <div class="section-header-about">
-        <div class="header-left">
-            <span class="tag">OUR TEAM</span>
-            <h2>Meet Our Master Chefs</h2>
-        </div>
-        <button class="btn btn-outline">JOIN OUR TEAM</button>
-    </div>
-    <div class="chef-grid">
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef1.png') }}" alt="Chef Marcus">
-            </div>
-            <div class="chef-info">
-                <h3>Marcus Chen</h3>
-                <p>Head Pastry Chef</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef2.png') }}" alt="Chef Sarah">
-            </div>
-            <div class="chef-info">
-                <h3>Sarah Jenkins</h3>
-                <p>Sourdough Specialist</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef3.png') }}" alt="Chef David">
-            </div>
-            <div class="chef-info">
-                <h3>David Miller</h3>
-                <p>Artisan Baker</p>
-            </div>
-        </div>
-        <div class="chef-card">
-            <div class="chef-img">
-                <img src="{{ asset('assets/chef4.png') }}" alt="Chef Elena">
-            </div>
-            <div class="chef-info">
-                <h3>Elena Rossi</h3>
-                <p>Cake Designer</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Flagship Section -->
 <section class="flagship">
     <div class="container flagship-grid">
         <div class="flagship-content">
             <span class="tag">LOCATION</span>
-            <h2>Our Flagship Store</h2>
-            <p>Visit us in the heart of the city, where the aroma of fresh bread fills the air. Our flagship
-                store is designed to be a sanctuary for pastry lovers, offering a cozy atmosphere and our full
-                range of artisanal bakes.</p>
+            <h2>Toko Kami?</h2>
+            <p>Jika teman teman ingin mampir ke toko kami untuk berkonsultasi serta bernegosiasi dengan kami, jangan ragu untuk mampir yaa.</p>
             <div class="location-details">
                 <div class="detail">
                     <i class="fa-solid fa-location-dot"></i>
-                    <p>123 Bakery Lane, Artisan District</p>
+                    <p>Perumahan Alana Crown Blok B18, Teluk, Purwokerto selatan, Banyumas, Jawa tengah</p>
                 </div>
                 <div class="detail">
                     <i class="fa-solid fa-clock"></i>
-                    <p>Mon - Sun: 7:00 AM - 8:00 PM</p>
+                    <p>Senin - Jumat : 09.00 - 17.00 WIB</p>
                 </div>
             </div>
         </div>
         <div class="flagship-visual">
             <div class="store-illustration">
-                <img src="{{ asset('assets/flagship_store.png') }}" alt="Nami Lontar Flagship Store">
+                <img src="{{ asset('assets/about us lokasi.png') }}" alt="Nami Lontar Flagship Store">
             </div>
         </div>
     </div>

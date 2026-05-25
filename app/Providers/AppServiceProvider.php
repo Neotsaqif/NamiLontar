@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,104 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 1. Check for Primary Database Setting to switch connection dynamically
+        try {
+            if (Schema::hasTable('system_settings')) {
+                $primary = DB::table('system_settings')->where('key', 'primary_database')->value('value');
+                if ($primary && in_array($primary, ['mysql', 'sqlite'])) {
+                    config(['database.default' => $primary]);
+                }
+            }
+        } catch (\Exception $e) {
+            // Silently skip if DB/Table not ready yet
+        }
+
+        if (app()->environment('local')) {
+            $this->ensureDatabaseAndTablesExist();
+        }
+    }
+
+    /**
+     * Ensure the database and required tables exist.
+     */
+    protected function ensureDatabaseAndTablesExist(): void
+    {
+        $connection = config('database.default');
+        $config = config("database.connections.{$connection}");
+        
+        if (!$config) {
+            return;
+        }
+
+        // 1. Ensure Database Exists
+        if ($connection === 'sqlite') {
+            $dbPath = $config['database'];
+            if ($dbPath !== ':memory:' && !file_exists($dbPath)) {
+                try {
+                    @mkdir(dirname($dbPath), 0755, true);
+                    @touch($dbPath);
+                } catch (\Exception $e) {
+                    return;
+                }
+            }
+        } else if ($connection === 'mysql') {
+            try {
+                DB::connection()->getPdo();
+            } catch (\Exception $e) {
+                // If MySQL is down, automatically fallback to SQLite
+                if (str_contains($e->getMessage(), 'actively refused it') || str_contains($e->getMessage(), 'Connection refused') || str_contains($e->getMessage(), 'No connection')) {
+                    config(['database.default' => 'sqlite']);
+                    config(['database.connections.sqlite.database' => database_path('database.sqlite')]);
+                    $this->ensureDatabaseAndTablesExist();
+                    return;
+                }
+
+                $database = $config['database'];
+                $config['database'] = null;
+                config(["database.connections.{$connection}_setup" => $config]);
+
+                try {
+                    DB::connection("{$connection}_setup")->statement("CREATE DATABASE IF NOT EXISTS `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                    DB::purge("{$connection}_setup");
+                    DB::purge($connection);
+                } catch (\Exception $e2) {
+                    return;
+                }
+            }
+        }
+
+        // 2. Ensure Migrations and Tables exist
+        try {
+            $requiredTables = [
+                'migrations',
+                'users',
+                'products',
+                'categories',
+                'discounts',
+                'carts',
+                'orders',
+                'order_items',
+                'system_settings',
+            ];
+
+            $missingTable = false;
+            foreach ($requiredTables as $table) {
+                if (!Schema::hasTable($table)) {
+                    $missingTable = true;
+                    break;
+                }
+            }
+
+            if ($missingTable) {
+                Artisan::call('migrate', ['--force' => true]);
+            }
+
+            // 3. Ensure seed data exists (Admin account only, as per previous requirement)
+            if (Schema::hasTable('users') && \App\Models\User::count() === 0) {
+                Artisan::call('db:seed', ['--force' => true]);
+            }
+        } catch (\Exception $e) {
+            // Silently fail to avoid blocking server boot
+        }
     }
 }

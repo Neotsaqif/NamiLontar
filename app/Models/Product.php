@@ -22,12 +22,16 @@ class Product extends Model
         'ingredients',
         'storage',
         'artisan_note',
+        'has_size_options',
+        'size_options',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'rating' => 'decimal:1',
         'reviews' => 'integer',
+        'has_size_options' => 'boolean',
+        'size_options' => 'array',
     ];
 
     /**

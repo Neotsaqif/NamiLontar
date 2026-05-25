@@ -25,14 +25,26 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 3. Database Setup
+### 3. Midtrans Integration Setup
+To use the Midtrans payment gateway, add/configure the following environment variables in your `.env` file:
+```env
+MIDTRANS_SERVER_KEY=your_server_key_here
+MIDTRANS_CLIENT_KEY=your_client_key_here
+MIDTRANS_IS_PRODUCTION=false
+MIDTRANS_IS_SANITIZED=true
+MIDTRANS_IS_3DS=true
+```
+You can get these credentials from the [Midtrans Dashboard](https://dashboard.midtrans.com/) (Sandbox mode for development).
+
+
+### 4. Database Setup
 Ensure you have a MySQL database named `db_namilontar`. Then run:
 ```bash
 # Run database migrations
 php artisan migrate
 ```
 
-### 4. Final Touches
+### 5. Final Touches
 ```bash
 # Create storage symlink
 php artisan storage:link

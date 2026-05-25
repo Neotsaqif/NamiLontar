@@ -56,14 +56,24 @@
                 {{ $product->description }}
             </p>
 
+            @if($product->has_size_options && !empty($product->size_options))
             <div class="selection-group">
                 <span class="selection-label">Select Size</span>
-                <div class="size-options">
-                    <button class="size-btn active">Standard</button>
-                    <button class="size-btn">Large</button>
-                    <button class="size-btn">Gift Box</button>
+                <div class="size-options" id="size-options-container">
+                    @foreach($product->size_options as $index => $size)
+                    <button class="size-btn {{ $index === 0 ? 'active' : '' }}"
+                            data-size="{{ $size['label'] }}"
+                            data-unit="{{ $size['unit'] ?? '' }}">
+                        {{ $size['label'] }}
+                        @if(!empty($size['unit']))
+                            <small style="display: block; font-size: 0.65em; opacity: 0.75; font-weight: 400; margin-top: 1px;">{{ strtoupper($size['unit']) }}</small>
+                        @endif
+                    </button>
+                    @endforeach
                 </div>
+                <input type="hidden" id="selected-size" name="selected_size" value="{{ $product->size_options[0]['label'] ?? '' }}">
             </div>
+            @endif
 
             <div class="action-row">
                 <div class="qty-selector">
@@ -156,12 +166,16 @@
             }
         });
 
-        // Size Selection Logic
+        // Size Selection Logic (dynamic from DB)
         const sizeBtns = document.querySelectorAll('.size-btn');
+        const selectedSizeInput = document.getElementById('selected-size');
         sizeBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 sizeBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                if (selectedSizeInput) {
+                    selectedSizeInput.value = btn.getAttribute('data-size') || btn.textContent.trim();
+                }
             });
         });
     });

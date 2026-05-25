@@ -49,9 +49,30 @@ class AdminProductController extends Controller
             'ingredients' => 'nullable|string',
             'storage' => 'nullable|string',
             'artisan_note' => 'nullable|string',
+            'has_size_options' => 'nullable|boolean',
+            'size_labels' => 'nullable|array',
+            'size_labels.*' => 'nullable|string|max:50',
+            'size_units' => 'nullable|array',
+            'size_units.*' => 'nullable|string|max:20',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->except(['image', 'size_labels', 'size_units']);
+        $data['has_size_options'] = $request->boolean('has_size_options');
+
+        // Build size_options JSON from parallel arrays
+        if ($data['has_size_options'] && $request->filled('size_labels')) {
+            $labels = $request->input('size_labels', []);
+            $units  = $request->input('size_units', []);
+            $sizes  = [];
+            foreach ($labels as $i => $label) {
+                if (!empty(trim($label))) {
+                    $sizes[] = ['label' => trim($label), 'unit' => trim($units[$i] ?? '')];
+                }
+            }
+            $data['size_options'] = count($sizes) ? $sizes : null;
+        } else {
+            $data['size_options'] = null;
+        }
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -96,9 +117,30 @@ class AdminProductController extends Controller
             'ingredients' => 'nullable|string',
             'storage' => 'nullable|string',
             'artisan_note' => 'nullable|string',
+            'has_size_options' => 'nullable|boolean',
+            'size_labels' => 'nullable|array',
+            'size_labels.*' => 'nullable|string|max:50',
+            'size_units' => 'nullable|array',
+            'size_units.*' => 'nullable|string|max:20',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->except(['image', 'size_labels', 'size_units']);
+        $data['has_size_options'] = $request->boolean('has_size_options');
+
+        // Build size_options JSON from parallel arrays
+        if ($data['has_size_options'] && $request->filled('size_labels')) {
+            $labels = $request->input('size_labels', []);
+            $units  = $request->input('size_units', []);
+            $sizes  = [];
+            foreach ($labels as $i => $label) {
+                if (!empty(trim($label))) {
+                    $sizes[] = ['label' => trim($label), 'unit' => trim($units[$i] ?? '')];
+                }
+            }
+            $data['size_options'] = count($sizes) ? $sizes : null;
+        } else {
+            $data['size_options'] = null;
+        }
 
         if ($request->hasFile('image')) {
             // Move old file to trash if exists

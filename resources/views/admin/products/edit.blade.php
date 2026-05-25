@@ -108,6 +108,80 @@
             @enderror
         </div>
 
+        {{-- ===== SIZE OPTIONS SECTION ===== --}}
+        @php
+            $sizeEnabled = old('has_size_options', $product->has_size_options);
+            $existingSizes = old('size_labels') ? null : ($product->size_options ?? []);
+        @endphp
+        <div style="border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem; margin-top: 0.5rem; background: rgba(255,255,255,0.02);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <div>
+                    <h3 style="margin: 0; font-size: 1rem; font-weight: 600;">Pilihan Ukuran (Size Options)</h3>
+                    <p style="margin: 4px 0 0; font-size: 0.8rem; color: var(--text-secondary);">Aktifkan jika produk ini memiliki pilihan ukuran (berat, porsi, dll.)</p>
+                </div>
+                <label class="toggle-switch" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="has_size_options" name="has_size_options" value="1"
+                        {{ $sizeEnabled ? 'checked' : '' }}
+                        onchange="toggleSizeOptions(this)"
+                        style="display: none;">
+                    <div id="toggle-track" style="width: 48px; height: 26px; border-radius: 999px; background: {{ $sizeEnabled ? 'var(--primary-color, #c8a96e)' : '#555' }}; position: relative; transition: background 0.3s;">
+                        <div id="toggle-thumb" style="position: absolute; top: 3px; left: {{ $sizeEnabled ? '24px' : '3px' }}; width: 20px; height: 20px; border-radius: 50%; background: white; transition: left 0.3s;"></div>
+                    </div>
+                    <span id="toggle-label" style="font-size: 0.85rem; font-weight: 500; color: var(--text-secondary);">{{ $sizeEnabled ? 'Aktif' : 'Nonaktif' }}</span>
+                </label>
+            </div>
+
+            <div id="size-options-panel" style="display: {{ $sizeEnabled ? 'block' : 'none' }};">
+                <div id="size-rows-container">
+                    @if(old('size_labels'))
+                        @foreach(old('size_labels') as $i => $lbl)
+                        <div class="size-row" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px;">
+                            <input type="text" name="size_labels[]" placeholder="Label ukuran" value="{{ $lbl }}" style="margin: 0;">
+                            <select name="size_units[]" style="margin: 0;">
+                                <option value="">-- Tipe Satuan --</option>
+                                @foreach(['gram','kg','ml','liter','pcs','lusin','porsi','cm','inch'] as $u)
+                                    <option value="{{ $u }}" {{ old("size_units.$i") === $u ? 'selected' : '' }}>{{ strtoupper($u) }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" onclick="this.closest('.size-row').remove()" style="background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 1rem; line-height: 1;">&times;</button>
+                        </div>
+                        @endforeach
+                    @elseif($existingSizes)
+                        @foreach($existingSizes as $size)
+                        <div class="size-row" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px;">
+                            <input type="text" name="size_labels[]" placeholder="Label ukuran" value="{{ $size['label'] ?? '' }}" style="margin: 0;">
+                            <select name="size_units[]" style="margin: 0;">
+                                <option value="">-- Tipe Satuan --</option>
+                                @foreach(['gram','kg','ml','liter','pcs','lusin','porsi','cm','inch'] as $u)
+                                    <option value="{{ $u }}" {{ ($size['unit'] ?? '') === $u ? 'selected' : '' }}>{{ strtoupper($u) }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" onclick="this.closest('.size-row').remove()" style="background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 1rem; line-height: 1;">&times;</button>
+                        </div>
+                        @endforeach
+                    @else
+                        <div class="size-row" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px;">
+                            <input type="text" name="size_labels[]" placeholder="Label ukuran (cth: 250gr, Small, 1 Lusin)" style="margin: 0;">
+                            <select name="size_units[]" style="margin: 0;">
+                                <option value="">-- Tipe Satuan --</option>
+                                @foreach(['gram','kg','ml','liter','pcs','lusin','porsi','cm','inch'] as $u)
+                                    <option value="{{ $u }}">{{ strtoupper($u) }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" onclick="this.closest('.size-row').remove()" style="background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 1rem; line-height: 1;">&times;</button>
+                        </div>
+                    @endif
+                </div>
+                <button type="button" onclick="addSizeRow()" style="margin-top: 5px; background: rgba(200,169,110,0.1); color: var(--primary-color, #c8a96e); border: 1px dashed var(--primary-color, #c8a96e); border-radius: 8px; padding: 8px 18px; cursor: pointer; font-size: 0.85rem; font-weight: 500;">
+                    + Tambah Ukuran
+                </button>
+                <p style="margin-top: 10px; font-size: 0.75rem; color: var(--text-secondary);">
+                    <strong>Label</strong> = teks yang tampil di tombol (misal: <em>250gr, 500gr, Small, Large, 1 Lusin</em>).<br>
+                    <strong>Tipe Satuan</strong> = kategori satuan untuk referensi (opsional).
+                </p>
+            </div>
+        </div>
+
         <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);">
             <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Cancel</a>
             <button type="submit" class="btn btn-primary">Update Product</button>
@@ -116,6 +190,45 @@
 </div>
 
 <script>
+    // Toggle size options panel
+    function toggleSizeOptions(checkbox) {
+        const panel = document.getElementById('size-options-panel');
+        const track = document.getElementById('toggle-track');
+        const thumb = document.getElementById('toggle-thumb');
+        const label = document.getElementById('toggle-label');
+        if (checkbox.checked) {
+            panel.style.display = 'block';
+            track.style.background = 'var(--primary-color, #c8a96e)';
+            thumb.style.left = '24px';
+            label.textContent = 'Aktif';
+        } else {
+            panel.style.display = 'none';
+            track.style.background = '#555';
+            thumb.style.left = '3px';
+            label.textContent = 'Nonaktif';
+        }
+    }
+
+    // Template for a new size row
+    function addSizeRow() {
+        const unitOptions = ['gram','kg','ml','liter','pcs','lusin','porsi','cm','inch']
+            .map(u => `<option value="${u}">${u.toUpperCase()}</option>`)
+            .join('');
+
+        const row = document.createElement('div');
+        row.className = 'size-row';
+        row.style.cssText = 'display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px;';
+        row.innerHTML = `
+            <input type="text" name="size_labels[]" placeholder="Label ukuran (cth: 250gr, Small, 1 Lusin)" style="margin: 0;">
+            <select name="size_units[]" style="margin: 0;">
+                <option value="">-- Tipe Satuan --</option>
+                ${unitOptions}
+            </select>
+            <button type="button" onclick="this.closest('.size-row').remove()" style="background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 1rem; line-height: 1;">&times;</button>
+        `;
+        document.getElementById('size-rows-container').appendChild(row);
+    }
+
     // Automatic Slug Generation (Only if name changes and user wants to edit slug)
     const nameInput = document.getElementById('name');
     const slugInput = document.getElementById('slug');
@@ -145,3 +258,4 @@
     }
 </script>
 @endsection
+

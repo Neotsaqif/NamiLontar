@@ -67,7 +67,7 @@
 
         <footer class="login-footer">
             <div class="container">
-                <p>&copy; 2024 NAMI LONTAR. ALL RIGHTS RESERVED.</p>
+                <p>&copy; 2026 NAMI LONTAR. ALL RIGHTS RESERVED.</p>
             </div>
         </footer>
     </main>

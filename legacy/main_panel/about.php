@@ -66,7 +66,7 @@
         <section class="legacy container">
             <div class="legacy-grid">
                 <div class="legacy-text">
-                    <span class="section-tag">EST. 2024</span>
+                    <span class="section-tag">EST. 2026</span>
                     <h2>A Legacy of Perfection</h2>
                     <p>At Nami Lontar, we believe that the best pastries come from a combination of time-honored
                         techniques and the finest ingredients. Every loaf of bread and every delicate pastry is a
@@ -205,7 +205,7 @@
         <div class="container footer-content">
             <div class="footer-brand">
                 <h2 class="footer-logo">MBUH BAKERY</h2>
-                <p>&copy; 2024 MBUH BAKERY. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
+                <p>&copy; 2026 MBUH BAKERY. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
                     story.</p>
             </div>
 

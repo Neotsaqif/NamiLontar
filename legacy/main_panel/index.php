@@ -48,7 +48,7 @@
             </div>
             <div class="hero-content container">
                 <div class="hero-text-box">
-                    <span class="since">Est. 2024</span>
+                    <span class="since">Est. 2026</span>
                     <h1>Artisanal Pastries in Every Golden Bite</h1>
                     <p>Experience the perfect balance of flavors and textures in our hand-crafted pastries, baked fresh
                         every day with the finest organic ingredients.</p>
@@ -229,7 +229,7 @@
         <div class="container footer-content">
             <div class="footer-brand">
                 <h2 class="footer-logo">MBUH BAKERY</h2>
-                <p>&copy; 2024 MBUH BAKERY. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
+                <p>&copy; 2026 MBUH BAKERY. Crafted with<br>passion. From our hearth to your home,<br>every loaf tells a
                     story.</p>
             </div>
 

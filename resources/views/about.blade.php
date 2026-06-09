@@ -11,11 +11,9 @@
     </div>
     <div class="about-hero-content container">
         <div class="hero-label">
-            <span class="line"></span>
-            <span class="label-text">OUR STORY</span>
-            <span class="line"></span>
+            <span class="label-text">Nami Lontar</span>
         </div>
-        <h1>Nami Lontar</h1>
+        <h1>Our Story</h1>
         <p>Dari Rumah, Untuk Hati</p>
         <div class="scroll-indicator">
             <span class="line-v"></span>
@@ -27,9 +25,9 @@
 <section class="legacy container">
     <div class="legacy-grid">
         <div class="legacy-text">
-            <span class="section-tag">EST. 2024</span>
+            <span class="section-tag">EST. 2026</span>
             <h2>Siapa sih itu Nami Lontar?</h2>
-            <p>Kami adalah UMKM kuliner rumahan yang hadir kembali sejak 2024 untuk menyajikan aneka camilan lezat yang bikin nagih! Mulai dari kue tradisional seperti pastel, lontar, dan lumpia, hingga renyahnya keripik singkong balado dan asin, semua dibuat dengan penuh cinta demi memanjakan lidah kamu.</p>
+            <p>Kami adalah UMKM kuliner rumahan yang hadir kembali sejak 2026 untuk menyajikan aneka camilan lezat yang bikin nagih! Mulai dari kue tradisional seperti pastel, lontar, dan lumpia, hingga renyahnya keripik singkong balado dan asin, semua dibuat dengan penuh cinta demi memanjakan lidah kamu.</p>
             <p>Buat acara spesialmu seperti arisan atau kumpul keluarga, kami siap memproduksi 200 hingga 400 pcs camilan segar. Karena sistemnya pre-order demi menjaga kualitas, pastikan kamu memesan minimal H-5 sebelum acara khusus untuk orderan di atas 150 pcs ya. Yuk, bikin acaramu makin ceria bersama kami!</p>
             <div class="signature">
                 <span class="sig-line"></span>

@@ -7,11 +7,14 @@
 <section class="contact-hero">
     <div class="hero-bg">
         <img src="{{ asset('assets/about_hero_bg.png') }}" alt="Bakery Background">
+        <div class="overlay"></div>
     </div>
     <div class="contact-hero-content container">
-        <span class="tag">LET'S TALK</span>
-        <h1>Get in Touch</h1>
-        <p>We’d love to hear from you. Whether you have a question about our pastries or want to place a custom order, our door is always open.</p>
+        <div class="hero-label">
+            <span class="label-text">Nami Lontar</span>
+        </div>
+        <h1>Contact Us</h1>
+        <p>Dari Rumah, Untuk Hati</p>
     </div>
 </section>
 

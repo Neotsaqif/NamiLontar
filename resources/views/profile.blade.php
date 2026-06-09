@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label>PHONE NUMBER</label>
-                    <input type="tel" name="phone" value="{{ $user->phone }}" placeholder="+1 (555) 234-8890">
+                    <input type="tel" name="phone" value="{{ $user->phone }}" placeholder="082192019618">
                 </div>
             </div>
 

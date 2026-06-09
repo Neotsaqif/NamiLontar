@@ -125,7 +125,7 @@
                 </div>
                 <div class="detail">
                     <i class="fa-solid fa-clock"></i>
-                    <p>Senin - Jumat : 09.00 - 17.00 WIB</p>
+                    <p>Setiap Hari : 10.00 - 20.00 WIB</p>
                 </div>
             </div>
         </div>

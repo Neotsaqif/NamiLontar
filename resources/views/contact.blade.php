@@ -56,7 +56,7 @@
                 <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
                 <div class="info-text">
                     <h4>VISIT US</h4>
-                    <p>123 Bakery Lane, Artisan District,<br>Pastryville, PV 90210</p>
+                    <p>Perumahan Alana Crown Blok B18, Teluk,<br>Purwokerto selatan, Banyumas, Jawa tengah</p>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                 <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
                 <div class="info-text">
                     <h4>CALL US</h4>
-                    <p>+1 (555) 234-8890</p>
+                    <p>082192019618</p>
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
                 <div class="info-text">
                     <h4>EMAIL US</h4>
-                    <p>hello@namilontar.com</p>
+                    <p>nami.lontar@gmail.com</p>
                 </div>
             </div>
 
@@ -80,16 +80,8 @@
                 <h3>Opening hours</h3>
                 <div class="hours-table">
                     <div class="hour-row">
-                        <span class="day">Monday - Friday</span>
-                        <span class="time">07:00 AM - 08:00 PM</span>
-                    </div>
-                    <div class="hour-row">
-                        <span class="day">Saturday</span>
-                        <span class="time">08:00 AM - 10:00 PM</span>
-                    </div>
-                    <div class="hour-row">
-                        <span class="day">Sunday</span>
-                        <span class="time active">08:00 AM - 06:00 PM</span>
+                        <span class="day">Setiap Hari</span>
+                        <span class="time active">10.00 - 20.00 WIB</span>
                     </div>
                 </div>
             </div>

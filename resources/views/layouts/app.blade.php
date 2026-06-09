@@ -67,6 +67,27 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll('.smooth-reveal');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: "0px 0px -50px 0px"
+            });
+            
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 

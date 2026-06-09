@@ -5,7 +5,7 @@
 @section('content')
 <main class="basket-container container">
     <div class="basket-grid">
-        <div class="basket-content">
+        <div class="basket-content smooth-reveal smooth-reveal-left">
             <div class="basket-title">
                 <h1>Your Basket</h1>
                 <p>Review your artisanal selection before checkout.</p>
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="basket-summary">
+        <div class="basket-summary smooth-reveal smooth-reveal-right">
             <div class="summary-card">
                 <h2>Order Summary</h2>
                 <div class="summary-row">

@@ -6,7 +6,7 @@
 <!-- Main Content Layout -->
 <div class="dashboard-container">
     <!-- Left Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar smooth-reveal smooth-reveal-left">
         <h2 class="sidebar-title">Settings</h2>
         <nav class="sidebar-nav">
             <a href="{{ url('/profile') }}" class="sidebar-item">
@@ -29,7 +29,7 @@
     </aside>
 
     <!-- Right Content Pane -->
-    <div class="content-pane">
+    <div class="content-pane smooth-reveal smooth-reveal-right">
 
         <div style="margin-bottom: 36px;">
             <h1 class="card-title" style="font-size: 28px; margin-bottom: 8px;">Daftar Pesanan</h1>

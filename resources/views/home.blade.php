@@ -9,28 +9,31 @@
     {{ session('success') }}
 </div>
 @endif
-<section class="hero">
+<section class="about-hero">
     <div class="hero-bg">
         <img src="{{ asset('assets/full product header.png') }}" alt="Delicious Nami Lontar Spread">
+        <div class="overlay"></div>
     </div>
-    <div class="hero-content container">
-        <div class="hero-text-box">
-            <span class="since smooth-reveal smooth-reveal-up">Est. 2024</span>
-            <h1 class="smooth-reveal smooth-reveal-up delay-100">Artisanal Pastries in Every Golden Bite</h1>
-            <p class="smooth-reveal smooth-reveal-up delay-200">Experience the perfect balance of flavors and textures in our hand-crafted pastries, baked fresh
-                every day with the finest organic ingredients.</p>
-            <a href="#product" class="btn btn-primary smooth-reveal smooth-reveal-up delay-300">Shop the Collection</a>
+    <div class="about-hero-content container">
+        <div class="hero-label">
+            <span class="label-text">Nami Lontar</span>
+        </div>
+        <h1>Welcome</h1>
+        <p>Dari Rumah, Untuk Hati</p>
+        <div class="scroll-indicator">
+            <span class="line-v"></span>
         </div>
     </div>
 </section>
 
+
 <!-- Signature Pastries -->
 <section class="pastries container" id="product">
-    <div class="section-header smooth-reveal smooth-reveal-up">
-        <h2>Signature Collection</h2>
+    <div class="section-header">
+        <h2>Pilihan Nami Lontar</h2>
         <a href="#" class="view-all">View All Products <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <p class="section-subtitle smooth-reveal smooth-reveal-up delay-100">Our most loved artisanal treats, prepared with traditional recipes and premium ingredients.</p>
+    <p class="section-subtitle">Dibuat dengan resep keluarga, bahan berkualitas, dan sentuhan kehangatan di setiap sajian.</p>
 
     <div class="product-grid">
         @foreach($products as $product)
@@ -77,9 +80,9 @@
             <p>{{ $bestseller->description }}</p>
             <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">Rp{{ number_format($bestseller->price, 0, ',', '.') }}</div>
             <ul class="feature-list">
-                <li><i class="fa-solid fa-check"></i> <strong>Premium Ingredients:</strong> {{ $bestseller->ingredients ?: 'Made with organic dairy and free-range eggs.' }}</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> {{ $bestseller->artisan_note ?: 'Not too sweet, with a hint of vanilla.' }}</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> {{ $bestseller->storage ?: 'Baked in small batches to ensure quality.' }}</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Kualitas:</strong> {{ $bestseller->ingredients ?: 'Terbuat dari bahan yang selalu baru.' }}</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Rasa:</strong> {{ $bestseller->artisan_note ?: 'Tidak terlalu manis dan rasanya seimbang.' }}</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Ketepatan waktu masak:</strong> {{ $bestseller->storage ?: 'Terpanggang dengan waktu yang sudah ditentukan.' }}</li>
             </ul>
             <button class="btn btn-primary" onclick="addToCart('{{ $bestseller->slug }}', event)" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
@@ -97,9 +100,9 @@
             <p>Experience our signature creation. The Nami Lontar Original combines a perfectly flaky crust with a rich, creamy custard filling that melts in your mouth. Baked fresh daily using our closely guarded traditional recipe.</p>
             <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">$15.50</div>
             <ul class="feature-list">
-                <li><i class="fa-solid fa-check"></i> <strong>Premium Ingredients:</strong> Made with organic dairy and free-range eggs.</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Perfect Balance:</strong> Not too sweet, with a hint of vanilla.</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Fresh Daily:</strong> Baked in small batches to ensure quality.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Kualitas:</strong> Terbuat dari bahan yang selalu baru.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Rasa:</strong> Tidak terlalu manis dan rasanya seimbang.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Ketepatan waktu masak:</strong> Terpanggang dengan waktu yang sudah ditentukan.</li>
             </ul>
             <button class="btn btn-primary" onclick="addToCart('lontar', event)" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 8px;">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
         </div>

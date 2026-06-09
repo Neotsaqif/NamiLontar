@@ -40,86 +40,87 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Ensure the database and required tables exist.
+     * Ensure the database and required tables exist for both MySQL and SQLite.
      */
     protected function ensureDatabaseAndTablesExist(): void
     {
-        $connection = config('database.default');
-        $config = config("database.connections.{$connection}");
-        
-        if (!$config) {
-            return;
-        }
-
-        // 1. Ensure Database Exists
-        if ($connection === 'sqlite') {
-            $dbPath = $config['database'];
+        // 1. Ensure SQLite database file exists
+        $sqliteConfig = config("database.connections.sqlite");
+        if ($sqliteConfig && isset($sqliteConfig['database'])) {
+            $dbPath = $sqliteConfig['database'];
             if ($dbPath !== ':memory:' && !file_exists($dbPath)) {
                 try {
                     @mkdir(dirname($dbPath), 0755, true);
                     @touch($dbPath);
                 } catch (\Exception $e) {
-                    return;
-                }
-            }
-        } else if ($connection === 'mysql') {
-            try {
-                DB::connection()->getPdo();
-            } catch (\Exception $e) {
-                // If MySQL is down, automatically fallback to SQLite
-                if (str_contains($e->getMessage(), 'actively refused it') || str_contains($e->getMessage(), 'Connection refused') || str_contains($e->getMessage(), 'No connection')) {
-                    config(['database.default' => 'sqlite']);
-                    config(['database.connections.sqlite.database' => database_path('database.sqlite')]);
-                    $this->ensureDatabaseAndTablesExist();
-                    return;
-                }
-
-                $database = $config['database'];
-                $config['database'] = null;
-                config(["database.connections.{$connection}_setup" => $config]);
-
-                try {
-                    DB::connection("{$connection}_setup")->statement("CREATE DATABASE IF NOT EXISTS `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-                    DB::purge("{$connection}_setup");
-                    DB::purge($connection);
-                } catch (\Exception $e2) {
-                    return;
+                    // Ignore
                 }
             }
         }
 
-        // 2. Ensure Migrations and Tables exist
-        try {
-            $requiredTables = [
-                'migrations',
-                'users',
-                'products',
-                'categories',
-                'discounts',
-                'carts',
-                'orders',
-                'order_items',
-                'system_settings',
-            ];
+        // 2. Ensure MySQL database exists
+        $mysqlConfig = config("database.connections.mysql");
+        if ($mysqlConfig) {
+            try {
+                // Try connecting to MySQL server to create the DB if missing
+                $pdo = @new \PDO(
+                    "mysql:host={$mysqlConfig['host']};port={$mysqlConfig['port']}",
+                    $mysqlConfig['username'],
+                    $mysqlConfig['password'],
+                    [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_TIMEOUT => 2]
+                );
+                $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$mysqlConfig['database']}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+            } catch (\Exception $e) {
+                // MySQL is offline or connection failed
+            }
+        }
 
-            $missingTable = false;
-            foreach ($requiredTables as $table) {
-                if (!Schema::hasTable($table)) {
-                    $missingTable = true;
-                    break;
+        // Determine active connection and fallback if mysql is configured default but offline
+        $defaultConnection = config('database.default');
+        if ($defaultConnection === 'mysql') {
+            try {
+                DB::connection('mysql')->getPdo();
+            } catch (\Exception $e) {
+                if (str_contains($e->getMessage(), 'actively refused it') || str_contains($e->getMessage(), 'Connection refused') || str_contains($e->getMessage(), 'No connection') || str_contains($e->getMessage(), 'Unknown database')) {
+                    config(['database.default' => 'sqlite']);
+                    $defaultConnection = 'sqlite';
                 }
             }
+        }
 
-            if ($missingTable) {
-                Artisan::call('migrate', ['--force' => true]);
+        // 3. Keep both active databases updated with migrations and seed data
+        $connectionsToMigrate = ['sqlite'];
+        if ($defaultConnection === 'mysql') {
+            $connectionsToMigrate[] = 'mysql';
+        } else {
+            // Check if mysql is online to migrate it too
+            try {
+                DB::connection('mysql')->getPdo();
+                $connectionsToMigrate[] = 'mysql';
+            } catch (\Exception $e) {
+                // mysql is offline
             }
+        }
 
-            // 3. Ensure seed data exists (Admin account only, as per previous requirement)
-            if (Schema::hasTable('users') && \App\Models\User::count() === 0) {
-                Artisan::call('db:seed', ['--force' => true]);
+        foreach ($connectionsToMigrate as $conn) {
+            try {
+                // Always run migrate to catch new tables or new column migrations
+                Artisan::call('migrate', [
+                    '--database' => $conn,
+                    '--force' => true
+                ]);
+
+                // Ensure seed data exists on this connection
+                $userCount = DB::connection($conn)->table('users')->count();
+                if ($userCount === 0) {
+                    Artisan::call('db:seed', [
+                        '--database' => $conn,
+                        '--force' => true
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // Silently skip if migration fails for this connection
             }
-        } catch (\Exception $e) {
-            // Silently fail to avoid blocking server boot
         }
     }
 }

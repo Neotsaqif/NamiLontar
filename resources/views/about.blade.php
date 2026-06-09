@@ -34,7 +34,7 @@
                 <p>Dari Rumah, Untuk Hati</p>
             </div>
         </div>
-        <div class="legacy-image">
+        <div class="legacy-image smooth-reveal smooth-reveal-right">
             <div class="image-frame">
                 <img src="{{ asset('assets/about us.png') }}" alt="Artisan Baker">
             </div>
@@ -45,13 +45,13 @@
 <!-- Artisanal Section / Rating Section -->
 <section class="artisanal">
     <div class="container">
-        <div class="section-title-centered">
+        <div class="section-title-centered smooth-reveal smooth-reveal-up">
             <span class="tag">Nami Lontar</span>
             <h2>Our best rating</h2>
         </div>
         <div class="artisanal-grid">
             <!-- Card 1 -->
-            <div class="artisanal-card review-card">
+            <div class="artisanal-card review-card smooth-reveal smooth-reveal-scale delay-100">
                 <div class="review-top">
                     <img src="{{ asset('assets/chef1.png') }}" alt="User Profile" class="review-avatar">
                     <span class="review-author">Budi Santoso</span>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="artisanal-card review-card">
+            <div class="artisanal-card review-card smooth-reveal smooth-reveal-scale delay-200">
                 <div class="review-top">
                     <img src="{{ asset('assets/chef2.png') }}" alt="User Profile" class="review-avatar">
                     <span class="review-author">Siti Rahmawati</span>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="artisanal-card review-card">
+            <div class="artisanal-card review-card smooth-reveal smooth-reveal-scale delay-300">
                 <div class="review-top">
                     <img src="{{ asset('assets/chef3.png') }}" alt="User Profile" class="review-avatar">
                     <span class="review-author">Hendra Wijaya</span>
@@ -111,15 +111,13 @@
     </div>
 </section>
 
-
-
 <!-- Flagship Section -->
 <section class="flagship">
     <div class="container flagship-grid">
-        <div class="flagship-content">
+        <div class="flagship-content smooth-reveal smooth-reveal-left">
             <span class="tag">LOCATION</span>
             <h2>Toko Kami?</h2>
-            <p>Jika teman teman ingin mampir ke toko kami untuk berkonsultasi serta bernegosiasi dengan kami, jangan ragu untuk mampir yaa.</p>
+            <p>Jika teman teman ingin mampir to toko kami untuk berkonsultasi serta bernegosiasi dengan kami, jangan ragu untuk mampir yaa.</p>
             <div class="location-details">
                 <div class="detail">
                     <i class="fa-solid fa-location-dot"></i>
@@ -131,7 +129,7 @@
                 </div>
             </div>
         </div>
-        <div class="flagship-visual">
+        <div class="flagship-visual smooth-reveal smooth-reveal-right">
             <div class="store-illustration">
                 <img src="{{ asset('assets/about us lokasi.png') }}" alt="Nami Lontar Flagship Store">
             </div>

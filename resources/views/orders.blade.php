@@ -6,7 +6,7 @@
 <!-- Main Content Layout -->
 <div class="dashboard-container">
     <!-- Left Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar smooth-reveal smooth-reveal-left">
         <h2 class="sidebar-title">Settings</h2>
         <nav class="sidebar-nav">
             <a href="{{ url('/profile') }}" class="sidebar-item">
@@ -21,7 +21,16 @@
                 <i class="fa-solid fa-box"></i>
                 Orders
             </a>
-            <a href="{{ url('/login') }}" class="sidebar-item">
+            @if(Auth::user()->role === 'admin')
+            <a href="{{ url('/admin/dashboard') }}" class="sidebar-item" style="color: var(--primary-color); font-weight: 600;">
+                <i class="fa-solid fa-gauge-high"></i>
+                Admin Dashboard
+            </a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+                @csrf
+            </form>
+            <a href="#" class="sidebar-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sign Out
             </a>
@@ -29,7 +38,7 @@
     </aside>
 
     <!-- Right Content Pane -->
-    <div class="content-pane">
+    <div class="content-pane smooth-reveal smooth-reveal-right">
 
         <div style="margin-bottom: 36px;">
             <h1 class="card-title" style="font-size: 28px; margin-bottom: 8px;">Daftar Pesanan</h1>

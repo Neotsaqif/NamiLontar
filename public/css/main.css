@@ -3052,3 +3052,133 @@ header nav .nav-icons a:hover i {
     color: var(--white);
     border-color: var(--dark-color);
 }
+
+/* Professional Smooth Animations & Scroll Reveal */
+.smooth-reveal {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Stagger & Direction Animations */
+.smooth-reveal-up {
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.smooth-reveal-down {
+    transform: translateY(-30px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.smooth-reveal-left {
+    transform: translateX(-40px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.smooth-reveal-right {
+    transform: translateX(40px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.smooth-reveal-scale {
+    transform: scale(0.93);
+    transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Active State */
+.smooth-reveal.reveal-active {
+    opacity: 1;
+    transform: translate(0) scale(1) rotate(0);
+}
+
+/* Staggered Delay Utilities */
+.delay-100 { transition-delay: 100ms !important; }
+.delay-200 { transition-delay: 200ms !important; }
+.delay-300 { transition-delay: 300ms !important; }
+.delay-400 { transition-delay: 400ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
+.delay-600 { transition-delay: 600ms !important; }
+.delay-700 { transition-delay: 700ms !important; }
+.delay-800 { transition-delay: 800ms !important; }
+
+/* Continuous Professional Floating & Pulsing */
+@keyframes smoothFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes smoothPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.smooth-floating {
+    animation: smoothFloat 4s ease-in-out infinite;
+}
+
+.smooth-pulsing {
+    animation: smoothPulse 3s ease-in-out infinite;
+}
+
+/* Enhancing existing selectors on hover for professional and sleek transitions */
+.product-card, .pairing-card {
+    border-radius: 12px !important;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), box-shadow 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+}
+
+.product-card:hover, .pairing-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 20px 35px rgba(212, 163, 115, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+.product-card:hover .product-img img, .pairing-card:hover .pairing-img img {
+    transform: scale(1.05) !important;
+}
+
+.btn-primary, .btn-add, .btn-dark {
+    border-radius: 30px !important; /* Smooth rounded shape */
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+}
+
+.btn-primary:hover, .btn-dark:hover {
+    transform: translateY(-2px) scale(1.03) !important;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px) scale(1.03) !important;
+    background-color: var(--dark-color) !important;
+    color: var(--white) !important;
+}
+
+/* Feature Img sleek zoom on hover */
+.feature-img {
+    transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), box-shadow 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+}
+
+.feature-img:hover {
+    transform: scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hero bg elegant zoom on load */
+.hero-bg img {
+    animation: heroBgZoom 10s ease-out forwards;
+}
+
+@keyframes heroBgZoom {
+    from {
+        transform: scale(1.08);
+    }
+    to {
+        transform: scale(1);
+    }
+}

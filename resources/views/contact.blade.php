@@ -22,7 +22,7 @@
 <section class="contact-main container">
     <div class="contact-grid">
         <!-- Contact Form -->
-        <div class="contact-form-container">
+        <div class="contact-form-container smooth-reveal smooth-reveal-left">
             <h2>Send a Message</h2>
             <form class="contact-form" action="#" method="POST">
                 @csrf
@@ -49,7 +49,7 @@
         </div>
 
         <!-- Contact Info -->
-        <div class="contact-info-container">
+        <div class="contact-info-container smooth-reveal smooth-reveal-right">
             <h2>Our Bakery</h2>
             
             <div class="info-item">

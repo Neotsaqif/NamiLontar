@@ -11,7 +11,7 @@
 
     <div class="tracking-grid">
         <!-- Left Column: Map -->
-        <div class="tracking-left">
+        <div class="tracking-left smooth-reveal smooth-reveal-left">
             <!-- <div class="map-container">
                 <img src="{{ asset('assets/delivery_map_ui.png') }}" alt="Live Delivery Map" class="map-image">
                 <div class="map-overlay-text">
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Right Column: Status & Details -->
-        <div class="tracking-right">
+        <div class="tracking-right smooth-reveal smooth-reveal-right">
             
             @if(session('success'))
                 <div class="alert alert-success" style="margin-bottom: 1rem; padding: 1rem; background: #e6f7e6; color: #2e7d32; border-radius: 8px;">

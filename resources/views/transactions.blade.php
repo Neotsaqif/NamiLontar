@@ -21,7 +21,16 @@
                 <i class="fa-solid fa-box"></i>
                 Orders
             </a>
-            <a href="{{ url('/login') }}" class="sidebar-item">
+            @if(Auth::user()->role === 'admin')
+            <a href="{{ url('/admin/dashboard') }}" class="sidebar-item" style="color: var(--primary-color); font-weight: 600;">
+                <i class="fa-solid fa-gauge-high"></i>
+                Admin Dashboard
+            </a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+                @csrf
+            </form>
+            <a href="#" class="sidebar-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sign Out
             </a>

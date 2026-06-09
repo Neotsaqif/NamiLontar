@@ -14,7 +14,7 @@
 <section class="product-hero container">
     <div class="product-hero-grid">
         <!-- Gallery -->
-        <div class="product-gallery">
+        <div class="product-gallery smooth-reveal smooth-reveal-left">
             <div class="main-img-container">
                 <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" id="main-product-img">
             </div>
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Info -->
-        <div class="product-content-details">
+        <div class="product-content-details smooth-reveal smooth-reveal-right">
             <span class="product-tag" id="product-category">{{ $product->category }}</span>
             <h1 id="product-name">{{ $product->name }}</h1>
             
@@ -111,15 +111,15 @@
 <section class="product-extra-info">
     <div class="container">
         <div class="info-grid-container">
-            <div class="info-col">
+            <div class="info-col smooth-reveal smooth-reveal-up">
                 <h3>Ingredients</h3>
                 <p id="product-ingredients">{{ $product->ingredients }}</p>
             </div>
-            <div class="info-col">
+            <div class="info-col smooth-reveal smooth-reveal-up delay-150">
                 <h3>Storage</h3>
                 <p id="product-storage">{{ $product->storage }}</p>
             </div>
-            <div class="info-col">
+            <div class="info-col smooth-reveal smooth-reveal-up delay-300">
                 <h3>Artisan Note</h3>
                 <p id="product-artisan-note">{{ $product->artisan_note }}</p>
             </div>
@@ -129,10 +129,10 @@
 
 <!-- Perfect Pairings -->
 <section class="pairings-section container">
-    <h2>Perfect Pairings</h2>
+    <h2 class="smooth-reveal smooth-reveal-up">Perfect Pairings</h2>
     <div class="pairings-grid" id="pairings-grid">
         @foreach($pairings as $pair)
-        <div class="pairing-card">
+        <div class="pairing-card smooth-reveal smooth-reveal-scale delay-{{ (($loop->index % 4) + 1) * 100 }}">
             <a href="{{ url('/product/' . $pair->slug) }}">
                 <div class="pairing-img">
                     <img src="{{ asset($pair->image) }}" alt="{{ $pair->name }}">

@@ -6,7 +6,7 @@
 <!-- Main Content Layout -->
 <div class="dashboard-container">
     <!-- Left Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar smooth-reveal smooth-reveal-left">
         <h2 class="sidebar-title">Settings</h2>
         <nav class="sidebar-nav">
             <a href="{{ url('/profile') }}" class="sidebar-item active">
@@ -38,7 +38,7 @@
     </aside>
 
     <!-- Right Content Pane -->
-    <div class="content-pane">
+    <div class="content-pane smooth-reveal smooth-reveal-right">
         @if(session('success'))
             <div class="alert alert-success" style="margin-bottom: 2rem; padding: 1rem; background: #e6f7e6; color: #2e7d32; border-radius: 8px; border: 1px solid #c8e6c9;">
                 <i class="fa-solid fa-circle-check"></i> {{ session('success') }}

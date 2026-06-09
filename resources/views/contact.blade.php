@@ -9,9 +9,9 @@
         <img src="{{ asset('assets/about_hero_bg.png') }}" alt="Bakery Background">
     </div>
     <div class="contact-hero-content container">
-        <span class="tag">LET'S TALK</span>
-        <h1>Get in Touch</h1>
-        <p>We’d love to hear from you. Whether you have a question about our pastries or want to place a custom order, our door is always open.</p>
+        <span class="tag smooth-reveal smooth-reveal-up">LET'S TALK</span>
+        <h1 class="smooth-reveal smooth-reveal-up delay-100">Get in Touch</h1>
+        <p class="smooth-reveal smooth-reveal-up delay-200">We’d love to hear from you. Whether you have a question about our pastries or want to place a custom order, our door is always open.</p>
     </div>
 </section>
 
@@ -19,7 +19,7 @@
 <section class="contact-main container">
     <div class="contact-grid">
         <!-- Contact Form -->
-        <div class="contact-form-container">
+        <div class="contact-form-container smooth-reveal smooth-reveal-left">
             <h2>Send a Message</h2>
             <form class="contact-form" action="#" method="POST">
                 @csrf
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Contact Info -->
-        <div class="contact-info-container">
+        <div class="contact-info-container smooth-reveal smooth-reveal-right">
             <h2>Our Bakery</h2>
             
             <div class="info-item">

@@ -15,26 +15,26 @@
     </div>
     <div class="hero-content container">
         <div class="hero-text-box">
-            <span class="since">Est. 2024</span>
-            <h1>Artisanal Pastries in Every Golden Bite</h1>
-            <p>Experience the perfect balance of flavors and textures in our hand-crafted pastries, baked fresh
+            <span class="since smooth-reveal smooth-reveal-up">Est. 2024</span>
+            <h1 class="smooth-reveal smooth-reveal-up delay-100">Artisanal Pastries in Every Golden Bite</h1>
+            <p class="smooth-reveal smooth-reveal-up delay-200">Experience the perfect balance of flavors and textures in our hand-crafted pastries, baked fresh
                 every day with the finest organic ingredients.</p>
-            <a href="#product" class="btn btn-primary">Shop the Collection</a>
+            <a href="#product" class="btn btn-primary smooth-reveal smooth-reveal-up delay-300">Shop the Collection</a>
         </div>
     </div>
 </section>
 
 <!-- Signature Pastries -->
 <section class="pastries container" id="product">
-    <div class="section-header">
+    <div class="section-header smooth-reveal smooth-reveal-up">
         <h2>Signature Collection</h2>
         <a href="#" class="view-all">View All Products <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <p class="section-subtitle">Our most loved artisanal treats, prepared with traditional recipes and premium ingredients.</p>
+    <p class="section-subtitle smooth-reveal smooth-reveal-up delay-100">Our most loved artisanal treats, prepared with traditional recipes and premium ingredients.</p>
 
     <div class="product-grid">
         @foreach($products as $product)
-        <div class="product-card">
+        <div class="product-card smooth-reveal smooth-reveal-scale delay-{{ (($loop->index % 4) + 1) * 100 }}">
             <a href="{{ url('/product/' . $product->slug) }}">
                 <div class="product-img">
                     <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
@@ -68,11 +68,11 @@
 @if($bestseller)
 <section class="feature container">
     <div class="feature-grid">
-        <div class="feature-img">
+        <div class="feature-img smooth-reveal smooth-reveal-left">
             <img src="{{ asset($bestseller->image) }}" alt="{{ $bestseller->name }} Bestseller">
         </div>
-        <div class="feature-content">
-            <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
+        <div class="feature-content smooth-reveal smooth-reveal-right">
+            <span class="tag smooth-pulsing" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
             <h2>{{ $bestseller->name }}</h2>
             <p>{{ $bestseller->description }}</p>
             <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">Rp{{ number_format($bestseller->price, 0, ',', '.') }}</div>
@@ -88,11 +88,11 @@
 @else
 <section class="feature container">
     <div class="feature-grid">
-        <div class="feature-img">
+        <div class="feature-img smooth-reveal smooth-reveal-left">
             <img src="{{ asset('product-photos/main/lontar.jpeg') }}" alt="Nami Lontar Original Bestseller">
         </div>
-        <div class="feature-content">
-            <span class="tag" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
+        <div class="feature-content smooth-reveal smooth-reveal-right">
+            <span class="tag smooth-pulsing" style="color: var(--primary-color); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; display: block;">OUR BESTSELLER</span>
             <h2>Nami Lontar Original</h2>
             <p>Experience our signature creation. The Nami Lontar Original combines a perfectly flaky crust with a rich, creamy custard filling that melts in your mouth. Baked fresh daily using our closely guarded traditional recipe.</p>
             <div class="product-price-large" style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem;">$15.50</div>
@@ -110,7 +110,7 @@
 <!-- Newsletter Section -->
 <section class="newsletter">
     <div class="container newsletter-grid">
-        <div class="newsletter-content">
+        <div class="newsletter-content smooth-reveal smooth-reveal-left">
             <h2>Fresh from the Oven</h2>
             <p>Join our newsletter and be the first to know about seasonal specials and weekly baked box offers.</p>
             <form class="newsletter-form">
@@ -118,7 +118,7 @@
                 <button type="submit" class="btn btn-dark">SUBSCRIBE</button>
             </form>
         </div>
-        <div class="newsletter-logo">
+        <div class="newsletter-logo smooth-reveal smooth-reveal-right smooth-floating">
             <img src="{{ asset('assets/Logo.png') }}" alt="Nami Lontar Logo" class="logo-gradient">
         </div>
     </div>

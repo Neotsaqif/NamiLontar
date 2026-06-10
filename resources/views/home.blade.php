@@ -9,23 +9,125 @@
     {{ session('success') }}
 </div>
 @endif
-<section class="about-hero">
-    <div class="hero-bg">
+<section class="home-hero">
+    <div class="home-hero-bg">
         <img src="{{ asset('assets/full product header.png') }}" alt="Delicious Nami Lontar Spread">
-        <div class="overlay"></div>
+        <div class="home-hero-overlay"></div>
     </div>
-    <div class="about-hero-content container">
-        <div class="hero-label">
-            <span class="label-text">Nami Lontar</span>
+    <div class="home-hero-content container">
+        <div class="hero-label-pill">Nami Lontar</div>
+        <h1 class="home-hero-title">Welcome</h1>
+        <p class="home-hero-subtitle">Dari Rumah, Untuk Hati</p>
+        <div class="home-hero-cta">
+            <a href="#product" class="hero-btn-primary">Lihat Produk <i class="fa-solid fa-arrow-down"></i></a>
         </div>
-        <h1>Welcome</h1>
-        <p>Dari Rumah, Untuk Hati</p>
         <div class="scroll-indicator">
             <span class="line-v"></span>
         </div>
     </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     BUSINESS OVERVIEW — Quick Stats
+════════════════════════════════════════════ -->
+<section class="business-overview">
+    <div class="container">
+        <div class="biz-section-header">
+            <div class="biz-section-title-wrap">
+                <span class="biz-section-eyebrow"><i class="fa-solid fa-chart-line"></i> Live Analytics</span>
+                <h2 class="biz-section-title">Business Overview</h2>
+            </div>
+            <span class="biz-section-tag">Data hari ini · {{ now()->format('d M Y') }}</span>
+        </div>
+
+        <div class="biz-stat-grid">
+            <!-- Card 1: Total Pengunjung -->
+            <div class="biz-stat-card biz-card-gold">
+                <div class="biz-stat-top">
+                    <div class="biz-stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <span class="biz-stat-badge biz-badge-up">
+                        <i class="fa-solid fa-arrow-trend-up"></i> +12%
+                    </span>
+                </div>
+                <div class="biz-stat-label">Total Pengunjung Hari Ini</div>
+                <div class="biz-stat-value">1.245</div>
+                <div class="biz-stat-sub">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+149 dari kemarin</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Total Pembelian -->
+            <div class="biz-stat-card biz-card-blue">
+                <div class="biz-stat-top">
+                    <div class="biz-stat-icon biz-icon-blue">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <span class="biz-stat-badge biz-badge-blue">
+                        <i class="fa-solid fa-bolt"></i> Hari Ini
+                    </span>
+                </div>
+                <div class="biz-stat-label">Total Pembelian Hari Ini</div>
+                <div class="biz-stat-value biz-val-blue">38</div>
+                <div class="biz-stat-sub">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+3 pesanan · +8% dari kemarin</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Produk Terjual -->
+            <div class="biz-stat-card biz-card-amber">
+                <div class="biz-stat-top">
+                    <div class="biz-stat-icon biz-icon-amber">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <span class="biz-stat-badge biz-badge-amber">
+                        <i class="fa-solid fa-cubes"></i> Produk
+                    </span>
+                </div>
+                <div class="biz-stat-label">Produk Terjual Hari Ini</div>
+                <div class="biz-stat-value biz-val-amber">87</div>
+                <div class="biz-stat-sub">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>+4 unit · +5% dari kemarin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── Charts Row ─── -->
+        <div class="biz-charts-row">
+            <!-- Chart 1: Pengunjung Harian -->
+            <div class="biz-chart-card">
+                <div class="biz-chart-header">
+                    <div>
+                        <h3 class="biz-chart-title"><i class="fa-solid fa-eye"></i> Grafik Pengunjung Harian</h3>
+                        <p class="biz-chart-sub">Tren kunjungan 7 hari terakhir</p>
+                    </div>
+                    <span class="biz-chart-badge">Minggu Ini</span>
+                </div>
+                <div class="biz-chart-wrap">
+                    <canvas id="visitorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Pembelian Harian -->
+            <div class="biz-chart-card">
+                <div class="biz-chart-header">
+                    <div>
+                        <h3 class="biz-chart-title"><i class="fa-solid fa-bag-shopping"></i> Grafik Pembelian Harian</h3>
+                        <p class="biz-chart-sub">Tren transaksi 7 hari terakhir</p>
+                    </div>
+                    <span class="biz-chart-badge">Minggu Ini</span>
+                </div>
+                <div class="biz-chart-wrap">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Signature Pastries -->
 <section class="pastries container" id="product">
@@ -127,3 +229,122 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const labels = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+
+    // ─── Chart 1: Pengunjung Harian ───
+    const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+    const visitorGrad = visitorCtx.createLinearGradient(0, 0, 0, 260);
+    visitorGrad.addColorStop(0, 'rgba(212, 175, 55, 0.35)');
+    visitorGrad.addColorStop(1, 'rgba(212, 175, 55, 0.01)');
+
+    new Chart(visitorCtx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Pengunjung',
+                data: [980, 1120, 860, 1340, 1245, 1560, 1180],
+                borderColor: '#D4AF37',
+                backgroundColor: visitorGrad,
+                borderWidth: 2.5,
+                pointBackgroundColor: '#D4AF37',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                tension: 0.42,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(139, 94, 60, 0.08)' },
+                    ticks: { color: '#8B5E3C', font: { size: 12, family: 'Inter' } }
+                },
+                y: {
+                    min: 0,
+                    grid: { color: 'rgba(139, 94, 60, 0.08)' },
+                    ticks: { color: '#8B5E3C', font: { size: 12 }, callback: v => v.toLocaleString() }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(43, 35, 28, 0.92)',
+                    titleColor: '#F5E6C8',
+                    bodyColor: '#D4AF37',
+                    borderColor: 'rgba(212, 175, 55, 0.3)',
+                    borderWidth: 1,
+                    padding: 12,
+                    callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} pengunjung` }
+                }
+            }
+        }
+    });
+
+    // ─── Chart 2: Pembelian Harian ───
+    const salesCtx = document.getElementById('salesChart').getContext('2d');
+    const salesGrad = salesCtx.createLinearGradient(0, 0, 0, 260);
+    salesGrad.addColorStop(0, 'rgba(52, 168, 131, 0.35)');
+    salesGrad.addColorStop(1, 'rgba(52, 168, 131, 0.01)');
+
+    new Chart(salesCtx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Pesanan',
+                data: [28, 34, 22, 41, 38, 52, 44],
+                borderColor: '#34A883',
+                backgroundColor: salesGrad,
+                borderWidth: 2.5,
+                pointBackgroundColor: '#34A883',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                tension: 0.42,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(139, 94, 60, 0.08)' },
+                    ticks: { color: '#8B5E3C', font: { size: 12, family: 'Inter' } }
+                },
+                y: {
+                    min: 0,
+                    grid: { color: 'rgba(139, 94, 60, 0.08)' },
+                    ticks: { color: '#8B5E3C', font: { size: 12 }, callback: v => v + ' pesanan' }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(43, 35, 28, 0.92)',
+                    titleColor: '#F5E6C8',
+                    bodyColor: '#34A883',
+                    borderColor: 'rgba(52, 168, 131, 0.3)',
+                    borderWidth: 1,
+                    padding: 12,
+                    callbacks: { label: ctx => ` ${ctx.raw} pesanan` }
+                }
+            }
+        }
+    });
+});
+</script>
+@endpush

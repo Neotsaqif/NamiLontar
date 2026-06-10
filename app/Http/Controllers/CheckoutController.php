@@ -66,6 +66,19 @@ class CheckoutController extends Controller
                 }
             }
 
+            // Check internet connection before making API calls
+            $connected = @fsockopen("www.google.com", 80, $errno, $errstr, 2);
+            if (!$connected) {
+                $connectedMidtrans = @fsockopen("app.sandbox.midtrans.com", 80, $errno, $errstr, 2);
+                if (!$connectedMidtrans) {
+                    throw new \Exception("No internet connection detected. Please verify your network and try again.");
+                } else {
+                    fclose($connectedMidtrans);
+                }
+            } else {
+                fclose($connected);
+            }
+
             // Midtrans Configuration
             \Midtrans\Config::$serverKey = config('services.midtrans.server_key');
             \Midtrans\Config::$isProduction = config('services.midtrans.is_production');

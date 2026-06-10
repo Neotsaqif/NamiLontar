@@ -4,6 +4,15 @@
 
 @section('content')
 <main class="basket-container container">
+    @if($errors->any())
+        <div class="alert alert-danger" style="background-color: #fde8e8; border: 1px solid #f8b4b4; color: #9b1c1c; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; font-weight: 500; animation: fadeInUp 0.5s ease;">
+            <ul style="list-style: none; margin: 0; padding: 0;">
+                @foreach($errors->all() as $error)
+                    <li><i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="basket-grid">
         <div class="basket-content smooth-reveal smooth-reveal-left">
             <div class="basket-title">
@@ -110,6 +119,11 @@
 
         if (checkoutForm) {
             checkoutForm.addEventListener('submit', (e) => {
+                if (!navigator.onLine) {
+                    e.preventDefault();
+                    alert('No internet connection. Please check your network and try again.');
+                    return;
+                }
                 const cartData = cartManager.getCart();
                 if (cartData.length === 0) {
                     e.preventDefault();
